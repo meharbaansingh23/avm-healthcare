@@ -581,31 +581,41 @@
   .quote-products-panel {
     border-right: none;
     border-bottom: 1px solid #e5e7eb;
-    max-height: none; /* No height limit */
-    min-height: auto;
+    max-height: none !important; /* No height limit */
+    min-height: auto !important;
+    flex: none !important; /* Don't flex - take natural height */
     flex-shrink: 0;
-    overflow-y: visible; /* NO scrolling - content flows naturally */
+    overflow-y: visible !important; /* NO scrolling */
     overflow-x: hidden;
     padding: 16px;
+    display: block; /* Change from flex to block on mobile */
   }
 
   .quote-form-panel {
     width: 100%;
+    flex: none !important; /* Don't flex - take natural height */
     flex-shrink: 0;
-    overflow-y: visible; /* NO scrolling - content flows naturally */
+    overflow-y: visible !important; /* NO scrolling */
     overflow-x: hidden;
     padding: 16px;
     padding-bottom: 30px; /* Extra space at bottom for submit button */
+    display: block; /* Change from flex to block on mobile */
   }
 
   .quote-form-row {
     grid-template-columns: 1fr;
   }
   
-  /* Ensure items list doesn't scroll independently */
+  /* Remove flex from items list - let it take natural height */
   .quote-items-list {
-    overflow: visible;
-    flex: none; /* Don't flex, just take natural height */
+    overflow: visible !important;
+    flex: none !important; /* Don't flex - natural height */
+    display: block; /* Change from flex to block */
+  }
+  
+  /* Stack items naturally */
+  .quote-item {
+    margin-bottom: 10px;
   }
 
   .quote-float-btn {
