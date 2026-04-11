@@ -1,10 +1,7 @@
 {% comment %}
-  AVM Healthcare — Quote Request System
-  Uses invisible hCaptcha to prevent challenge page redirects.
+  AVM Healthcare — Quote Request System (True Shopify-Native)
+  The modal form IS the Shopify contact form - CAPTCHA is handled automatically by Shopify.
 {% endcomment %}
-
-{% comment %} Load hCaptcha with explicit render mode {% endcomment %}
-<script src="https://js.hcaptcha.com/1/api.js?render=explicit" async defer></script>
 
 <!-- Floating "View Quote" Button -->
 <button
@@ -165,12 +162,6 @@
 
           <!-- Hidden field for the formatted email body -->
           <input type="hidden" name="contact[body]" id="quote-body-field" value="">
-          
-          <!-- Hidden hCaptcha response field -->
-          <input type="hidden" name="h-captcha-response" id="h-captcha-response" value="">
-
-          <!-- Invisible hCaptcha container -->
-          <div id="quote-captcha-container" style="display: none;"></div>
 
           <div id="quote-form-error" class="quote-form-error" style="display: none;"></div>
 
@@ -180,7 +171,6 @@
             class="quote-submit-btn"
           >
             <span id="quote-submit-text">Submit Quote Request</span>
-            <span id="quote-submit-loader" style="display: none;">Verifying security...</span>
           </button>
 
         {%- endform -%}
