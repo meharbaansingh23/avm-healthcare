@@ -545,8 +545,8 @@
 @media screen and (max-width: 768px) {
   .quote-modal-overlay {
     padding: 0;
-    align-items: center; /* Center vertically instead of bottom */
-    justify-content: center;
+    align-items: stretch; /* Stretch full height */
+    justify-content: stretch;
   }
 
   .quote-modal {
@@ -555,6 +555,16 @@
     height: 100vh; /* Take full height */
     max-width: 100%;
     transform: translateY(20px);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Add safe area padding for notch/status bar */
+  .quote-modal-header {
+    padding-top: max(16px, env(safe-area-inset-top, 0));
+    padding-bottom: 16px;
+    padding-left: max(22px, env(safe-area-inset-left, 0));
+    padding-right: max(22px, env(safe-area-inset-right, 0));
   }
 
   .quote-modal-overlay.is-open .quote-modal {
@@ -566,6 +576,7 @@
     overflow-y: auto; /* Allow scrolling on mobile */
     overflow-x: hidden; /* Prevent horizontal scroll */
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    flex: 1; /* Take remaining space */
   }
 
   .quote-products-panel {
@@ -576,12 +587,17 @@
     flex-shrink: 0; /* Don't shrink */
     overflow-y: visible; /* Disable panel scrolling on mobile */
     overflow-x: hidden;
+    padding-left: max(20px, env(safe-area-inset-left, 0));
+    padding-right: max(20px, env(safe-area-inset-right, 0));
   }
 
   .quote-form-panel {
     width: 100%;
     flex-shrink: 0; /* Don't shrink */
     overflow-y: visible; /* Allow content to flow */
+    padding-left: max(20px, env(safe-area-inset-left, 0));
+    padding-right: max(20px, env(safe-area-inset-right, 0));
+    padding-bottom: max(20px, env(safe-area-inset-bottom, 20px)); /* Safe area for home indicator */
   }
 
   .quote-form-row {
