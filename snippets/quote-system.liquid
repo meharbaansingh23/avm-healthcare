@@ -1,12 +1,7 @@
 {% comment %}
-  AVM Healthcare — Quote Request System
-  Floating button + modal rendered on every page via theme.liquid.
+  AVM Healthcare — Quote Request System (True Shopify-Native)
+  The modal form IS the Shopify contact form - CAPTCHA works automatically.
 {% endcomment %}
-
-{% comment %} Hidden Shopify contact form — provides the authenticity_token for AJAX submission {% endcomment %}
-<div style="display:none" aria-hidden="true">
-  {%- form 'contact', id: 'quote-hidden-form' -%}{%- endform -%}
-</div>
 
 <!-- Floating "View Quote" Button -->
 <button
@@ -55,7 +50,7 @@
         <div id="quote-items-list" class="quote-items-list"></div>
 
         <div id="quote-empty-state" class="quote-empty-state" style="display: flex;">
-          <div class="quote-empty-state-icon">&#128230;</div>
+          <div class="quote-empty-state-icon">📦</div>
           <p>No products added yet.<br>Browse our catalogue and click <strong>&ldquo;Add to Quote&rdquo;</strong>.</p>
         </div>
       </div>
@@ -64,9 +59,9 @@
       <div class="quote-form-panel">
         <p class="quote-panel-title">Your Details</p>
 
-        <!-- Success message (hidden until submit) -->
+        <!-- Success message (shown after redirect) -->
         <div id="quote-success" class="quote-success" style="display: none;">
-          <div class="quote-success-icon">&#10003;</div>
+          <div class="quote-success-icon">✓</div>
           <h3>Quote Request Sent!</h3>
           <p class="quote-success-msg">
             Thank you! Your quote request has been submitted successfully.
@@ -80,9 +75,9 @@
           </button>
         </div>
 
-        <!-- Contact form -->
-        <form id="quote-contact-form" class="quote-contact-form" novalidate>
-
+        <!-- Real Shopify contact form -->
+        {%- form 'contact', id: 'quote-contact-form', class: 'quote-contact-form' -%}
+          
           <div class="quote-form-group">
             <label for="q-name">Full Name <span class="req">*</span></label>
             <input
@@ -127,7 +122,7 @@
               id="q-company"
               name="contact[company]"
               required
-              placeholder="Apollo Hospitals, Max Healthcare&hellip;"
+              placeholder="Apollo Hospitals, Max Healthcare…"
               autocomplete="organization"
             >
           </div>
@@ -139,7 +134,7 @@
                 type="text"
                 id="q-dept"
                 name="contact[department]"
-                placeholder="ICU, Cardiology&hellip;"
+                placeholder="ICU, Cardiology…"
               >
             </div>
             <div class="quote-form-group">
@@ -161,9 +156,12 @@
               id="q-notes"
               name="contact[notes]"
               rows="3"
-              placeholder="Quantity requirements, customizations, delivery timeline, service contract needs&hellip;"
+              placeholder="Quantity requirements, customizations, delivery timeline, service contract needs…"
             ></textarea>
           </div>
+
+          <!-- Hidden field for the formatted email body -->
+          <input type="hidden" name="contact[body]" id="quote-body-field" value="">
 
           <div id="quote-form-error" class="quote-form-error" style="display: none;"></div>
 
@@ -173,10 +171,9 @@
             class="quote-submit-btn"
           >
             <span id="quote-submit-text">Submit Quote Request</span>
-            <span id="quote-submit-loading" style="display: none;">Sending&hellip;</span>
           </button>
 
-        </form>
+        {%- endform -%}
       </div><!-- /.quote-form-panel -->
 
     </div><!-- /.quote-modal-body -->
