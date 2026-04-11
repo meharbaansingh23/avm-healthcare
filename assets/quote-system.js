@@ -1,12 +1,12 @@
 /**
- * AVM Healthcare — Quote Request System
- * Intercepts "Add to Quote" form submissions, manages a localStorage cart,
- * renders a modal with product list + contact form, and submits to Shopify /contact.
+ * AVM Healthcare — Quote Request System (Shopify-Native)
+ * Uses Shopify's native contact form submission with CAPTCHA support.
  */
 (function () {
   'use strict';
 
   var STORAGE_KEY = 'avm_quote_items';
+  var SUCCESS_FLAG = 'avm_quote_success';
 
   var quoteSystem = {
     items: [],
@@ -17,6 +17,23 @@
       this.updateFloatBtn();
       this.bindFormIntercept();
       this.bindStaticEvents();
+      this.checkSuccessState();
+    },
+
+    /* ── Check if we just returned from successful submission ── */
+    checkSuccessState: function () {
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('customer_posted') === 'true' || params.get('contact_posted') === 'true') {
+        var successName = sessionStorage.getItem(SUCCESS_FLAG);
+        if (successName) {
+          sessionStorage.removeItem(SUCCESS_FLAG);
+          this.clearAll();
+          this.openModal();
+          this.showSuccess(successName);
+          // Clean URL
+          window.history.replaceState({}, '', window.location.pathname);
+        }
+      }
     },
 
     /* ── Persistence ────────────────────────────────────── */
@@ -38,7 +55,6 @@
 
     /* ── Item CRUD ──────────────────────────────────────── */
     addItem: function (item) {
-      /* Deduplicate by variantId, falling back to title */
       var key = item.variantId || item.title;
       var existing = null;
       for (var i = 0; i < this.items.length; i++) {
@@ -63,7 +79,7 @@
 
       this.save();
       this.updateFloatBtn(true);
-      this.showToast('\u2713 Added to quote: ' + (item.title || 'Product').substring(0, 45));
+      this.showToast('✓ Added to quote: ' + (item.title || 'Product').substring(0, 45));
     },
 
     removeItem: function (id) {
@@ -102,7 +118,6 @@
       countEl.textContent = this.totalCount();
       if (pulse) {
         countEl.classList.remove('pulse');
-        /* Trigger reflow so animation replays */
         void countEl.offsetWidth;
         countEl.classList.add('pulse');
       }
@@ -116,7 +131,6 @@
       this.resetFormState();
       overlay.classList.add('is-open');
       document.body.style.overflow = 'hidden';
-      /* Focus the first input for accessibility */
       setTimeout(function () {
         var first = overlay.querySelector('input:not([disabled])');
         if (first) first.focus();
@@ -148,7 +162,7 @@
       listEl.innerHTML = this.items.map(function (item) {
         var img = item.image
           ? '<img class="quote-item-image" src="' + self.esc(item.image) + '" alt="' + self.esc(item.title) + '" loading="lazy">'
-          : '<div class="quote-item-image-placeholder">&#128230;</div>';
+          : '<div class="quote-item-image-placeholder">📦</div>';
 
         return (
           '<div class="quote-item" data-item-id="' + item.id + '">' +
@@ -165,7 +179,6 @@
         );
       }).join('');
 
-      /* Bind events on freshly rendered nodes */
       listEl.querySelectorAll('.quote-item-remove').forEach(function (btn) {
         btn.addEventListener('click', function () {
           self.removeItem(parseInt(btn.dataset.itemId, 10));
@@ -183,7 +196,6 @@
     bindStaticEvents: function () {
       var self = this;
 
-      /* Close on overlay click */
       var overlay = document.getElementById('quote-modal-overlay');
       if (overlay) {
         overlay.addEventListener('click', function (e) {
@@ -191,12 +203,10 @@
         });
       }
 
-      /* Close on Escape */
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') self.closeModal();
       });
 
-      /* Contact form submit */
       var form = document.getElementById('quote-contact-form');
       if (form) {
         form.addEventListener('submit', function (e) {
@@ -208,11 +218,6 @@
     /* ── Intercept Shopify Add-to-Cart Forms ────────────── */
     bindFormIntercept: function () {
       var self = this;
-      /*
-       * Use capture phase (3rd arg = true) so our handler fires BEFORE
-       * Shopify's product-form web component, which listens on the form element.
-       * stopPropagation() prevents the event from propagating down to the form.
-       */
       document.addEventListener('submit', function (e) {
         var form = e.target;
         if (!form || form.getAttribute('data-type') !== 'add-to-cart-form') return;
@@ -230,7 +235,6 @@
       var image = '';
       var url = window.location.pathname;
 
-      /* ── Collection card context ── */
       var card = form.closest('.card-wrapper');
       if (card) {
         var cardLink = card.querySelector('.card__heading a, .card__heading--placeholder a');
@@ -242,7 +246,6 @@
         if (cardImg) image = cardImg.currentSrc || cardImg.src || '';
       }
 
-      /* ── Quick-add modal context ── */
       if (!title) {
         var qModal = form.closest('.quick-add-modal__content-info, .quick-add-modal');
         if (qModal) {
@@ -253,7 +256,6 @@
         }
       }
 
-      /* ── Product page context ── */
       if (!title) {
         var h1 = document.querySelector('.product__title, h1.title, h1');
         if (h1) title = (h1.textContent || '').trim();
@@ -264,24 +266,18 @@
       }
 
       title = title || 'Product';
-      /* Strip Shopify size suffix for a clean URL, but keep query params */
       image = image.replace(/_(pico|icon|thumb|small|compact|medium|large|grande|original|master|[\d]+x[\d]*)(\.[a-z]+)/i, '$2');
 
       return { variantId: variantId, title: title, image: image, url: url };
     },
 
-    /* ── Quote Form Submission ──────────────────────────── */
+    /* ── Quote Form Submission (Native Shopify) ─────────── */
     submitQuote: function (e) {
       e.preventDefault();
 
-      var self = this;
       var form = document.getElementById('quote-contact-form');
       var errorEl = document.getElementById('quote-form-error');
-      var submitBtn = document.getElementById('quote-submit-btn');
-      var submitText = document.getElementById('quote-submit-text');
-      var submitLoader = document.getElementById('quote-submit-loading');
 
-      /* Validate required fields */
       if (!form.checkValidity()) {
         form.reportValidity();
         return;
@@ -295,7 +291,6 @@
 
       errorEl.style.display = 'none';
 
-      /* Gather form values */
       var data = new FormData(form);
       var name = data.get('contact[name]') || '';
       var email = data.get('contact[email]') || '';
@@ -339,67 +334,29 @@
         divider
       ].join('\n');
 
-      /* Disable submit while sending */
-      submitBtn.disabled = true;
-      if (submitText) submitText.style.display = 'none';
-      if (submitLoader) submitLoader.style.display = 'inline';
+      /* Store name for success message after redirect */
+      sessionStorage.setItem(SUCCESS_FLAG, name);
 
-      /* ── Generate CAPTCHA token first ── */
-      if (typeof grecaptcha !== 'undefined' && grecaptcha.ready) {
-        grecaptcha.ready(function() {
-          grecaptcha.execute(Shopify.recaptchaV3SiteKey || '', { action: 'contact' })
-            .then(function(token) {
-              self.sendQuoteToShopify(name, email, body, token, errorEl, submitBtn, submitText, submitLoader);
-            })
-            .catch(function() {
-              self.sendQuoteToShopify(name, email, body, '', errorEl, submitBtn, submitText, submitLoader);
-            });
-        });
-      } else {
-        /* Fallback: try without CAPTCHA (may fail on some stores) */
-        self.sendQuoteToShopify(name, email, body, '', errorEl, submitBtn, submitText, submitLoader);
-      }
+      /* Populate and submit the native Shopify form */
+      this.submitNativeForm(name, email, body);
     },
 
-    sendQuoteToShopify: function(name, email, body, captchaToken, errorEl, submitBtn, submitText, submitLoader) {
-      var self = this;
-      
-      /* Read the authenticity_token from the hidden Shopify-rendered form */
-      var tokenInput = document.querySelector('#quote-hidden-form [name="authenticity_token"]');
-      var token = tokenInput ? tokenInput.value : '';
+    /* ── Submit via native Shopify contact form ─────────── */
+    submitNativeForm: function (name, email, body) {
+      var nativeForm = document.getElementById('quote-shopify-form');
+      if (!nativeForm) return;
 
-      var params = new URLSearchParams();
-      params.append('form_type', 'contact');
-      params.append('utf8', '✓');
-      if (token) params.append('authenticity_token', token);
-      params.append('contact[name]', name);
-      params.append('contact[email]', email);
-      params.append('contact[body]', body);
-      if (captchaToken) params.append('g-recaptcha-response', captchaToken);
+      /* Populate the form fields */
+      var nameInput = nativeForm.querySelector('[name="contact[name]"]');
+      var emailInput = nativeForm.querySelector('[name="contact[email]"]');
+      var bodyInput = nativeForm.querySelector('[name="contact[body]"]');
 
-      fetch('/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Accept': 'application/json'
-        },
-        body: params.toString()
-      })
-        .then(function (res) {
-          if (res.ok) {
-            self.showSuccess(name);
-            self.clearAll();
-          } else {
-            throw new Error('server');
-          }
-        })
-        .catch(function () {
-          errorEl.textContent = 'Something went wrong. Please try again or contact us directly.';
-          errorEl.style.display = 'block';
-          submitBtn.disabled = false;
-          if (submitText) submitText.style.display = 'inline';
-          if (submitLoader) submitLoader.style.display = 'none';
-        });
+      if (nameInput) nameInput.value = name;
+      if (emailInput) emailInput.value = email;
+      if (bodyInput) bodyInput.value = body;
+
+      /* Submit the form — Shopify handles CAPTCHA and redirect */
+      nativeForm.submit();
     },
 
     /* ── UI State Helpers ───────────────────────────────── */
@@ -427,12 +384,6 @@
       if (success) success.style.display = 'none';
       var errorEl = document.getElementById('quote-form-error');
       if (errorEl) errorEl.style.display = 'none';
-      var submitBtn = document.getElementById('quote-submit-btn');
-      var submitText = document.getElementById('quote-submit-text');
-      var submitLoader = document.getElementById('quote-submit-loading');
-      if (submitBtn) submitBtn.disabled = false;
-      if (submitText) submitText.style.display = 'inline';
-      if (submitLoader) submitLoader.style.display = 'none';
       this.closeModal();
     },
 
@@ -473,6 +424,6 @@
     quoteSystem.init();
   }
 
-  /* Expose globally for inline onclick handlers in the snippet */
+  /* Expose globally for inline onclick handlers */
   window.quoteSystem = quoteSystem;
 })();
