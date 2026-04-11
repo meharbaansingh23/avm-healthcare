@@ -330,6 +330,19 @@
   margin-bottom: 12px;
 }
 
+/* reCAPTCHA styling */
+.quote-form-group .g-recaptcha {
+  transform: scale(0.95);
+  transform-origin: 0 0;
+  margin: 8px 0;
+}
+
+@media screen and (max-width: 768px) {
+  .quote-form-group .g-recaptcha {
+    transform: scale(0.85);
+  }
+}
+
 .quote-form-group label {
   display: block;
   font-size: 12px;

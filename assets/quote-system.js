@@ -131,6 +131,16 @@
       this.resetFormState();
       overlay.classList.add('is-open');
       document.body.style.overflow = 'hidden';
+      
+      // Reset reCAPTCHA if it exists
+      if (typeof grecaptcha !== 'undefined') {
+        try {
+          grecaptcha.reset();
+        } catch (e) {
+          // CAPTCHA not yet initialized, ignore
+        }
+      }
+      
       setTimeout(function () {
         var first = overlay.querySelector('input:not([disabled])');
         if (first) first.focus();
@@ -286,6 +296,22 @@
         errorEl.textContent = 'Please add at least one product to your quote before submitting.';
         errorEl.style.display = 'block';
         return;
+      }
+
+      // Check if reCAPTCHA is completed
+      if (typeof grecaptcha !== 'undefined') {
+        var recaptchaResponse = grecaptcha.getResponse();
+        if (!recaptchaResponse) {
+          e.preventDefault();
+          errorEl.textContent = 'Please complete the security verification (reCAPTCHA) before submitting.';
+          errorEl.style.display = 'block';
+          // Scroll to CAPTCHA
+          var recaptchaEl = document.getElementById('quote-recaptcha');
+          if (recaptchaEl) {
+            recaptchaEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          return;
+        }
       }
 
       errorEl.style.display = 'none';
