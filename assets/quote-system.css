@@ -330,15 +330,15 @@
   margin-bottom: 12px;
 }
 
-/* reCAPTCHA styling */
-.quote-form-group .g-recaptcha {
+/* hCaptcha styling */
+.quote-form-group .h-captcha {
   transform: scale(0.95);
   transform-origin: 0 0;
   margin: 8px 0;
 }
 
 @media screen and (max-width: 768px) {
-  .quote-form-group .g-recaptcha {
+  .quote-form-group .h-captcha {
     transform: scale(0.85);
   }
 }

@@ -132,10 +132,10 @@
       overlay.classList.add('is-open');
       document.body.style.overflow = 'hidden';
       
-      // Reset reCAPTCHA if it exists
-      if (typeof grecaptcha !== 'undefined') {
+      // Reset hCaptcha if it exists
+      if (typeof hcaptcha !== 'undefined') {
         try {
-          grecaptcha.reset();
+          hcaptcha.reset();
         } catch (e) {
           // CAPTCHA not yet initialized, ignore
         }
@@ -298,17 +298,17 @@
         return;
       }
 
-      // Check if reCAPTCHA is completed
-      if (typeof grecaptcha !== 'undefined') {
-        var recaptchaResponse = grecaptcha.getResponse();
-        if (!recaptchaResponse) {
+      // Check if hCaptcha is completed
+      if (typeof hcaptcha !== 'undefined') {
+        var captchaResponse = hcaptcha.getResponse();
+        if (!captchaResponse) {
           e.preventDefault();
-          errorEl.textContent = 'Please complete the security verification (reCAPTCHA) before submitting.';
+          errorEl.textContent = 'Please complete the security verification (CAPTCHA) before submitting.';
           errorEl.style.display = 'block';
           // Scroll to CAPTCHA
-          var recaptchaEl = document.getElementById('quote-recaptcha');
-          if (recaptchaEl) {
-            recaptchaEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          var captchaEl = document.getElementById('quote-captcha');
+          if (captchaEl) {
+            captchaEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
           return;
         }

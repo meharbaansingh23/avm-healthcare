@@ -3,8 +3,8 @@
   The modal form IS the Shopify contact form - CAPTCHA works automatically.
 {% endcomment %}
 
-{% comment %} Load Google reCAPTCHA {% endcomment %}
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{% comment %} Load hCaptcha (Shopify's CAPTCHA provider) {% endcomment %}
+<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 
 <!-- Floating "View Quote" Button -->
 <button
@@ -166,9 +166,11 @@
           <!-- Hidden field for the formatted email body -->
           <input type="hidden" name="contact[body]" id="quote-body-field" value="">
 
-          <!-- reCAPTCHA Widget -->
+          <!-- hCaptcha Widget (Shopify's CAPTCHA) -->
           <div class="quote-form-group">
-            <div class="g-recaptcha" data-sitekey="f06e6c50-85a8-45c8-87d0-21a2b65856fe" id="quote-recaptcha"></div>
+            <div class="h-captcha" 
+                 data-sitekey="f06e6c50-85a8-45c8-87d0-21a2b65856fe" 
+                 id="quote-captcha"></div>
           </div>
 
           <div id="quote-form-error" class="quote-form-error" style="display: none;"></div>
