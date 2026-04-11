@@ -167,6 +167,7 @@
   padding: 20px;
   border-right: 1px solid #e5e7eb;
   overflow-y: auto;
+  overflow-x: hidden; /* Prevent horizontal scroll */
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -322,6 +323,7 @@
   flex-shrink: 0;
   padding: 20px;
   overflow-y: auto;
+  overflow-x: hidden; /* Prevent horizontal scroll */
   display: flex;
   flex-direction: column;
 }
@@ -559,17 +561,22 @@
 
   .quote-modal-body {
     flex-direction: column;
+    overflow-y: auto; /* Allow scrolling on mobile */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
   }
 
   .quote-products-panel {
     border-right: none;
     border-bottom: 1px solid #e5e7eb;
-    max-height: 32vh;
-    min-height: 100px;
+    max-height: none; /* Remove height restriction */
+    min-height: auto; /* Remove min height */
+    flex-shrink: 0; /* Don't shrink */
   }
 
   .quote-form-panel {
     width: 100%;
+    flex-shrink: 0; /* Don't shrink */
+    overflow-y: visible; /* Allow content to flow */
   }
 
   .quote-form-row {
@@ -606,5 +613,18 @@
 @media screen and (max-width: 480px) {
   .quote-modal-header-text h2 {
     font-size: 16px;
+  }
+  
+  .quote-modal-header {
+    padding: 14px 18px;
+  }
+  
+  .quote-modal-body {
+    padding: 0; /* Remove any padding that might interfere */
+  }
+  
+  .quote-products-panel,
+  .quote-form-panel {
+    padding: 16px;
   }
 }
