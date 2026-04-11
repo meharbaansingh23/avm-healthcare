@@ -307,30 +307,30 @@
 
       /* Build email body */
       var productLines = this.items.map(function (item) {
-        return '- ' + item.title + ' \u2014 Quantity: ' + item.quantity;
+        return '- ' + item.title + ' — Quantity: ' + item.quantity;
       }).join('\n');
 
       var divider = '================================================';
 
       var body = [
         divider,
-        '\uD83C\uDFE5 NEW QUOTE REQUEST \u2014 AVM HEALTHCARE',
+        '🏥 NEW QUOTE REQUEST — AVM HEALTHCARE',
         divider,
         '',
-        '\uD83D\uDCE6 PRODUCTS REQUESTED:',
+        '📦 PRODUCTS REQUESTED:',
         productLines,
         '',
-        '\uD83D\uDC64 CUSTOMER INFORMATION:',
+        '👤 CUSTOMER INFORMATION:',
         'Name          : ' + name,
         'Email         : ' + email,
         'Phone         : ' + phone,
         '',
-        '\uD83C\uDFE2 ORGANISATION DETAILS:',
+        '🏢 ORGANISATION DETAILS:',
         'Company/Facility : ' + company,
         'Department       : ' + (dept || 'Not specified'),
         'City/Location    : ' + city,
         '',
-        '\uD83D\uDCDD SPECIAL INQUIRY:',
+        '📝 SPECIAL INQUIRY:',
         notes || 'None',
         '',
         divider,
@@ -344,18 +344,38 @@
       if (submitText) submitText.style.display = 'none';
       if (submitLoader) submitLoader.style.display = 'inline';
 
-      /* POST to Shopify /contact */
+      /* ── Generate CAPTCHA token first ── */
+      if (typeof grecaptcha !== 'undefined' && grecaptcha.ready) {
+        grecaptcha.ready(function() {
+          grecaptcha.execute(Shopify.recaptchaV3SiteKey || '', { action: 'contact' })
+            .then(function(token) {
+              self.sendQuoteToShopify(name, email, body, token, errorEl, submitBtn, submitText, submitLoader);
+            })
+            .catch(function() {
+              self.sendQuoteToShopify(name, email, body, '', errorEl, submitBtn, submitText, submitLoader);
+            });
+        });
+      } else {
+        /* Fallback: try without CAPTCHA (may fail on some stores) */
+        self.sendQuoteToShopify(name, email, body, '', errorEl, submitBtn, submitText, submitLoader);
+      }
+    },
+
+    sendQuoteToShopify: function(name, email, body, captchaToken, errorEl, submitBtn, submitText, submitLoader) {
+      var self = this;
+      
       /* Read the authenticity_token from the hidden Shopify-rendered form */
       var tokenInput = document.querySelector('#quote-hidden-form [name="authenticity_token"]');
       var token = tokenInput ? tokenInput.value : '';
 
       var params = new URLSearchParams();
       params.append('form_type', 'contact');
-      params.append('utf8', '\u2713');
+      params.append('utf8', '✓');
       if (token) params.append('authenticity_token', token);
       params.append('contact[name]', name);
       params.append('contact[email]', email);
       params.append('contact[body]', body);
+      if (captchaToken) params.append('g-recaptcha-response', captchaToken);
 
       fetch('/contact', {
         method: 'POST',
