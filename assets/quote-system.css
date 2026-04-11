@@ -544,7 +544,7 @@
 /* ── Responsive ───────────────────────────────────────────── */
 @media screen and (max-width: 768px) {
   .quote-modal-overlay {
-    padding: 0;
+    padding: 20px 0; /* Top and bottom padding for breathing room */
     align-items: center;
     justify-content: center;
   }
@@ -555,7 +555,7 @@
     height: 90vh;
     max-width: calc(100vw - 20px); /* Small margin on sides */
     width: calc(100vw - 20px);
-    transform: translateY(20px);
+    transform: translateY(0); /* Remove translateY since we have padding */
     display: flex;
     flex-direction: column;
   }
