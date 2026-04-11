@@ -1,0 +1,518 @@
+{% doc %}
+  @prompt
+    Create a section to showcase the team images with names and designations
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-team-showcase-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: 40px 20px;
+  }
+
+  .ai-team-showcase__container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.container_max_width }}px;
+    margin: 0 auto;
+  }
+
+  .ai-team-showcase__header-{{ ai_gen_id }} {
+    text-align: {{ block.settings.text_alignment }};
+    margin-bottom: 40px;
+  }
+
+  .ai-team-showcase__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 12px;
+    font-family: {{ block.settings.title_font.family }}, {{ block.settings.title_font.fallback_families }};
+    font-weight: {{ block.settings.title_font.weight }};
+  }
+
+  .ai-team-showcase__subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.subtitle_color }};
+    margin: 0;
+  }
+
+  .ai-team-showcase__grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+  }
+
+  .ai-team-showcase__member-{{ ai_gen_id }} {
+    text-align: center;
+  }
+
+  .ai-team-showcase__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    margin-bottom: 16px;
+    overflow: hidden;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .ai-team-showcase__image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .ai-team-showcase__image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .ai-team-showcase__image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-team-showcase__name-{{ ai_gen_id }} {
+    font-size: {{ block.settings.name_size }}px;
+    color: {{ block.settings.name_color }};
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+
+  .ai-team-showcase__designation-{{ ai_gen_id }} {
+    font-size: {{ block.settings.designation_size }}px;
+    color: {{ block.settings.designation_color }};
+    margin: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-team-showcase__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+      gap: {{ block.settings.grid_gap | times: 0.75 }}px;
+    }
+
+    .ai-team-showcase__title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.8 }}px;
+    }
+
+    .ai-team-showcase__subtitle-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subtitle_size | times: 0.9 }}px;
+    }
+  }
+{% endstyle %}
+
+<team-showcase-{{ ai_gen_id }} class="ai-team-showcase-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-team-showcase__container-{{ ai_gen_id }}">
+    {% if block.settings.title != blank or block.settings.subtitle != blank %}
+      <div class="ai-team-showcase__header-{{ ai_gen_id }}">
+        {% if block.settings.title != blank %}
+          <h2 class="ai-team-showcase__title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+        {% endif %}
+        {% if block.settings.subtitle != blank %}
+          <div class="ai-team-showcase__subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="ai-team-showcase__grid-{{ ai_gen_id }}">
+      {% for i in (1..6) %}
+        {% liquid
+          assign member_enabled_key = 'member_' | append: i | append: '_enabled'
+          assign member_image_key = 'member_' | append: i | append: '_image'
+          assign member_name_key = 'member_' | append: i | append: '_name'
+          assign member_designation_key = 'member_' | append: i | append: '_designation'
+
+          assign member_enabled = block.settings[member_enabled_key]
+          assign member_image = block.settings[member_image_key]
+          assign member_name = block.settings[member_name_key]
+          assign member_designation = block.settings[member_designation_key]
+        %}
+
+        {% if member_enabled %}
+          <div class="ai-team-showcase__member-{{ ai_gen_id }}">
+            <div class="ai-team-showcase__image-wrapper-{{ ai_gen_id }}">
+              {% if member_image %}
+                <img
+                  src="{{ member_image | image_url: width: 600 }}"
+                  alt="{{ member_name | escape }}"
+                  loading="lazy"
+                  width="600"
+                  height="600"
+                  class="ai-team-showcase__image-{{ ai_gen_id }}"
+                >
+              {% else %}
+                <div class="ai-team-showcase__image-placeholder-{{ ai_gen_id }}">
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </div>
+            {% if member_name != blank %}
+              <h3 class="ai-team-showcase__name-{{ ai_gen_id }}">{{ member_name }}</h3>
+            {% endif %}
+            {% if member_designation != blank %}
+              <p class="ai-team-showcase__designation-{{ ai_gen_id }}">{{ member_designation }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</team-showcase-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class TeamShowcase{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+      }
+    }
+
+    customElements.define('team-showcase-{{ ai_gen_id }}', TeamShowcase{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Team showcase",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "Meet our team"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "The people behind our success"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#121212"
+    },
+    {
+      "type": "font_picker",
+      "id": "title_font",
+      "label": "Title font",
+      "default": "playfair_display_n4"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "container_max_width",
+      "min": 600,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "label": "Container max width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Grid gap",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Member styling"
+    },
+    {
+      "type": "range",
+      "id": "name_size",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Name size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "designation_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Designation size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "name_color",
+      "label": "Name color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "designation_color",
+      "label": "Designation color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Team member 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "member_1_enabled",
+      "label": "Enable member 1",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "member_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "member_1_name",
+      "label": "Name",
+      "default": "John Doe"
+    },
+    {
+      "type": "text",
+      "id": "member_1_designation",
+      "label": "Designation",
+      "default": "CEO & Founder"
+    },
+    {
+      "type": "header",
+      "content": "Team member 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "member_2_enabled",
+      "label": "Enable member 2",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "member_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "member_2_name",
+      "label": "Name",
+      "default": "Jane Smith"
+    },
+    {
+      "type": "text",
+      "id": "member_2_designation",
+      "label": "Designation",
+      "default": "Chief Technology Officer"
+    },
+    {
+      "type": "header",
+      "content": "Team member 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "member_3_enabled",
+      "label": "Enable member 3",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "member_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "member_3_name",
+      "label": "Name",
+      "default": "Michael Brown"
+    },
+    {
+      "type": "text",
+      "id": "member_3_designation",
+      "label": "Designation",
+      "default": "Head of Marketing"
+    },
+    {
+      "type": "header",
+      "content": "Team member 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "member_4_enabled",
+      "label": "Enable member 4",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "member_4_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "member_4_name",
+      "label": "Name"
+    },
+    {
+      "type": "text",
+      "id": "member_4_designation",
+      "label": "Designation"
+    },
+    {
+      "type": "header",
+      "content": "Team member 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "member_5_enabled",
+      "label": "Enable member 5",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "member_5_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "member_5_name",
+      "label": "Name"
+    },
+    {
+      "type": "text",
+      "id": "member_5_designation",
+      "label": "Designation"
+    },
+    {
+      "type": "header",
+      "content": "Team member 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "member_6_enabled",
+      "label": "Enable member 6",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "member_6_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "member_6_name",
+      "label": "Name"
+    },
+    {
+      "type": "text",
+      "id": "member_6_designation",
+      "label": "Designation"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Team showcase"
+    }
+  ]
+}
+{% endschema %}

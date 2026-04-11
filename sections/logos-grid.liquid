@@ -1,0 +1,152 @@
+{% comment %}
+  Client logos (grid) — simple & Dawn‑compatible
+  - Responsive grid with adjustable columns
+  - Each block is one logo (optional link)
+  - Uses plain <img> to avoid image_tag syntax issues
+{% endcomment %}
+
+{%- assign gray_class = section.settings.grayscale | default: false -%}
+
+<section
+  id="logos-{{ section.id }}"
+  class="logos-section{% if gray_class %} is-gray{% endif %}"
+  style="
+    --cols: {{ section.settings.columns }};
+    --gap: {{ section.settings.gap }}px;
+    --mw: {{ section.settings.max_width }}px;
+    --mh: {{ section.settings.max_height }}px;
+    --cellh: {{ section.settings.cell_min_height }}px;
+    --op: {{ section.settings.logo_opacity | divided_by: 100.0 }};
+    --pt: {{ section.settings.pad_top }}px;
+    --pb: {{ section.settings.pad_bottom }}px;
+  "
+>
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="logos-title logos-title--{{ section.settings.heading_align }}">
+        {{ section.settings.heading | escape }}
+      </h2>
+    {%- endif -%}
+
+    <ul class="logos-grid">
+      {%- for block in section.blocks -%}
+        {%- assign img = block.settings.image -%}
+        {%- if img != blank -%}
+          <li class="logos-item" {{ block.shopify_attributes }}>
+            {%- if block.settings.link != blank -%}
+              <a
+                href="{{ block.settings.link }}"
+                class="logos-link"
+                {%- if section.settings.new_tab -%} target="_blank" rel="noopener" {%- endif -%}
+              >
+            {%- endif -%}
+
+            {% if img != blank %}
+  {% assign max_w = section.settings.max_width | default: 200 %}
+  {% assign alt_text = block.settings.alt %}
+  {% if alt_text == blank and img != blank %}
+    {% assign alt_text = img.alt %}
+  {% endif %}
+
+  <img
+    class="logo-img"
+    src="{{ img | image_url: width: max_w }}"
+    alt="{{ alt_text | escape }}"
+    loading="lazy"
+  >
+{% endif %}
+
+            {%- if block.settings.link != blank -%}
+              </a>
+            {%- endif -%}
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+
+  <style>
+    #logos-{{ section.id }}{ padding: var(--pt) 0 var(--pb); }
+    #logos-{{ section.id }} .logos-title{ margin:0 0 16px; font-size:clamp(20px,2.8vw,30px); line-height:1.2 }
+    #logos-{{ section.id }} .logos-title--center{ text-align:center }
+    #logos-{{ section.id }} .logos-title--left{ text-align:left }
+    #logos-{{ section.id }} .logos-title--right{ text-align:right }
+
+    #logos-{{ section.id }} .logos-grid{
+      list-style:none; margin:0; padding:0;
+      display:grid; align-items:center; justify-items:center;
+      grid-template-columns:repeat(var(--cols), minmax(0,1fr));
+      gap:var(--gap);
+    }
+    @media (max-width: 989px){ #logos-{{ section.id }} .logos-grid{ grid-template-columns:repeat(3,1fr) } }
+    @media (max-width: 599px){ #logos-{{ section.id }} .logos-grid{ grid-template-columns:repeat(2,1fr) } }
+
+    #logos-{{ section.id }} .logos-item{
+      min-height:var(--cellh);
+      display:flex; align-items:center; justify-content:center;
+    }
+    #logos-{{ section.id }} .logos-link{ display:inline-flex }
+
+    #logos-{{ section.id }} .logo-img{
+      max-width:var(--mw); max-height:var(--mh);
+      width:auto; height:auto; object-fit:contain;
+      opacity:var(--op);
+      transition:opacity .2s ease, filter .2s ease, transform .2s ease;
+      display:block;
+    }
+    #logos-{{ section.id }}.is-gray .logo-img{ filter:grayscale(100%) }
+    #logos-{{ section.id }} .logos-item:hover .logo-img{ opacity:1; filter:none; transform:translateY(-1px) }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Client logos (grid)",
+  "tag": "section",
+  "class": "logos-grid-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Trusted by leading institutions" },
+    {
+      "type": "select", "id": "heading_align", "label": "Heading alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+
+    { "type": "range", "id": "columns", "label": "Columns (desktop)", "min": 3, "max": 6, "step": 1, "default": 5 },
+    { "type": "range", "id": "gap", "label": "Gap (px)", "min": 0, "max": 40, "step": 2, "default": 16 },
+
+    { "type": "range", "id": "max_width", "label": "Max logo width (px)", "min": 80, "max": 240, "step": 10, "default": 160 },
+    { "type": "range", "id": "max_height", "label": "Max logo height (px)", "min": 30, "max": 120, "step": 5, "default": 60 },
+    { "type": "range", "id": "cell_min_height", "label": "Cell minimum height (px)", "min": 40, "max": 160, "step": 10, "default": 80 },
+
+    { "type": "range", "id": "logo_opacity", "label": "Logo opacity (%)", "min": 50, "max": 100, "step": 5, "default": 85 },
+    { "type": "checkbox", "id": "grayscale", "label": "Show logos in grayscale (color on hover)", "default": true },
+    { "type": "checkbox", "id": "new_tab", "label": "Open links in new tab", "default": true },
+
+    { "type": "range", "id": "pad_top", "label": "Top padding", "min": 0, "max": 80, "step": 4, "default": 36 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom padding", "min": 0, "max": 80, "step": 4, "default": 36 }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Logo image (SVG/PNG recommended)" },
+        { "type": "text", "id": "alt", "label": "Alt text (optional)" },
+        { "type": "url", "id": "link", "label": "Optional link" }
+      ]
+    }
+  ],
+  "max_blocks": 30,
+  "presets": [
+    {
+      "name": "Client logos (grid)",
+      "blocks": [ { "type": "logo" }, { "type": "logo" }, { "type": "logo" }, { "type": "logo" }, { "type": "logo" } ]
+    }
+  ]
+}
+{% endschema %}
