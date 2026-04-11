@@ -349,7 +349,15 @@
     showSuccess: function (name) {
       var form = document.getElementById('quote-contact-form');
       var success = document.getElementById('quote-success');
+      var emptyState = document.getElementById('quote-empty-state');
+      var productsList = document.getElementById('quote-items-list');
+      
+      // Hide form and empty state
       if (form) form.style.display = 'none';
+      if (emptyState) emptyState.style.display = 'none';
+      if (productsList) productsList.innerHTML = '';
+      
+      // Show success message
       if (success) {
         success.style.display = 'flex';
         var msg = success.querySelector('.quote-success-msg');
@@ -357,20 +365,14 @@
           msg.textContent = 'Thank you ' + name + '! Your quote request has been submitted successfully. Our team will contact you within 24 hours.';
         }
       }
-      this.renderItemsList();
+      
+      // Ensure counter is at 0
+      this.updateFloatBtn(false);
     },
 
     resetAfterSuccess: function () {
-      var form = document.getElementById('quote-contact-form');
-      var success = document.getElementById('quote-success');
-      if (form) {
-        form.reset();
-        form.style.display = 'block';
-      }
-      if (success) success.style.display = 'none';
-      var errorEl = document.getElementById('quote-form-error');
-      if (errorEl) errorEl.style.display = 'none';
-      this.closeModal();
+      // Redirect to home page
+      window.location.href = '/';
     },
 
     resetFormState: function () {

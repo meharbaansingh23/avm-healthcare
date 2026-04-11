@@ -430,54 +430,71 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 30px 20px;
+  padding: 50px 30px;
   flex: 1;
+  min-height: 400px;
 }
 
 .quote-success-icon {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   background: #d1fae5;
   color: #059669;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
+  font-size: 36px;
   font-weight: 700;
-  margin: 0 auto 16px;
+  margin: 0 auto 20px;
 }
 
 .quote-success h3 {
   color: #065f46;
-  font-size: 17px;
+  font-size: 22px;
   font-weight: 700;
-  margin: 0 0 8px;
+  margin: 0 0 12px;
 }
 
 .quote-success p {
   color: #6b7280;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.6;
-  margin: 0 0 22px;
+  margin: 0 0 28px;
+  max-width: 480px;
 }
 
 .quote-success-back {
-  background: #ffffff;
-  color: #0d7377;
-  border: 2px solid #0d7377;
-  padding: 10px 22px;
-  border-radius: 7px;
-  font-size: 13px;
-  font-weight: 600;
+  background: linear-gradient(135deg, #0d7377 0%, #14a085 100%);
+  color: #ffffff;
+  border: none;
+  padding: 13px 32px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: opacity 0.2s, transform 0.1s;
   font-family: inherit;
+  letter-spacing: 0.3px;
 }
 
 .quote-success-back:hover {
-  background: #0d7377;
-  color: #ffffff;
+  opacity: 0.92;
+}
+
+.quote-success-back:active {
+  transform: scale(0.99);
+}
+
+/* Hide products panel when success is shown */
+.quote-modal-body:has(#quote-success[style*="display: flex"]) .quote-products-panel {
+  display: none;
+}
+
+/* Make form panel full width when success is shown */
+.quote-modal-body:has(#quote-success[style*="display: flex"]) .quote-form-panel {
+  width: 100%;
+  border-left: none;
 }
 
 /* ── Toast Feedback ───────────────────────────────────────── */
