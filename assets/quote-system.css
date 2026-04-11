@@ -545,26 +545,25 @@
 @media screen and (max-width: 768px) {
   .quote-modal-overlay {
     padding: 0;
-    align-items: stretch; /* Stretch full height */
-    justify-content: stretch;
+    align-items: center;
+    justify-content: center;
   }
 
   .quote-modal {
-    border-radius: 0; /* Full screen on mobile */
-    max-height: 100vh; /* Full viewport height */
-    height: 100vh; /* Take full height */
-    max-width: 100%;
+    border-radius: 12px; /* Rounded corners since not full screen */
+    max-height: 90vh; /* 90% of viewport height */
+    height: 90vh;
+    max-width: calc(100vw - 20px); /* Small margin on sides */
+    width: calc(100vw - 20px);
     transform: translateY(20px);
     display: flex;
     flex-direction: column;
   }
   
-  /* Add safe area padding for notch/status bar */
+  /* Header is fixed at top */
   .quote-modal-header {
-    padding-top: max(16px, env(safe-area-inset-top, 0));
-    padding-bottom: 16px;
-    padding-left: max(22px, env(safe-area-inset-left, 0));
-    padding-right: max(22px, env(safe-area-inset-right, 0));
+    padding: 14px 18px;
+    flex-shrink: 0; /* Don't shrink header */
   }
 
   .quote-modal-overlay.is-open .quote-modal {
@@ -573,35 +572,40 @@
 
   .quote-modal-body {
     flex-direction: column;
-    overflow-y: auto; /* Allow scrolling on mobile */
-    overflow-x: hidden; /* Prevent horizontal scroll */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    flex: 1; /* Take remaining space */
+    overflow-y: auto; /* ONLY area that scrolls */
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    flex: 1; /* Take remaining space after header */
   }
 
   .quote-products-panel {
     border-right: none;
     border-bottom: 1px solid #e5e7eb;
-    max-height: none; /* Remove height restriction */
-    min-height: auto; /* Remove min height */
-    flex-shrink: 0; /* Don't shrink */
-    overflow-y: visible; /* Disable panel scrolling on mobile */
+    max-height: none; /* No height limit */
+    min-height: auto;
+    flex-shrink: 0;
+    overflow-y: visible; /* NO scrolling - content flows naturally */
     overflow-x: hidden;
-    padding-left: max(20px, env(safe-area-inset-left, 0));
-    padding-right: max(20px, env(safe-area-inset-right, 0));
+    padding: 16px;
   }
 
   .quote-form-panel {
     width: 100%;
-    flex-shrink: 0; /* Don't shrink */
-    overflow-y: visible; /* Allow content to flow */
-    padding-left: max(20px, env(safe-area-inset-left, 0));
-    padding-right: max(20px, env(safe-area-inset-right, 0));
-    padding-bottom: max(20px, env(safe-area-inset-bottom, 20px)); /* Safe area for home indicator */
+    flex-shrink: 0;
+    overflow-y: visible; /* NO scrolling - content flows naturally */
+    overflow-x: hidden;
+    padding: 16px;
+    padding-bottom: 30px; /* Extra space at bottom for submit button */
   }
 
   .quote-form-row {
     grid-template-columns: 1fr;
+  }
+  
+  /* Ensure items list doesn't scroll independently */
+  .quote-items-list {
+    overflow: visible;
+    flex: none; /* Don't flex, just take natural height */
   }
 
   .quote-float-btn {
