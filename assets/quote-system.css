@@ -546,13 +546,15 @@
   .quote-modal-overlay {
     padding: 0;
     align-items: flex-end;
+    padding-top: env(safe-area-inset-top, 0); /* Account for notch/status bar */
   }
 
   .quote-modal {
     border-radius: 18px 18px 0 0;
-    max-height: 95vh;
+    max-height: calc(100vh - 60px); /* Leave space for header visibility */
     max-width: 100%;
     transform: translateY(20px);
+    margin-top: 60px; /* Ensure header is never cut off */
   }
 
   .quote-modal-overlay.is-open .quote-modal {
@@ -562,6 +564,7 @@
   .quote-modal-body {
     flex-direction: column;
     overflow-y: auto; /* Allow scrolling on mobile */
+    overflow-x: hidden; /* Prevent horizontal scroll */
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
   }
 
@@ -571,6 +574,8 @@
     max-height: none; /* Remove height restriction */
     min-height: auto; /* Remove min height */
     flex-shrink: 0; /* Don't shrink */
+    overflow-y: visible; /* Disable panel scrolling on mobile */
+    overflow-x: hidden;
   }
 
   .quote-form-panel {
@@ -626,5 +631,29 @@
   .quote-products-panel,
   .quote-form-panel {
     padding: 16px;
+  }
+  
+  /* Ensure submit button is always visible */
+  .quote-submit-btn {
+    margin-top: 16px;
+    margin-bottom: 20px; /* Extra space at bottom */
+  }
+  
+  /* Make sure empty state doesn't block scrolling */
+  .quote-empty-state {
+    padding: 20px 16px;
+    min-height: 100px;
+  }
+  
+  /* Reduce item size on very small screens */
+  .quote-item {
+    padding: 8px 10px;
+    gap: 10px;
+  }
+  
+  .quote-item-image,
+  .quote-item-image-placeholder {
+    width: 50px;
+    height: 50px;
   }
 }
