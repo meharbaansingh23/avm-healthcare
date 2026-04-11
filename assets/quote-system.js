@@ -345,22 +345,25 @@
       if (submitLoader) submitLoader.style.display = 'inline';
 
       /* POST to Shopify /contact */
-      var payload = new FormData();
-      payload.append('form_type', 'contact');
-      payload.append('utf8', '\u2713');
-      payload.append('contact[name]', name);
-      payload.append('contact[email]', email);
-      payload.append('contact[body]', body);
+      /* Read the authenticity_token from the hidden Shopify-rendered form */
+      var tokenInput = document.querySelector('#quote-hidden-form [name="authenticity_token"]');
+      var token = tokenInput ? tokenInput.value : '';
 
-      /* Shopify requires a CSRF token for /contact submissions */
-      if (window.Shopify && window.Shopify.csrfToken) {
-        payload.append('authenticity_token', window.Shopify.csrfToken);
-      }
+      var params = new URLSearchParams();
+      params.append('form_type', 'contact');
+      params.append('utf8', '\u2713');
+      if (token) params.append('authenticity_token', token);
+      params.append('contact[name]', name);
+      params.append('contact[email]', email);
+      params.append('contact[body]', body);
 
       fetch('/contact', {
         method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: payload
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Accept': 'application/json'
+        },
+        body: params.toString()
       })
         .then(function (res) {
           if (res.ok) {

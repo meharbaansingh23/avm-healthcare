@@ -3,6 +3,11 @@
   Floating button + modal rendered on every page via theme.liquid.
 {% endcomment %}
 
+{% comment %} Hidden Shopify contact form — provides the authenticity_token for AJAX submission {% endcomment %}
+<div style="display:none" aria-hidden="true">
+  {%- form 'contact', id: 'quote-hidden-form' -%}{%- endform -%}
+</div>
+
 <!-- Floating "View Quote" Button -->
 <button
   id="quote-float-btn"
