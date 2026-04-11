@@ -545,16 +545,16 @@
 @media screen and (max-width: 768px) {
   .quote-modal-overlay {
     padding: 0;
-    align-items: flex-end;
-    padding-top: env(safe-area-inset-top, 0); /* Account for notch/status bar */
+    align-items: center; /* Center vertically instead of bottom */
+    justify-content: center;
   }
 
   .quote-modal {
-    border-radius: 18px 18px 0 0;
-    max-height: calc(100vh - 60px); /* Leave space for header visibility */
+    border-radius: 0; /* Full screen on mobile */
+    max-height: 100vh; /* Full viewport height */
+    height: 100vh; /* Take full height */
     max-width: 100%;
     transform: translateY(20px);
-    margin-top: 60px; /* Ensure header is never cut off */
   }
 
   .quote-modal-overlay.is-open .quote-modal {
@@ -633,10 +633,18 @@
     padding: 16px;
   }
   
+  /* Prevent zoom on input focus - iOS requires 16px minimum */
+  .quote-form-group input,
+  .quote-form-group textarea,
+  .quote-form-group select {
+    font-size: 16px !important; /* Prevent auto-zoom */
+  }
+  
   /* Ensure submit button is always visible */
   .quote-submit-btn {
     margin-top: 16px;
     margin-bottom: 20px; /* Extra space at bottom */
+    font-size: 16px; /* Larger touch target */
   }
   
   /* Make sure empty state doesn't block scrolling */
