@@ -33,7 +33,7 @@
     save: function () {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(this.items));
-      } catch (_) {}
+      } catch (_) { }
     },
 
     /* ── Item CRUD ──────────────────────────────────────── */
@@ -152,15 +152,15 @@
 
         return (
           '<div class="quote-item" data-item-id="' + item.id + '">' +
-            img +
-            '<div class="quote-item-info">' +
-              '<p class="quote-item-title" title="' + self.esc(item.title) + '">' + self.esc(item.title) + '</p>' +
-              '<div class="quote-item-qty-row">' +
-                '<span>Qty:</span>' +
-                '<input type="number" min="1" value="' + item.quantity + '" data-item-id="' + item.id + '" class="quote-qty-input" aria-label="Quantity">' +
-              '</div>' +
-            '</div>' +
-            '<button class="quote-item-remove" data-item-id="' + item.id + '" aria-label="Remove">&times;</button>' +
+          img +
+          '<div class="quote-item-info">' +
+          '<p class="quote-item-title" title="' + self.esc(item.title) + '">' + self.esc(item.title) + '</p>' +
+          '<div class="quote-item-qty-row">' +
+          '<span>Qty:</span>' +
+          '<input type="number" min="1" value="' + item.quantity + '" data-item-id="' + item.id + '" class="quote-qty-input" aria-label="Quantity">' +
+          '</div>' +
+          '</div>' +
+          '<button class="quote-item-remove" data-item-id="' + item.id + '" aria-label="Remove">&times;</button>' +
           '</div>'
         );
       }).join('');
@@ -352,6 +352,11 @@
       payload.append('contact[email]', email);
       payload.append('contact[body]', body);
 
+      /* Shopify requires a CSRF token for /contact submissions */
+      if (window.Shopify && window.Shopify.csrfToken) {
+        payload.append('authenticity_token', window.Shopify.csrfToken);
+      }
+
       fetch('/contact', {
         method: 'POST',
         headers: { 'Accept': 'application/json' },
@@ -423,7 +428,6 @@
       toast.textContent = msg;
       toast.classList.add('show');
       clearTimeout(this._toastTimer);
-      var self = this;
       this._toastTimer = setTimeout(function () {
         toast.classList.remove('show');
       }, 2800);
