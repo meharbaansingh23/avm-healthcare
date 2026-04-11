@@ -131,16 +131,6 @@
       this.resetFormState();
       overlay.classList.add('is-open');
       document.body.style.overflow = 'hidden';
-      
-      // Reset hCaptcha if it exists
-      if (typeof hcaptcha !== 'undefined') {
-        try {
-          hcaptcha.reset();
-        } catch (e) {
-          // CAPTCHA not yet initialized, ignore
-        }
-      }
-      
       setTimeout(function () {
         var first = overlay.querySelector('input:not([disabled])');
         if (first) first.focus();
@@ -298,22 +288,6 @@
         return;
       }
 
-      // Check if hCaptcha is completed
-      if (typeof hcaptcha !== 'undefined') {
-        var captchaResponse = hcaptcha.getResponse();
-        if (!captchaResponse) {
-          e.preventDefault();
-          errorEl.textContent = 'Please complete the security verification (CAPTCHA) before submitting.';
-          errorEl.style.display = 'block';
-          // Scroll to CAPTCHA
-          var captchaEl = document.getElementById('quote-captcha');
-          if (captchaEl) {
-            captchaEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-          return;
-        }
-      }
-
       errorEl.style.display = 'none';
 
       // Get form data
@@ -367,7 +341,7 @@
       // Store name for success message after redirect
       sessionStorage.setItem(SUCCESS_FLAG, name);
 
-      // Let the form submit naturally - Shopify handles everything!
+      // Let the form submit naturally - Shopify handles CAPTCHA automatically!
       // Don't call e.preventDefault() - we want the normal submission
     },
 
