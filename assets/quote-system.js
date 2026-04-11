@@ -306,34 +306,37 @@
       var notes = data.get('contact[notes]') || '';
 
       /* Build email body */
-      var productLines = this.items.map(function (item, idx) {
-        return (idx + 1) + '. ' + item.title +
-          '  |  Qty: ' + item.quantity +
-          (item.url ? '  |  ' + window.location.origin + item.url : '');
+      var productLines = this.items.map(function (item) {
+        return '- ' + item.title + ' \u2014 Quantity: ' + item.quantity;
       }).join('\n');
 
+      var divider = '================================================';
+
       var body = [
-        'QUOTE REQUEST — AVM HEALTHCARE WEBSITE',
+        divider,
+        '\uD83C\uDFE5 NEW QUOTE REQUEST \u2014 AVM HEALTHCARE',
+        divider,
         '',
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-        'PRODUCTS REQUESTED',
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+        '\uD83D\uDCE6 PRODUCTS REQUESTED:',
         productLines,
         '',
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-        'CUSTOMER DETAILS',
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-        'Name            : ' + name,
-        'Email           : ' + email,
-        'Phone           : ' + phone,
-        'Company/Hospital: ' + company,
-        'Department      : ' + (dept || '—'),
-        'City / Location : ' + city,
+        '\uD83D\uDC64 CUSTOMER INFORMATION:',
+        'Name          : ' + name,
+        'Email         : ' + email,
+        'Phone         : ' + phone,
         '',
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-        'SPECIAL INQUIRY / NOTES',
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-        notes || '—'
+        '\uD83C\uDFE2 ORGANISATION DETAILS:',
+        'Company/Facility : ' + company,
+        'Department       : ' + (dept || 'Not specified'),
+        'City/Location    : ' + city,
+        '',
+        '\uD83D\uDCDD SPECIAL INQUIRY:',
+        notes || 'None',
+        '',
+        divider,
+        'Please respond within 24 hours.',
+        'AVM Healthcare Quote System',
+        divider
       ].join('\n');
 
       /* Disable submit while sending */
@@ -356,7 +359,7 @@
       })
         .then(function (res) {
           if (res.ok) {
-            self.showSuccess();
+            self.showSuccess(name);
             self.clearAll();
           } else {
             throw new Error('server');
@@ -372,11 +375,17 @@
     },
 
     /* ── UI State Helpers ───────────────────────────────── */
-    showSuccess: function () {
+    showSuccess: function (name) {
       var form = document.getElementById('quote-contact-form');
       var success = document.getElementById('quote-success');
       if (form) form.style.display = 'none';
-      if (success) success.style.display = 'flex';
+      if (success) {
+        success.style.display = 'flex';
+        var msg = success.querySelector('.quote-success-msg');
+        if (msg && name) {
+          msg.textContent = 'Thank you ' + name + '! Your quote request has been submitted successfully. Our team will contact you within 24 hours.';
+        }
+      }
       this.renderItemsList();
     },
 
