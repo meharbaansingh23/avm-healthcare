@@ -1,0 +1,182 @@
+{% comment %}
+  AVM Healthcare — Quote Request System
+  Floating button + modal rendered on every page via theme.liquid.
+{% endcomment %}
+
+<!-- Floating "View Quote" Button -->
+<button
+  id="quote-float-btn"
+  class="quote-float-btn"
+  onclick="quoteSystem.openModal()"
+  aria-label="View quote request"
+  aria-haspopup="dialog"
+>
+  <span class="quote-float-label">View Quote</span>
+  <span class="quote-float-count" id="quote-float-count">0</span>
+</button>
+
+<!-- Quote Modal Overlay -->
+<div
+  id="quote-modal-overlay"
+  class="quote-modal-overlay"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Quote request"
+>
+  <div class="quote-modal">
+
+    <!-- Header -->
+    <div class="quote-modal-header">
+      <div class="quote-modal-header-text">
+        <h2>Quote Request</h2>
+        <p>AVM Healthcare &mdash; B2B Medical Equipment</p>
+      </div>
+      <button
+        class="quote-modal-close"
+        onclick="quoteSystem.closeModal()"
+        aria-label="Close quote request"
+      >
+        &times;
+      </button>
+    </div>
+
+    <!-- Body: two panels -->
+    <div class="quote-modal-body">
+
+      <!-- LEFT: Product List -->
+      <div class="quote-products-panel">
+        <p class="quote-panel-title">Products in Quote</p>
+
+        <div id="quote-items-list" class="quote-items-list"></div>
+
+        <div id="quote-empty-state" class="quote-empty-state" style="display: flex;">
+          <div class="quote-empty-state-icon">&#128230;</div>
+          <p>No products added yet.<br>Browse our catalogue and click <strong>&ldquo;Add to Quote&rdquo;</strong>.</p>
+        </div>
+      </div>
+
+      <!-- RIGHT: Contact Form -->
+      <div class="quote-form-panel">
+        <p class="quote-panel-title">Your Details</p>
+
+        <!-- Success message (hidden until submit) -->
+        <div id="quote-success" class="quote-success" style="display: none;">
+          <div class="quote-success-icon">&#10003;</div>
+          <h3>Quote Request Sent!</h3>
+          <p>
+            Thank you for your inquiry. Our team will review your request
+            and get back to you within 24&nbsp;hours.
+          </p>
+          <button
+            class="quote-success-back"
+            onclick="quoteSystem.resetAfterSuccess()"
+          >
+            Submit Another Quote
+          </button>
+        </div>
+
+        <!-- Contact form -->
+        <form id="quote-contact-form" class="quote-contact-form" novalidate>
+
+          <div class="quote-form-group">
+            <label for="q-name">Full Name <span class="req">*</span></label>
+            <input
+              type="text"
+              id="q-name"
+              name="contact[name]"
+              required
+              placeholder="Dr. Ramesh Sharma"
+              autocomplete="name"
+            >
+          </div>
+
+          <div class="quote-form-row">
+            <div class="quote-form-group">
+              <label for="q-email">Email <span class="req">*</span></label>
+              <input
+                type="email"
+                id="q-email"
+                name="contact[email]"
+                required
+                placeholder="you@hospital.com"
+                autocomplete="email"
+              >
+            </div>
+            <div class="quote-form-group">
+              <label for="q-phone">Phone <span class="req">*</span></label>
+              <input
+                type="tel"
+                id="q-phone"
+                name="contact[phone]"
+                required
+                placeholder="+91 98765 43210"
+                autocomplete="tel"
+              >
+            </div>
+          </div>
+
+          <div class="quote-form-group">
+            <label for="q-company">Company / Hospital / Facility <span class="req">*</span></label>
+            <input
+              type="text"
+              id="q-company"
+              name="contact[company]"
+              required
+              placeholder="Apollo Hospitals, Max Healthcare&hellip;"
+              autocomplete="organization"
+            >
+          </div>
+
+          <div class="quote-form-row">
+            <div class="quote-form-group">
+              <label for="q-dept">Department</label>
+              <input
+                type="text"
+                id="q-dept"
+                name="contact[department]"
+                placeholder="ICU, Cardiology&hellip;"
+              >
+            </div>
+            <div class="quote-form-group">
+              <label for="q-city">City / Location <span class="req">*</span></label>
+              <input
+                type="text"
+                id="q-city"
+                name="contact[city]"
+                required
+                placeholder="Mumbai"
+                autocomplete="address-level2"
+              >
+            </div>
+          </div>
+
+          <div class="quote-form-group">
+            <label for="q-notes">Special Inquiry / Notes</label>
+            <textarea
+              id="q-notes"
+              name="contact[notes]"
+              rows="3"
+              placeholder="Quantity requirements, customizations, delivery timeline, service contract needs&hellip;"
+            ></textarea>
+          </div>
+
+          <div id="quote-form-error" class="quote-form-error" style="display: none;"></div>
+
+          <button
+            type="submit"
+            id="quote-submit-btn"
+            class="quote-submit-btn"
+          >
+            <span id="quote-submit-text">Submit Quote Request</span>
+            <span id="quote-submit-loading" style="display: none;">Sending&hellip;</span>
+          </button>
+
+        </form>
+      </div><!-- /.quote-form-panel -->
+
+    </div><!-- /.quote-modal-body -->
+  </div><!-- /.quote-modal -->
+</div><!-- /.quote-modal-overlay -->
+
+<!-- Toast notification -->
+<div id="quote-toast" class="quote-toast" aria-live="polite"></div>

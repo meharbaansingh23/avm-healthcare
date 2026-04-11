@@ -1,0 +1,580 @@
+/* ============================================================
+   AVM Healthcare — Quote Request System
+   ============================================================ */
+
+/* ── Floating Button ──────────────────────────────────────── */
+.quote-float-btn {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(160deg, #0d7377 0%, #14a085 100%);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+  border-radius: 10px 0 0 10px;
+  padding: 22px 11px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: -4px 0 18px rgba(0, 0, 0, 0.18);
+  transition: background 0.2s ease, transform 0.2s ease;
+  min-width: 46px;
+  font-family: inherit;
+}
+
+.quote-float-btn:hover {
+  background: linear-gradient(160deg, #0a5f63 0%, #0f8870 100%);
+  transform: translateY(-50%) translateX(-3px);
+}
+
+.quote-float-label {
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.quote-float-count {
+  background: #ffffff;
+  color: #0d7377;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.quote-float-count.pulse {
+  animation: quote-count-pulse 0.35s ease;
+}
+
+@keyframes quote-count-pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+/* ── Modal Overlay ────────────────────────────────────────── */
+.quote-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.6);
+  z-index: 99998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.quote-modal-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ── Modal Shell ──────────────────────────────────────────── */
+.quote-modal {
+  background: #ffffff;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 980px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+  transform: translateY(12px) scale(0.97);
+  transition: transform 0.25s ease;
+}
+
+.quote-modal-overlay.is-open .quote-modal {
+  transform: translateY(0) scale(1);
+}
+
+/* ── Modal Header ─────────────────────────────────────────── */
+.quote-modal-header {
+  background: linear-gradient(135deg, #0d7377 0%, #14a085 100%);
+  padding: 16px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.quote-modal-header-text h2 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.quote-modal-header-text p {
+  margin: 3px 0 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.3px;
+}
+
+.quote-modal-close {
+  background: rgba(255, 255, 255, 0.18);
+  border: none;
+  color: #ffffff;
+  font-size: 20px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s;
+  font-family: inherit;
+  line-height: 1;
+}
+
+.quote-modal-close:hover {
+  background: rgba(255, 255, 255, 0.32);
+}
+
+/* ── Modal Body ───────────────────────────────────────────── */
+.quote-modal-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* ── Products Panel (left) ────────────────────────────────── */
+.quote-products-panel {
+  flex: 1;
+  padding: 20px;
+  border-right: 1px solid #e5e7eb;
+  overflow-y: auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.quote-panel-title {
+  margin: 0 0 14px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.quote-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+/* ── Quote Item ───────────────────────────────────────────── */
+.quote-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid #e9ecef;
+  border-radius: 9px;
+  background: #f8f9fa;
+  transition: border-color 0.15s;
+}
+
+.quote-item:hover {
+  border-color: #0d7377;
+}
+
+.quote-item-image {
+  width: 58px;
+  height: 58px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  background: #e5e7eb;
+}
+
+.quote-item-image-placeholder {
+  width: 58px;
+  height: 58px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  background: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #9ca3af;
+}
+
+.quote-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.quote-item-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 7px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.quote-item-qty-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.quote-item-qty-row input[type="number"] {
+  width: 58px;
+  padding: 4px 7px;
+  border: 1px solid #d1d5db;
+  border-radius: 5px;
+  font-size: 13px;
+  text-align: center;
+  color: #111827;
+  background: #fff;
+  font-family: inherit;
+  -moz-appearance: textfield;
+}
+
+.quote-item-qty-row input[type="number"]::-webkit-inner-spin-button,
+.quote-item-qty-row input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+.quote-item-qty-row input[type="number"]:focus {
+  outline: none;
+  border-color: #0d7377;
+  box-shadow: 0 0 0 2px rgba(13, 115, 119, 0.15);
+}
+
+.quote-item-remove {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 17px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: color 0.15s, background 0.15s;
+  font-family: inherit;
+}
+
+.quote-item-remove:hover {
+  color: #ef4444;
+  background: #fee2e2;
+}
+
+.quote-empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px 20px;
+  color: #9ca3af;
+}
+
+.quote-empty-state-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.quote-empty-state p {
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 220px;
+}
+
+/* ── Form Panel (right) ───────────────────────────────────── */
+.quote-form-panel {
+  width: 370px;
+  flex-shrink: 0;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.quote-form-group {
+  margin-bottom: 12px;
+}
+
+.quote-form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 5px;
+  letter-spacing: 0.2px;
+}
+
+.quote-form-group .req {
+  color: #ef4444;
+  margin-left: 2px;
+}
+
+.quote-form-group input,
+.quote-form-group textarea,
+.quote-form-group select {
+  width: 100%;
+  padding: 9px 11px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 7px;
+  font-size: 13px;
+  color: #111827;
+  background: #ffffff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.quote-form-group input:focus,
+.quote-form-group textarea:focus,
+.quote-form-group select:focus {
+  outline: none;
+  border-color: #0d7377;
+  box-shadow: 0 0 0 3px rgba(13, 115, 119, 0.12);
+}
+
+.quote-form-group input::placeholder,
+.quote-form-group textarea::placeholder {
+  color: #c4c9d4;
+}
+
+.quote-form-group textarea {
+  resize: vertical;
+  min-height: 76px;
+}
+
+.quote-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.quote-form-error {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  border-radius: 7px;
+  padding: 10px 13px;
+  font-size: 13px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.quote-submit-btn {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, #0d7377 0%, #14a085 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  letter-spacing: 0.3px;
+  font-family: inherit;
+  margin-top: auto;
+}
+
+.quote-submit-btn:hover {
+  opacity: 0.92;
+}
+
+.quote-submit-btn:active {
+  transform: scale(0.99);
+}
+
+.quote-submit-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ── Success State ────────────────────────────────────────── */
+.quote-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px 20px;
+  flex: 1;
+}
+
+.quote-success-icon {
+  width: 60px;
+  height: 60px;
+  background: #d1fae5;
+  color: #059669;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 auto 16px;
+}
+
+.quote-success h3 {
+  color: #065f46;
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.quote-success p {
+  color: #6b7280;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0 0 22px;
+}
+
+.quote-success-back {
+  background: #ffffff;
+  color: #0d7377;
+  border: 2px solid #0d7377;
+  padding: 10px 22px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  font-family: inherit;
+}
+
+.quote-success-back:hover {
+  background: #0d7377;
+  color: #ffffff;
+}
+
+/* ── Toast Feedback ───────────────────────────────────────── */
+.quote-toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: #111827;
+  color: #ffffff;
+  padding: 11px 22px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  z-index: 99999;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.22);
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+  white-space: nowrap;
+  max-width: calc(100vw - 40px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: inherit;
+}
+
+.quote-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media screen and (max-width: 768px) {
+  .quote-modal-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .quote-modal {
+    border-radius: 18px 18px 0 0;
+    max-height: 95vh;
+    max-width: 100%;
+    transform: translateY(20px);
+  }
+
+  .quote-modal-overlay.is-open .quote-modal {
+    transform: translateY(0);
+  }
+
+  .quote-modal-body {
+    flex-direction: column;
+  }
+
+  .quote-products-panel {
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+    max-height: 32vh;
+    min-height: 100px;
+  }
+
+  .quote-form-panel {
+    width: 100%;
+  }
+
+  .quote-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .quote-float-btn {
+    top: auto;
+    bottom: 24px;
+    transform: none;
+    flex-direction: row;
+    padding: 11px 14px;
+    border-radius: 30px 0 0 30px;
+    gap: 8px;
+  }
+
+  .quote-float-btn:hover {
+    transform: translateX(-3px);
+  }
+
+  .quote-float-label {
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: 11px;
+  }
+
+  .quote-float-count {
+    width: 22px;
+    height: 22px;
+    font-size: 11px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .quote-modal-header-text h2 {
+    font-size: 16px;
+  }
+}
