@@ -1,15 +1,18 @@
 /**
- * AVM Healthcare — Quote Request System (True Shopify-Native)
- * The modal form IS the actual Shopify contact form with CAPTCHA.
+ * AVM Healthcare — Quote Request System with Invisible hCaptcha
+ * Pre-verifies users with invisible CAPTCHA to prevent challenge page redirects.
  */
 (function () {
   'use strict';
 
   var STORAGE_KEY = 'avm_quote_items';
   var SUCCESS_FLAG = 'avm_quote_success';
+  var HCAPTCHA_SITE_KEY = 'f06e6c50-85a8-45c8-87d0-21a2b65856fe';
 
   var quoteSystem = {
     items: [],
+    hcaptchaWidgetId: null,
+    isSubmitting: false,
 
     /* ── Bootstrap ──────────────────────────────────────── */
     init: function () {
@@ -18,6 +21,72 @@
       this.bindFormIntercept();
       this.bindStaticEvents();
       this.checkSuccessState();
+      this.initInvisibleCaptcha();
+    },
+
+    /* ── Initialize Invisible hCaptcha ───────────────────── */
+    initInvisibleCaptcha: function () {
+      var self = this;
+      
+      // Wait for hCaptcha API to load
+      var checkHCaptcha = setInterval(function() {
+        if (typeof hcaptcha !== 'undefined' && hcaptcha.render) {
+          clearInterval(checkHCaptcha);
+          
+          try {
+            // Render invisible hCaptcha
+            self.hcaptchaWidgetId = hcaptcha.render('quote-captcha-container', {
+              sitekey: HCAPTCHA_SITE_KEY,
+              size: 'invisible',
+              callback: function(token) {
+                self.onCaptchaSuccess(token);
+              },
+              'error-callback': function() {
+                self.onCaptchaError();
+              }
+            });
+          } catch (e) {
+            console.log('hCaptcha render skipped (Shopify may handle it):', e);
+          }
+        }
+      }, 100);
+      
+      // Stop checking after 10 seconds
+      setTimeout(function() {
+        clearInterval(checkHCaptcha);
+      }, 10000);
+    },
+
+    /* ── hCaptcha Callbacks ──────────────────────────────── */
+    onCaptchaSuccess: function(token) {
+      // Store token in hidden field
+      var tokenField = document.getElementById('h-captcha-response');
+      if (tokenField) tokenField.value = token;
+      
+      // Now submit the form
+      var form = document.getElementById('quote-contact-form');
+      if (form && this.isSubmitting) {
+        this.isSubmitting = false;
+        form.submit();
+      }
+    },
+
+    onCaptchaError: function() {
+      var errorEl = document.getElementById('quote-form-error');
+      var submitBtn = document.getElementById('quote-submit-btn');
+      var submitText = document.getElementById('quote-submit-text');
+      var submitLoader = document.getElementById('quote-submit-loader');
+      
+      if (errorEl) {
+        errorEl.textContent = 'Security verification failed. Please try again.';
+        errorEl.style.display = 'block';
+      }
+      
+      if (submitBtn) submitBtn.disabled = false;
+      if (submitText) submitText.style.display = 'inline';
+      if (submitLoader) submitLoader.style.display = 'none';
+      
+      this.isSubmitting = false;
     },
 
     /* ── Check if we just returned from successful submission ── */
@@ -30,7 +99,6 @@
           this.clearAll();
           this.openModal();
           this.showSuccess(successName);
-          // Clean URL
           window.history.replaceState({}, '', window.location.pathname);
         }
       }
@@ -273,16 +341,20 @@
 
     /* ── Prepare Form for Submission ────────────────────── */
     prepareSubmission: function (e) {
+      e.preventDefault();
+      
       var form = document.getElementById('quote-contact-form');
       var errorEl = document.getElementById('quote-form-error');
+      var submitBtn = document.getElementById('quote-submit-btn');
+      var submitText = document.getElementById('quote-submit-text');
+      var submitLoader = document.getElementById('quote-submit-loader');
 
       if (!form.checkValidity()) {
-        // Let browser handle validation
+        form.reportValidity();
         return;
       }
 
       if (this.items.length === 0) {
-        e.preventDefault();
         errorEl.textContent = 'Please add at least one product to your quote before submitting.';
         errorEl.style.display = 'block';
         return;
@@ -341,8 +413,28 @@
       // Store name for success message after redirect
       sessionStorage.setItem(SUCCESS_FLAG, name);
 
-      // Let the form submit naturally - Shopify handles CAPTCHA automatically!
-      // Don't call e.preventDefault() - we want the normal submission
+      // Show loading state
+      if (submitBtn) submitBtn.disabled = true;
+      if (submitText) submitText.style.display = 'none';
+      if (submitLoader) submitLoader.style.display = 'inline';
+
+      // Execute invisible hCaptcha
+      this.isSubmitting = true;
+      
+      if (this.hcaptchaWidgetId !== null && typeof hcaptcha !== 'undefined') {
+        try {
+          hcaptcha.execute(this.hcaptchaWidgetId);
+        } catch (e) {
+          // If hCaptcha fails, submit anyway (Shopify will handle it)
+          console.log('hCaptcha execute failed, submitting normally:', e);
+          this.isSubmitting = false;
+          form.submit();
+        }
+      } else {
+        // No hCaptcha widget, submit normally
+        this.isSubmitting = false;
+        form.submit();
+      }
     },
 
     /* ── UI State Helpers ───────────────────────────────── */
@@ -352,12 +444,10 @@
       var emptyState = document.getElementById('quote-empty-state');
       var productsList = document.getElementById('quote-items-list');
       
-      // Hide form and empty state
       if (form) form.style.display = 'none';
       if (emptyState) emptyState.style.display = 'none';
       if (productsList) productsList.innerHTML = '';
       
-      // Show success message
       if (success) {
         success.style.display = 'flex';
         var msg = success.querySelector('.quote-success-msg');
@@ -366,12 +456,10 @@
         }
       }
       
-      // Ensure counter is at 0
       this.updateFloatBtn(false);
     },
 
     resetAfterSuccess: function () {
-      // Redirect to home page
       window.location.href = '/';
     },
 
