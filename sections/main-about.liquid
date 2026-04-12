@@ -304,7 +304,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 56px;
+    gap: 64px;
     max-width: 1000px;
     margin: 0 auto;
   }
@@ -325,10 +325,12 @@
   }
 
   .avm-about-trusted__logo img {
-    max-height: 56px;
-    max-width: 160px;
-    width: auto;
+    height: 64px !important;
+    max-width: 180px !important;
+    width: auto !important;
     object-fit: contain;
+    opacity: 0.65;
+    transition: opacity 0.3s;
     display: block;
   }
 
@@ -656,9 +658,25 @@
       padding: 0 20px;
     }
     .avm-about-team__grid {
-      grid-template-columns: 1fr;
-      max-width: 380px;
-      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .avm-about-team__card {
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .avm-about-team__photo {
+      height: 160px;
+    }
+    .avm-about-team__name {
+      font-size: 12px;
+    }
+    .avm-about-team__role {
+      font-size: 11px;
+    }
+    .avm-about-team__info {
+      padding: 10px 12px;
     }
 
     /* Certs: 2-col */
