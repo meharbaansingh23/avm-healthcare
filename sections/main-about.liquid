@@ -1,0 +1,910 @@
+<style>
+  /* ================================================
+     AVM About Us — all 8 sections
+     ================================================ */
+  .avm-about * {
+    box-sizing: border-box;
+    font-family: 'Google Sans Flex', sans-serif;
+  }
+
+  /* ---- S1: Hero ---- */
+  .avm-about-hero {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .avm-about-hero__bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://1zkcvw-8f.myshopify.com/cdn/shop/files/pexels-tara-winstead-7722685.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .avm-about-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 31, 61, 0.75);
+  }
+
+  .avm-about-hero__content {
+    position: relative;
+    z-index: 2;
+    padding: 0 24px;
+  }
+
+  .avm-about-hero__label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #93c5fd;
+    margin-bottom: 20px;
+  }
+
+  .avm-about-hero__title {
+    font-size: 52px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.15;
+    max-width: 700px;
+    margin: 0 auto 24px;
+    letter-spacing: -0.5px;
+  }
+
+  .avm-about-hero__sub {
+    font-size: 18px;
+    color: #93c5fd;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  @media screen and (max-width: 749px) {
+    .avm-about-hero { height: 420px; }
+    .avm-about-hero__title { font-size: 30px; }
+    .avm-about-hero__sub { font-size: 15px; }
+  }
+
+  /* ---- S2: Stats ---- */
+  .avm-about-stats {
+    background: #fff;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 60px 40px;
+  }
+
+  .avm-about-stats__inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .avm-about-stats__item {
+    text-align: center;
+    padding: 0 28px;
+  }
+
+  .avm-about-stats__item + .avm-about-stats__item {
+    border-left: 1px solid #e5e7eb;
+  }
+
+  .avm-about-stats__number {
+    display: block;
+    font-size: 48px;
+    font-weight: 700;
+    color: #0f1f3d;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .avm-about-stats__label {
+    font-size: 14px;
+    color: #6b7280;
+    margin: 6px 0 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .avm-about-stats__inner {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px 0;
+    }
+    .avm-about-stats__item:nth-child(odd) { border-left: none; }
+    .avm-about-stats__item:nth-child(n+3) {
+      border-top: 1px solid #e5e7eb;
+      padding-top: 32px;
+    }
+  }
+
+  /* ---- S3: Our Story ---- */
+  .avm-about-story {
+    background: #f8fafc;
+    padding: 80px 0;
+  }
+
+  .avm-about-story__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .avm-about-story__label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #1a5fa8;
+    margin-bottom: 16px;
+  }
+
+  .avm-about-story__title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #0f1f3d;
+    line-height: 1.2;
+    margin: 0 0 24px;
+    letter-spacing: -0.3px;
+  }
+
+  .avm-about-story__body {
+    font-size: 16px;
+    color: #4b5563;
+    line-height: 1.85;
+    margin: 0;
+  }
+
+  .avm-about-story__image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+  }
+
+  @media screen and (max-width: 899px) {
+    .avm-about-story__inner { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  @media screen and (max-width: 599px) {
+    .avm-about-story__inner { padding: 0 24px; }
+  }
+
+  /* ---- S4: Video ---- */
+  .avm-about-video {
+    background: #0f1f3d;
+    padding: 80px 40px;
+    text-align: center;
+  }
+
+  .avm-about-video__label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #93c5fd;
+    margin-bottom: 16px;
+  }
+
+  .avm-about-video__title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 auto 48px;
+    max-width: 600px;
+    letter-spacing: -0.3px;
+  }
+
+  .avm-about-video__frame {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .avm-about-video__embed {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .avm-about-video__embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .avm-about-video__placeholder {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .avm-about-video__play-btn {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1.5px solid rgba(255, 255, 255, 0.28);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .avm-about-video__play-btn svg {
+    width: 28px;
+    height: 28px;
+    fill: #fff;
+    margin-left: 4px;
+  }
+
+  .avm-about-video__placeholder-text {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.38);
+    margin: 0;
+    max-width: 320px;
+    line-height: 1.5;
+  }
+
+  /* ---- S5: Trusted By ---- */
+  .avm-about-trusted {
+    background: #fff;
+    padding: 60px 40px;
+    text-align: center;
+  }
+
+  .avm-about-trusted__label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #6b7280;
+    margin-bottom: 40px;
+  }
+
+  .avm-about-trusted__logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .avm-about-trusted__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: grayscale(1);
+    opacity: 0.6;
+    transition: filter 0.2s ease, opacity 0.2s ease;
+    text-decoration: none;
+  }
+
+  .avm-about-trusted__logo:hover {
+    filter: grayscale(0);
+    opacity: 1;
+  }
+
+  .avm-about-trusted__logo img {
+    max-height: 48px;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* ---- S6: Team ---- */
+  .avm-about-team {
+    background: #f8fafc;
+    padding: 80px 0;
+  }
+
+  .avm-about-team__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .avm-about-team__header {
+    text-align: center;
+    margin-bottom: 52px;
+  }
+
+  .avm-about-team__label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #1a5fa8;
+    margin-bottom: 12px;
+  }
+
+  .avm-about-team__title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #0f1f3d;
+    margin: 0;
+    letter-spacing: -0.3px;
+  }
+
+  .avm-about-team__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .avm-about-team__card {
+    background: #fff;
+    border: 0.5px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .avm-about-team__photo {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+  }
+
+  .avm-about-team__info {
+    padding: 20px 24px;
+  }
+
+  .avm-about-team__name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #0f1f3d;
+    margin: 0;
+  }
+
+  .avm-about-team__role {
+    font-size: 13px;
+    color: #6b7280;
+    margin: 4px 0 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .avm-about-team__grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+  }
+
+  @media screen and (max-width: 599px) {
+    .avm-about-team__inner { padding: 0 24px; }
+  }
+
+  /* ---- S7: Certifications ---- */
+  .avm-about-certs {
+    background: #fff;
+    padding: 60px 0;
+  }
+
+  .avm-about-certs__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .avm-about-certs__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .avm-about-certs__label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #1a5fa8;
+    margin-bottom: 12px;
+  }
+
+  .avm-about-certs__title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #0f1f3d;
+    margin: 0;
+    letter-spacing: -0.3px;
+  }
+
+  .avm-about-certs__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .avm-about-certs__card {
+    border: 0.5px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 24px;
+    background: #fff;
+  }
+
+  .avm-about-certs__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #1a5fa8;
+    margin-bottom: 14px;
+  }
+
+  .avm-about-certs__badge {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f1f3d;
+    margin: 0 0 8px;
+  }
+
+  .avm-about-certs__desc {
+    font-size: 12px;
+    color: #9ca3af;
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  @media screen and (max-width: 899px) {
+    .avm-about-certs__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media screen and (max-width: 599px) {
+    .avm-about-certs__grid { grid-template-columns: 1fr; }
+    .avm-about-certs__inner { padding: 0 24px; }
+  }
+
+  /* ---- S8: FAQ ---- */
+  .avm-about-faq {
+    background: #f8fafc;
+    padding: 80px 0;
+  }
+
+  .avm-about-faq__inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .avm-about-faq__header {
+    text-align: center;
+    margin-bottom: 52px;
+  }
+
+  .avm-about-faq__label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #1a5fa8;
+    margin-bottom: 12px;
+  }
+
+  .avm-about-faq__title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #0f1f3d;
+    margin: 0;
+    letter-spacing: -0.3px;
+  }
+
+  .avm-about-faq__item {
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .avm-about-faq__question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 20px 0;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 600;
+    color: #0f1f3d;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-family: 'Google Sans Flex', sans-serif !important;
+    line-height: 1.4;
+    transition: color 0.15s ease;
+  }
+
+  .avm-about-faq__question:hover {
+    color: #1a5fa8;
+  }
+
+  .avm-about-faq__icon {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid #d1d5db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 1;
+    color: #9ca3af;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .avm-about-faq__question[aria-expanded="true"] .avm-about-faq__icon {
+    border-color: #1a5fa8;
+    color: #1a5fa8;
+  }
+
+  .avm-about-faq__answer {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.32s ease;
+  }
+
+  .avm-about-faq__answer-inner {
+    padding: 0 0 22px;
+    font-size: 15px;
+    color: #4b5563;
+    line-height: 1.7;
+  }
+
+  .avm-about-faq__answer-inner p { margin: 0 0 10px; }
+  .avm-about-faq__answer-inner p:last-child { margin-bottom: 0; }
+  .avm-about-faq__answer-inner ul { margin: 8px 0 10px; padding-left: 20px; }
+  .avm-about-faq__answer-inner li { margin-bottom: 5px; }
+
+  @media screen and (max-width: 599px) {
+    .avm-about-faq__inner { padding: 0 24px; }
+  }
+</style>
+
+<div class="avm-about">
+
+  <!-- ===========================
+       S1: HERO
+       =========================== -->
+  <div class="avm-about-hero">
+    <div class="avm-about-hero__bg"></div>
+    <div class="avm-about-hero__overlay"></div>
+    <div class="avm-about-hero__content">
+      <span class="avm-about-hero__label">About AVM Healthcare</span>
+      <h1 class="avm-about-hero__title">Precision instruments for modern healthcare.</h1>
+      <p class="avm-about-hero__sub">From New Delhi to global operating theatres — trusted by India's leading hospitals for over a decade.</p>
+    </div>
+  </div>
+
+  <!-- ===========================
+       S2: STATS BAR
+       =========================== -->
+  <div class="avm-about-stats">
+    <div class="avm-about-stats__inner">
+      <div class="avm-about-stats__item">
+        <span class="avm-about-stats__number">10,000+</span>
+        <p class="avm-about-stats__label">Healthcare SKUs</p>
+      </div>
+      <div class="avm-about-stats__item">
+        <span class="avm-about-stats__number">250+</span>
+        <p class="avm-about-stats__label">Institutions Served</p>
+      </div>
+      <div class="avm-about-stats__item">
+        <span class="avm-about-stats__number">4+</span>
+        <p class="avm-about-stats__label">Countries in Network</p>
+      </div>
+      <div class="avm-about-stats__item">
+        <span class="avm-about-stats__number">98%</span>
+        <p class="avm-about-stats__label">On-time Fulfilment</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===========================
+       S3: OUR STORY
+       =========================== -->
+  <div class="avm-about-story">
+    <div class="avm-about-story__inner">
+      <div>
+        <span class="avm-about-story__label">Our Story</span>
+        <h2 class="avm-about-story__title">Started with a mission.<br>Grown through trust.</h2>
+        <p class="avm-about-story__body">AVM Healthcare was founded to make dependable medical supplies easier to access. Today we support hospitals, clinics, and distributors with a curated range of surgical, diagnostic, and rehabilitation products — selected for quality, availability, and value. Our team works closely with partners across India, Germany, and Taiwan to keep supply chains responsive and reliable.</p>
+      </div>
+      <div>
+        <img
+          src="https://1zkcvw-8f.myshopify.com/cdn/shop/files/doctor-reaches-towards-shelf.jpg"
+          alt="AVM Healthcare — doctor reaching for instruments"
+          class="avm-about-story__image"
+          loading="lazy"
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- ===========================
+       S4: VIDEO
+       =========================== -->
+  <div class="avm-about-video">
+    <span class="avm-about-video__label">Our Products</span>
+    <h2 class="avm-about-video__title">See our complete instrument range.</h2>
+    <div class="avm-about-video__frame">
+      {%- if section.settings.video_url != blank -%}
+        <div class="avm-about-video__embed">
+          <iframe
+            src="{{ section.settings.video_url }}"
+            title="AVM Healthcare Product Video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      {%- else -%}
+        <div class="avm-about-video__placeholder">
+          <div class="avm-about-video__play-btn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+          <p class="avm-about-video__placeholder-text">Paste a YouTube embed URL in the Shopify admin to activate this section.</p>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <!-- ===========================
+       S5: TRUSTED BY
+       =========================== -->
+  <div class="avm-about-trusted">
+    <span class="avm-about-trusted__label">Trusted by leading institutions</span>
+    <div class="avm-about-trusted__logos">
+      <a href="https://www.apollohospitals.com/delhi" class="avm-about-trusted__logo" target="_blank" rel="noopener">
+        <img src="https://cdn.shopify.com/s/files/1/0656/2342/5113/files/Apollo_logo.svg" alt="Apollo Hospitals" loading="lazy">
+      </a>
+      <a href="https://www.maxhealthcare.in/" class="avm-about-trusted__logo" target="_blank" rel="noopener">
+        <img src="https://cdn.shopify.com/s/files/1/0656/2342/5113/files/Max_logo_new.svg" alt="Max Healthcare" loading="lazy">
+      </a>
+      <a href="https://www.fortishealthcare.com/" class="avm-about-trusted__logo" target="_blank" rel="noopener">
+        <img src="https://cdn.shopify.com/s/files/1/0656/2342/5113/files/Fortis_Logo.png" alt="Fortis Healthcare" loading="lazy">
+      </a>
+      <a href="https://www.aiims.edu/" class="avm-about-trusted__logo" target="_blank" rel="noopener">
+        <img src="https://cdn.shopify.com/s/files/1/0656/2342/5113/files/AIIMS_Logo.png" alt="AIIMS" loading="lazy">
+      </a>
+      <a href="https://medanta.org" class="avm-about-trusted__logo" target="_blank" rel="noopener">
+        <img src="https://cdn.shopify.com/s/files/1/0656/2342/5113/files/Medanta_Logo.png" alt="Medanta" loading="lazy">
+      </a>
+    </div>
+  </div>
+
+  <!-- ===========================
+       S6: TEAM
+       =========================== -->
+  <div class="avm-about-team">
+    <div class="avm-about-team__inner">
+      <div class="avm-about-team__header">
+        <span class="avm-about-team__label">Meet the team</span>
+        <h2 class="avm-about-team__title">The people behind AVM</h2>
+      </div>
+      <div class="avm-about-team__grid">
+        <div class="avm-about-team__card">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0656/2342/5113/files/Anil_Chaba.avif"
+            alt="Anil Chaba"
+            class="avm-about-team__photo"
+            loading="lazy"
+          >
+          <div class="avm-about-team__info">
+            <p class="avm-about-team__name">Anil Chaba</p>
+            <p class="avm-about-team__role">Chief Executive Officer</p>
+          </div>
+        </div>
+        <div class="avm-about-team__card">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0656/2342/5113/files/Vipin_Chaba.avif"
+            alt="Vipin Chaba"
+            class="avm-about-team__photo"
+            loading="lazy"
+          >
+          <div class="avm-about-team__info">
+            <p class="avm-about-team__name">Vipin Chaba</p>
+            <p class="avm-about-team__role">Chief Financial Officer</p>
+          </div>
+        </div>
+        <div class="avm-about-team__card">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0656/2342/5113/files/Shivam_Chaba.avif"
+            alt="Shivam Chaba"
+            class="avm-about-team__photo"
+            loading="lazy"
+          >
+          <div class="avm-about-team__info">
+            <p class="avm-about-team__name">Shivam Chaba</p>
+            <p class="avm-about-team__role">Director of International Relations</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===========================
+       S7: CERTIFICATIONS
+       =========================== -->
+  <div class="avm-about-certs">
+    <div class="avm-about-certs__inner">
+      <div class="avm-about-certs__header">
+        <span class="avm-about-certs__label">Quality &amp; Compliance</span>
+        <h2 class="avm-about-certs__title">Standards you can verify</h2>
+      </div>
+      <div class="avm-about-certs__grid">
+        <div class="avm-about-certs__card">
+          <div class="avm-about-certs__dot"></div>
+          <p class="avm-about-certs__badge">ISO 13485</p>
+          <p class="avm-about-certs__desc">Medical devices quality management system standard, maintained across our key supply partners.</p>
+        </div>
+        <div class="avm-about-certs__card">
+          <div class="avm-about-certs__dot"></div>
+          <p class="avm-about-certs__badge">CE Marked</p>
+          <p class="avm-about-certs__desc">European conformity marking confirming products meet EU health, safety, and environmental standards.</p>
+        </div>
+        <div class="avm-about-certs__card">
+          <div class="avm-about-certs__dot"></div>
+          <p class="avm-about-certs__badge">FDA Registered Suppliers</p>
+          <p class="avm-about-certs__desc">Key manufacturing partners hold active FDA registration for medical device supply to regulated markets.</p>
+        </div>
+        <div class="avm-about-certs__card">
+          <div class="avm-about-certs__dot"></div>
+          <p class="avm-about-certs__badge">MDR Compliant</p>
+          <p class="avm-about-certs__desc">Products supplied to European markets comply with EU Medical Device Regulation 2017/745.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===========================
+       S8: FAQ
+       =========================== -->
+  <div class="avm-about-faq">
+    <div class="avm-about-faq__inner">
+      <div class="avm-about-faq__header">
+        <span class="avm-about-faq__label">FAQs</span>
+        <h2 class="avm-about-faq__title">Common questions</h2>
+      </div>
+
+      <div class="avm-about-faq__list">
+
+        <div class="avm-about-faq__item">
+          <button class="avm-about-faq__question" aria-expanded="true">
+            What categories do you supply?
+            <span class="avm-about-faq__icon" aria-hidden="true">−</span>
+          </button>
+          <div class="avm-about-faq__answer" style="max-height: 800px;">
+            <div class="avm-about-faq__answer-inner">
+              <p>We supply a comprehensive range of medical and surgical products, including:</p>
+              <ul>
+                <li>Surgical instruments and consumables</li>
+                <li>Laboratory &amp; diagnostic equipment</li>
+                <li>Endoscopy instruments and accessories</li>
+                <li>Hospital furniture and fittings</li>
+                <li>Rehabilitation and physiotherapy products</li>
+                <li>ECG machines, patient monitors, and related devices</li>
+              </ul>
+              <p>Our catalog is continually updated to include high-quality, certified products that meet international standards.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="avm-about-faq__item">
+          <button class="avm-about-faq__question" aria-expanded="false">
+            Do you provide quotations?
+            <span class="avm-about-faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="avm-about-faq__answer">
+            <div class="avm-about-faq__answer-inner">
+              <p>Yes. Simply add the products you're interested in to your quote list and submit the request form.</p>
+              <p>Our sales team will review your requirements and send a tailored quotation, including pricing, lead times, and any applicable bulk discounts — usually within 1–2 business days.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="avm-about-faq__item">
+          <button class="avm-about-faq__question" aria-expanded="false">
+            Do you offer bulk or institutional pricing?
+            <span class="avm-about-faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="avm-about-faq__answer">
+            <div class="avm-about-faq__answer-inner">
+              <p>Absolutely. We regularly supply hospitals, clinics, and distributors in large quantities.</p>
+              <p>Provide us with your bulk order requirements, and we'll offer competitive rates, priority processing, and consolidated shipping to ensure cost-effective delivery.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="avm-about-faq__item">
+          <button class="avm-about-faq__question" aria-expanded="false">
+            Where are your products sourced from?
+            <span class="avm-about-faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="avm-about-faq__answer">
+            <div class="avm-about-faq__answer-inner">
+              <p>Our products are sourced from trusted manufacturers in India, Germany, Taiwan, and other global partners.</p>
+              <p>Each supplier undergoes a rigorous vetting process to ensure compliance with quality, safety, and performance standards.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="avm-about-faq__item">
+          <button class="avm-about-faq__question" aria-expanded="false">
+            What quality certifications do you follow?
+            <span class="avm-about-faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="avm-about-faq__answer">
+            <div class="avm-about-faq__answer-inner">
+              <p>We work with suppliers whose products carry certifications such as ISO 13485, CE marking, and FDA approvals where applicable.</p>
+              <p>All items are checked for compliance with relevant healthcare regulations before being added to our catalog.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    document.querySelectorAll('.avm-about-faq__question').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var isOpen = btn.getAttribute('aria-expanded') === 'true';
+        var answer = btn.nextElementSibling;
+        var icon   = btn.querySelector('.avm-about-faq__icon');
+
+        if (isOpen) {
+          btn.setAttribute('aria-expanded', 'false');
+          answer.style.maxHeight = '0';
+          icon.textContent = '+';
+        } else {
+          btn.setAttribute('aria-expanded', 'true');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+          icon.textContent = '−';
+        }
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "About Us",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "YouTube embed URL",
+      "info": "Paste a YouTube embed URL (e.g. https://www.youtube.com/embed/VIDEO_ID) to activate the video section.",
+      "placeholder": "https://www.youtube.com/embed/VIDEO_ID"
+    }
+  ]
+}
+{% endschema %}

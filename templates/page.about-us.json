@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-about",
+      "settings": {
+        "video_url": ""
+      }
+    }
+  },
+  "order": ["main"]
+}
