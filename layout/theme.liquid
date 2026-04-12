@@ -302,6 +302,13 @@
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
+
+    <style>
+      *, body, h1, h2, h3, h4, h5, h6, p, a, button, input,
+      textarea, select, span, div {
+        font-family: 'Google Sans Flex', sans-serif !important;
+      }
+    </style>
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
