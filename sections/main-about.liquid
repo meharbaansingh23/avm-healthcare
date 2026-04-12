@@ -300,11 +300,11 @@
   }
 
   .avm-about-trusted__logos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 64px;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 72px !important;
     max-width: 1000px;
     margin: 0 auto;
   }
@@ -325,11 +325,12 @@
   }
 
   .avm-about-trusted__logo img {
-    height: 64px !important;
-    max-width: 180px !important;
+    height: 72px !important;
+    max-width: 200px !important;
+    min-width: 80px !important;
     width: auto !important;
-    object-fit: contain;
-    opacity: 0.65;
+    object-fit: contain !important;
+    opacity: 0.6;
     transition: opacity 0.3s;
     display: block;
   }
@@ -642,12 +643,16 @@
       padding: 48px 20px;
     }
     .avm-about-trusted__logos {
-      gap: 32px;
-      flex-wrap: wrap;
+      flex-wrap: nowrap !important;
+      overflow-x: auto !important;
+      justify-content: flex-start !important;
+      gap: 32px !important;
+      padding-bottom: 8px !important;
     }
     .avm-about-trusted__logo img {
-      max-height: 44px;
-      max-width: 130px;
+      height: 48px !important;
+      min-width: 80px !important;
+      max-width: 120px !important;
     }
 
     /* Team: single col */
@@ -658,25 +663,19 @@
       padding: 0 20px;
     }
     .avm-about-team__grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-    .avm-about-team__card {
-      border-radius: 8px;
-      overflow: hidden;
+      grid-template-columns: 1fr !important;
     }
     .avm-about-team__photo {
-      height: 160px;
-    }
-    .avm-about-team__name {
-      font-size: 12px;
-    }
-    .avm-about-team__role {
-      font-size: 11px;
+      height: 280px !important;
     }
     .avm-about-team__info {
-      padding: 10px 12px;
+      padding: 16px 20px !important;
+    }
+    .avm-about-team__name {
+      font-size: 16px !important;
+    }
+    .avm-about-team__role {
+      font-size: 13px !important;
     }
 
     /* Certs: 2-col */
