@@ -1,0 +1,360 @@
+/* ================================================
+   AVM Blog Styles — clean, clinical, #1a5fa8
+   ================================================ */
+
+/* ---- Blog Listing ---- */
+.avm-blog {
+  background: #fff;
+}
+
+.avm-blog__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.avm-blog__heading {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.avm-blog__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+@media screen and (max-width: 989px) {
+  .avm-blog__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .avm-blog__grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* ---- Blog Card ---- */
+.avm-blog-card {
+  background: #fff;
+  border: 1px solid #dde4ee;
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.avm-blog-card:hover {
+  box-shadow: 0 6px 24px rgba(26, 95, 168, 0.12);
+  transform: translateY(-2px);
+}
+
+.avm-blog-card__image-wrap {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: #eef2f7;
+  text-decoration: none;
+}
+
+.avm-blog-card__image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.avm-blog-card:hover .avm-blog-card__image-wrap img {
+  transform: scale(1.04);
+}
+
+.avm-blog-card__body {
+  padding: 20px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.avm-blog-card__tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #1a5fa8;
+  background: #e5eef9;
+  border-radius: 3px;
+  padding: 3px 8px;
+  margin-bottom: 10px;
+  width: fit-content;
+}
+
+.avm-blog-card__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 8px;
+  line-height: 1.45;
+  /* 2-line clamp */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.avm-blog-card__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.avm-blog-card__title a:hover {
+  color: #1a5fa8;
+}
+
+.avm-blog-card__date {
+  display: block;
+  font-size: 0.76rem;
+  color: #8a95a3;
+  margin-bottom: 10px;
+  letter-spacing: 0.01em;
+}
+
+.avm-blog-card__excerpt {
+  font-size: 0.875rem;
+  color: #555;
+  line-height: 1.65;
+  margin: 0 0 20px;
+  flex: 1;
+  /* 3-line clamp */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.avm-blog-card__btn {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  background: #1a5fa8;
+  border-radius: 4px;
+  padding: 8px 18px;
+  text-decoration: none;
+  letter-spacing: 0.025em;
+  transition: background 0.18s ease;
+  white-space: nowrap;
+}
+
+.avm-blog-card__btn:hover {
+  background: #154e8e;
+  color: #fff;
+}
+
+/* ---- Pagination ---- */
+.avm-blog__pagination {
+  margin-top: 52px;
+  text-align: center;
+}
+
+/* ================================================
+   AVM Article
+   ================================================ */
+.avm-article {
+  background: #fff;
+  padding-bottom: 80px;
+}
+
+/* Hero image — slightly wider than the reading column */
+.avm-article__hero {
+  max-width: 920px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+}
+
+.avm-article__hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+  max-height: 460px;
+  object-fit: cover;
+}
+
+/* Centered reading column */
+.avm-article__container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Back link */
+.avm-article__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1a5fa8;
+  text-decoration: none;
+  margin-bottom: 28px;
+  letter-spacing: 0.025em;
+  transition: color 0.15s ease;
+}
+
+.avm-article__back:hover {
+  color: #154e8e;
+}
+
+.avm-article__back svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* Tag */
+.avm-article__tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #1a5fa8;
+  background: #e5eef9;
+  border-radius: 3px;
+  padding: 3px 8px;
+  margin-bottom: 14px;
+}
+
+/* Title */
+.avm-article__title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.25;
+  margin: 0 0 14px;
+  letter-spacing: -0.025em;
+}
+
+@media screen and (max-width: 599px) {
+  .avm-article__title {
+    font-size: 1.45rem;
+  }
+}
+
+/* Byline */
+.avm-article__byline {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.8rem;
+  color: #8a95a3;
+  flex-wrap: wrap;
+}
+
+/* Divider */
+.avm-article__divider {
+  border: 0;
+  border-top: 1px solid #dde4ee;
+  margin: 28px 0 0;
+}
+
+/* Article content */
+.avm-article__content {
+  font-size: 1rem;
+  line-height: 1.78;
+  color: #333;
+  padding-top: 8px;
+}
+
+.avm-article__content h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #111;
+  margin: 38px 0 14px;
+  letter-spacing: -0.015em;
+}
+
+.avm-article__content h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111;
+  margin: 28px 0 10px;
+}
+
+.avm-article__content p {
+  margin: 0 0 18px;
+}
+
+.avm-article__content a {
+  color: #1a5fa8;
+  text-decoration: underline;
+}
+
+.avm-article__content ul,
+.avm-article__content ol {
+  margin: 0 0 18px;
+  padding-left: 22px;
+}
+
+.avm-article__content li {
+  margin-bottom: 6px;
+}
+
+.avm-article__content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 18px 0;
+}
+
+.avm-article__content blockquote {
+  border-left: 3px solid #1a5fa8;
+  margin: 28px 0;
+  padding: 14px 20px;
+  background: #f4f7fc;
+  color: #444;
+  font-style: italic;
+  border-radius: 0 4px 4px 0;
+}
+
+.avm-article__content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.avm-article__content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 0.9rem;
+}
+
+.avm-article__content th,
+.avm-article__content td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid #dde4ee;
+}
+
+.avm-article__content th {
+  font-weight: 700;
+  color: #1a5fa8;
+  border-bottom: 2px solid #1a5fa8;
+}
+
+/* Footer bar (back link at bottom) */
+.avm-article__footer {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid #dde4ee;
+}
