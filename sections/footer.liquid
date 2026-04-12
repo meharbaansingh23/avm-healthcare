@@ -251,7 +251,6 @@
           {%- endif -%}
         </a>
         <p class="avm-footer__tagline">Precision instruments for modern healthcare.</p>
-        <p class="avm-footer__copy">&copy; {{ 'now' | date: '%Y' }} AVM Healthcare Pvt. Ltd.</p>
       </div>
 
       <!-- Middle column: Quick Links -->
@@ -301,11 +300,6 @@
       <div class="avm-footer__bottom">
         <p class="avm-footer__bottom-note">&copy; {{ 'now' | date: '%Y' }} AVM Healthcare Pvt. Ltd. All rights reserved.</p>
         <ul class="avm-footer__policies">
-          {%- for policy in shop.policies -%}
-            {%- if policy != blank -%}
-              <li><a href="{{ policy.url }}">{{ policy.title | escape }}</a></li>
-            {%- endif -%}
-          {%- endfor -%}
           <li><a href="/policies/privacy-policy">Privacy Policy</a></li>
         </ul>
       </div>
