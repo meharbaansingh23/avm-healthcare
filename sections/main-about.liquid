@@ -21,7 +21,7 @@
   .avm-about-hero__overlay {
     position: absolute;
     inset: 0;
-    background: rgba(15, 31, 61, 0.78);
+    background: rgba(10, 20, 45, 0.88);
     z-index: 1;
   }
 
@@ -39,24 +39,27 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     color: #93c5fd !important;
+    text-shadow: none;
     margin-bottom: 20px;
   }
 
   .avm-about-hero__title {
-    font-size: 52px;
-    font-weight: 700;
+    font-size: 56px;
+    font-weight: 800;
     color: #ffffff !important;
     line-height: 1.15;
     margin: 0 auto 24px;
     letter-spacing: -0.5px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
   }
 
   .avm-about-hero__sub {
-    font-size: 18px;
-    color: #93c5fd !important;
+    font-size: 20px;
+    color: #e0eeff !important;
     margin: 0 auto;
     line-height: 1.6;
     max-width: 560px;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.4);
   }
 
   /* ---- S2: Stats ---- */
@@ -301,7 +304,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 40px;
+    gap: 56px;
     max-width: 1000px;
     margin: 0 auto;
   }
@@ -311,7 +314,7 @@
     align-items: center;
     justify-content: center;
     filter: grayscale(1);
-    opacity: 0.55;
+    opacity: 0.65;
     transition: filter 0.3s ease, opacity 0.3s ease;
     text-decoration: none;
   }
@@ -322,8 +325,8 @@
   }
 
   .avm-about-trusted__logo img {
-    max-height: 40px;
-    max-width: 120px;
+    max-height: 56px;
+    max-width: 160px;
     width: auto;
     object-fit: contain;
     display: block;
@@ -637,10 +640,12 @@
       padding: 48px 20px;
     }
     .avm-about-trusted__logos {
-      gap: 24px;
+      gap: 32px;
+      flex-wrap: wrap;
     }
     .avm-about-trusted__logo img {
-      max-height: 32px;
+      max-height: 44px;
+      max-width: 130px;
     }
 
     /* Team: single col */
