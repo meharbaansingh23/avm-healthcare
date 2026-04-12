@@ -11,32 +11,25 @@
   .avm-about-hero {
     position: relative;
     width: 100%;
-    height: 520px;
-    overflow: hidden;
+    min-height: 520px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
   }
 
-  .avm-about-hero__bg {
-    position: absolute;
-    inset: 0;
-    background-image: url('https://1zkcvw-8f.myshopify.com/cdn/shop/files/pexels-tara-winstead-7722685.jpg');
-    background-size: cover;
-    background-position: center;
-  }
-
   .avm-about-hero__overlay {
     position: absolute;
     inset: 0;
-    background: rgba(15, 31, 61, 0.75);
+    background: rgba(15, 31, 61, 0.78);
+    z-index: 1;
   }
 
   .avm-about-hero__content {
     position: relative;
     z-index: 2;
-    padding: 0 24px;
+    max-width: 700px;
+    padding: 80px 24px;
   }
 
   .avm-about-hero__label {
@@ -45,32 +38,25 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #93c5fd;
+    color: #93c5fd !important;
     margin-bottom: 20px;
   }
 
   .avm-about-hero__title {
     font-size: 52px;
     font-weight: 700;
-    color: #fff;
+    color: #ffffff !important;
     line-height: 1.15;
-    max-width: 700px;
     margin: 0 auto 24px;
     letter-spacing: -0.5px;
   }
 
   .avm-about-hero__sub {
     font-size: 18px;
-    color: #93c5fd;
-    max-width: 560px;
+    color: #93c5fd !important;
     margin: 0 auto;
     line-height: 1.6;
-  }
-
-  @media screen and (max-width: 749px) {
-    .avm-about-hero { height: 420px; }
-    .avm-about-hero__title { font-size: 30px; }
-    .avm-about-hero__sub { font-size: 15px; }
+    max-width: 560px;
   }
 
   /* ---- S2: Stats ---- */
@@ -112,18 +98,6 @@
     margin: 6px 0 0;
   }
 
-  @media screen and (max-width: 749px) {
-    .avm-about-stats__inner {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 32px 0;
-    }
-    .avm-about-stats__item:nth-child(odd) { border-left: none; }
-    .avm-about-stats__item:nth-child(n+3) {
-      border-top: 1px solid #e5e7eb;
-      padding-top: 32px;
-    }
-  }
-
   /* ---- S3: Our Story ---- */
   .avm-about-story {
     background: #f8fafc;
@@ -133,11 +107,11 @@
   .avm-about-story__inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 48px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 80px;
-    align-items: center;
+    align-items: start;
   }
 
   .avm-about-story__label {
@@ -163,23 +137,61 @@
     font-size: 16px;
     color: #4b5563;
     line-height: 1.85;
+    margin: 0 0 40px;
+  }
+
+  /* Timeline */
+  .avm-about-timeline {
+    border-left: 2px solid #e2e8f0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .avm-about-timeline__item {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 32px;
+  }
+
+  .avm-about-timeline__item:last-child {
+    margin-bottom: 0;
+  }
+
+  .avm-about-timeline__dot {
+    position: absolute;
+    left: -7px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #1a5fa8;
+    flex-shrink: 0;
+  }
+
+  .avm-about-timeline__year {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #1a5fa8;
+    margin-bottom: 6px;
+  }
+
+  .avm-about-timeline__text {
+    font-size: 14px;
+    color: #4b5563;
+    line-height: 1.7;
     margin: 0;
   }
 
   .avm-about-story__image {
     width: 100%;
-    height: 400px;
+    height: 480px;
     object-fit: cover;
     border-radius: 8px;
     display: block;
-  }
-
-  @media screen and (max-width: 899px) {
-    .avm-about-story__inner { grid-template-columns: 1fr; gap: 40px; }
-  }
-
-  @media screen and (max-width: 599px) {
-    .avm-about-story__inner { padding: 0 24px; }
   }
 
   /* ---- S4: Video ---- */
@@ -286,10 +298,10 @@
 
   .avm-about-trusted__logos {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 48px;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
     max-width: 1000px;
     margin: 0 auto;
   }
@@ -299,20 +311,20 @@
     align-items: center;
     justify-content: center;
     filter: grayscale(1);
-    opacity: 0.6;
-    transition: filter 0.2s ease, opacity 0.2s ease;
+    opacity: 0.55;
+    transition: filter 0.3s ease, opacity 0.3s ease;
     text-decoration: none;
   }
 
   .avm-about-trusted__logo:hover {
-    filter: grayscale(0);
+    filter: none;
     opacity: 1;
   }
 
   .avm-about-trusted__logo img {
-    max-height: 48px;
-    width: auto;
+    max-height: 40px;
     max-width: 120px;
+    width: auto;
     object-fit: contain;
     display: block;
   }
@@ -326,7 +338,7 @@
   .avm-about-team__inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 48px;
   }
 
   .avm-about-team__header {
@@ -390,14 +402,6 @@
     margin: 4px 0 0;
   }
 
-  @media screen and (max-width: 749px) {
-    .avm-about-team__grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
-  }
-
-  @media screen and (max-width: 599px) {
-    .avm-about-team__inner { padding: 0 24px; }
-  }
-
   /* ---- S7: Certifications ---- */
   .avm-about-certs {
     background: #fff;
@@ -407,7 +411,7 @@
   .avm-about-certs__inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 48px;
   }
 
   .avm-about-certs__header {
@@ -468,15 +472,6 @@
     line-height: 1.55;
   }
 
-  @media screen and (max-width: 899px) {
-    .avm-about-certs__grid { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  @media screen and (max-width: 599px) {
-    .avm-about-certs__grid { grid-template-columns: 1fr; }
-    .avm-about-certs__inner { padding: 0 24px; }
-  }
-
   /* ---- S8: FAQ ---- */
   .avm-about-faq {
     background: #f8fafc;
@@ -535,9 +530,7 @@
     transition: color 0.15s ease;
   }
 
-  .avm-about-faq__question:hover {
-    color: #1a5fa8;
-  }
+  .avm-about-faq__question:hover { color: #1a5fa8; }
 
   .avm-about-faq__icon {
     flex-shrink: 0;
@@ -577,8 +570,119 @@
   .avm-about-faq__answer-inner ul { margin: 8px 0 10px; padding-left: 20px; }
   .avm-about-faq__answer-inner li { margin-bottom: 5px; }
 
-  @media screen and (max-width: 599px) {
-    .avm-about-faq__inner { padding: 0 24px; }
+  /* ================================================
+     MOBILE — max-width 768px
+     ================================================ */
+  @media screen and (max-width: 768px) {
+
+    /* Hero */
+    .avm-about-hero {
+      min-height: 420px;
+    }
+    .avm-about-hero__content {
+      padding: 60px 20px;
+    }
+    .avm-about-hero__title {
+      font-size: 32px !important;
+    }
+    .avm-about-hero__sub {
+      font-size: 15px !important;
+    }
+
+    /* Stats: 2-col, swap dividers */
+    .avm-about-stats {
+      padding: 48px 20px;
+    }
+    .avm-about-stats__inner {
+      grid-template-columns: 1fr 1fr;
+    }
+    .avm-about-stats__item + .avm-about-stats__item {
+      border-left: none;
+    }
+    .avm-about-stats__item:nth-child(even) {
+      border-left: 1px solid #e5e7eb;
+    }
+    .avm-about-stats__item:nth-child(n+3) {
+      border-top: 1px solid #e5e7eb;
+      padding-top: 28px;
+      margin-top: 4px;
+    }
+
+    /* Story: single col, image first */
+    .avm-about-story {
+      padding: 48px 0;
+    }
+    .avm-about-story__inner {
+      grid-template-columns: 1fr;
+      gap: 36px;
+      padding: 0 20px;
+    }
+    .avm-about-story__inner > div:last-child {
+      order: -1;
+    }
+    .avm-about-story__image {
+      height: 260px;
+    }
+
+    /* Video */
+    .avm-about-video {
+      padding: 48px 20px;
+    }
+    .avm-about-video__title {
+      font-size: 28px;
+    }
+
+    /* Logos */
+    .avm-about-trusted {
+      padding: 48px 20px;
+    }
+    .avm-about-trusted__logos {
+      gap: 24px;
+    }
+    .avm-about-trusted__logo img {
+      max-height: 32px;
+    }
+
+    /* Team: single col */
+    .avm-about-team {
+      padding: 48px 0;
+    }
+    .avm-about-team__inner {
+      padding: 0 20px;
+    }
+    .avm-about-team__grid {
+      grid-template-columns: 1fr;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+
+    /* Certs: 2-col */
+    .avm-about-certs {
+      padding: 48px 0;
+    }
+    .avm-about-certs__inner {
+      padding: 0 20px;
+    }
+    .avm-about-certs__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* FAQ */
+    .avm-about-faq {
+      padding: 48px 0;
+    }
+    .avm-about-faq__inner {
+      padding: 0 20px;
+    }
+    .avm-about-faq__title {
+      font-size: 28px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .avm-about-certs__grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
 
@@ -587,8 +691,10 @@
   <!-- ===========================
        S1: HERO
        =========================== -->
-  <div class="avm-about-hero">
-    <div class="avm-about-hero__bg"></div>
+  <div
+    class="avm-about-hero"
+    style="background-image: url('https://1zkcvw-8f.myshopify.com/cdn/shop/files/pexels-tara-winstead-7722685.jpg?v=1754862230'); background-size: cover; background-position: center;"
+  >
     <div class="avm-about-hero__overlay"></div>
     <div class="avm-about-hero__content">
       <span class="avm-about-hero__label">About AVM Healthcare</span>
@@ -622,7 +728,7 @@
   </div>
 
   <!-- ===========================
-       S3: OUR STORY
+       S3: OUR STORY + TIMELINE
        =========================== -->
   <div class="avm-about-story">
     <div class="avm-about-story__inner">
@@ -630,6 +736,24 @@
         <span class="avm-about-story__label">Our Story</span>
         <h2 class="avm-about-story__title">Started with a mission.<br>Grown through trust.</h2>
         <p class="avm-about-story__body">AVM Healthcare was founded to make dependable medical supplies easier to access. Today we support hospitals, clinics, and distributors with a curated range of surgical, diagnostic, and rehabilitation products — selected for quality, availability, and value. Our team works closely with partners across India, Germany, and Taiwan to keep supply chains responsive and reliable.</p>
+
+        <ul class="avm-about-timeline">
+          <li class="avm-about-timeline__item">
+            <div class="avm-about-timeline__dot"></div>
+            <span class="avm-about-timeline__year">Founded</span>
+            <p class="avm-about-timeline__text">Established in New Delhi with a focus on surgical instrument supply to government hospitals and clinics.</p>
+          </li>
+          <li class="avm-about-timeline__item">
+            <div class="avm-about-timeline__dot"></div>
+            <span class="avm-about-timeline__year">Expansion</span>
+            <p class="avm-about-timeline__text">Partnered with certified manufacturers in Germany and Taiwan. International product range launched across 4+ countries.</p>
+          </li>
+          <li class="avm-about-timeline__item">
+            <div class="avm-about-timeline__dot"></div>
+            <span class="avm-about-timeline__year">Today</span>
+            <p class="avm-about-timeline__text">10,000+ SKUs. Supplying Apollo, AIIMS, Max, Fortis, Medanta and 250+ institutions across India.</p>
+          </li>
+        </ul>
       </div>
       <div>
         <img
