@@ -90,23 +90,5 @@
         {%- endif -%}
       </li>
     {%- endfor -%}
-    <li>
-      <a
-        id="HeaderMenu-insights"
-        href="/blogs/avm-insights"
-        class="header__menu-item list-menu__item link link--text focus-inset"
-        {%- if request.path contains '/blogs/avm-insights' %}
-          aria-current="page"
-        {%- endif %}
-      >
-        <span
-          {%- if request.path contains '/blogs/avm-insights' %}
-            class="header__active-menu-item"
-          {%- endif %}
-        >
-          Insights
-        </span>
-      </a>
-    </li>
   </ul>
 </nav>
