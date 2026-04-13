@@ -1493,14 +1493,27 @@ a.product__text {
   }
 }
 
-.product__title {
-  font-size: 22px !important;
+.product h1,
+.product h1.product__title,
+h1.product__title,
+[class*="product__title"],
+.product__title h1,
+.product__title h2,
+.product__title .h1 {
+  font-size: 20px !important;
   line-height: 1.4 !important;
   font-weight: 600 !important;
+  word-break: break-word !important;
 }
 
 @media (max-width: 768px) {
-  .product__title {
+  .product h1,
+  .product h1.product__title,
+  h1.product__title,
+  [class*="product__title"],
+  .product__title h1,
+  .product__title h2,
+  .product__title .h1 {
     font-size: 18px !important;
   }
 }
