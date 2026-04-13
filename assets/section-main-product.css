@@ -1492,3 +1492,15 @@ a.product__text {
     border: none;
   }
 }
+
+.product__title {
+  font-size: 22px !important;
+  line-height: 1.4 !important;
+  font-weight: 600 !important;
+}
+
+@media (max-width: 768px) {
+  .product__title {
+    font-size: 18px !important;
+  }
+}
