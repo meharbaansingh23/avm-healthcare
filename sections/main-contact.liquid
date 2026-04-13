@@ -7,32 +7,23 @@
   /* ---- Hero ---- */
   .avm-contact-hero {
     background: #0f1f3d;
-    padding: 48px;
-  }
-
-  .avm-contact-hero__label {
-    display: block;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #93c5fd;
-    margin-bottom: 14px;
+    padding: 56px 48px;
   }
 
   .avm-contact-hero__title {
-    font-size: 40px;
+    font-size: 44px;
     font-weight: 700;
     color: #fff;
-    margin: 0 0 14px;
+    margin: 0 0 16px;
     letter-spacing: -0.4px;
   }
 
   .avm-contact-hero__sub {
-    font-size: 16px;
+    font-size: 17px;
     color: #93c5fd;
     margin: 0;
     line-height: 1.6;
+    max-width: 520px;
   }
 
   /* ---- Body ---- */
@@ -46,7 +37,7 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: 55fr 45fr;
-    gap: 64px;
+    gap: 80px;
     align-items: start;
   }
 
@@ -84,7 +75,7 @@
     display: block;
     font-size: 13px;
     font-weight: 500;
-    color: #374151;
+    color: #6b7280;
     margin-bottom: 6px;
   }
 
@@ -93,13 +84,14 @@
     width: 100%;
     border: 1px solid #e5e7eb;
     border-radius: 6px;
-    padding: 12px 16px;
+    padding: 14px 16px;
     font-size: 15px;
-    color: #111827;
+    color: #1a1a1a;
     background: #fff;
     outline: none;
     transition: border-color 0.15s ease;
     font-family: 'Google Sans Flex', sans-serif;
+    appearance: none;
   }
 
   .avm-contact-form__field input:focus,
@@ -114,9 +106,9 @@
 
   .avm-contact-form__submit {
     width: 100%;
-    background: #1a5fa8;
+    background: #0f1f3d;
     color: #fff;
-    padding: 14px 32px;
+    padding: 15px 32px;
     border-radius: 6px;
     font-size: 15px;
     font-weight: 600;
@@ -128,7 +120,7 @@
   }
 
   .avm-contact-form__submit:hover {
-    background: #1550a0;
+    background: #1a5fa8;
   }
 
   .avm-contact-form__success {
@@ -151,11 +143,15 @@
     margin-bottom: 24px;
   }
 
-  /* ---- Right: Info panel ---- */
-  .avm-contact-info {
-    background: #f8fafc;
-    border-radius: 12px;
-    padding: 40px 36px;
+  /* ---- Right: Info panel (open layout) ---- */
+  .avm-contact-info__intro {
+    border-left: 3px solid #1a5fa8;
+    padding-left: 16px;
+    margin-bottom: 40px;
+    font-size: 15px;
+    color: #4b5563;
+    line-height: 1.7;
+    margin-top: 0;
   }
 
   .avm-contact-info__list {
@@ -168,7 +164,7 @@
     display: flex;
     align-items: flex-start;
     gap: 14px;
-    margin-bottom: 22px;
+    margin-bottom: 24px;
   }
 
   .avm-contact-info__icon {
@@ -186,13 +182,13 @@
 
   .avm-contact-info__text {
     font-size: 15px;
-    color: #374151;
-    line-height: 1.65;
+    color: #1a1a1a;
+    line-height: 1.6;
     margin: 0;
   }
 
   .avm-contact-info__text a {
-    color: #374151;
+    color: #1a1a1a;
     text-decoration: none;
     transition: color 0.15s;
   }
@@ -201,85 +197,54 @@
     color: #1a5fa8;
   }
 
-  /* Hours box */
-  .avm-contact-hours {
-    background: #fff;
-    border-radius: 8px;
-    padding: 20px 24px;
-    border-left: 3px solid #1a5fa8;
-    margin-top: 24px;
+  .avm-contact-divider {
+    border: none;
+    border-top: 1px solid #f0f0f0;
+    margin: 32px 0;
   }
 
-  .avm-contact-hours__label {
-    display: block;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #1a5fa8;
-    margin-bottom: 12px;
-  }
-
+  /* Hours */
   .avm-contact-hours__row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 6px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f5f5f5;
+    font-size: 14px;
   }
 
   .avm-contact-hours__days {
-    font-size: 14px;
-    color: #6b7280;
+    color: #4b5563;
   }
 
   .avm-contact-hours__time {
-    font-size: 15px;
     font-weight: 500;
     color: #0f1f3d;
   }
 
   .avm-contact-hours__time--closed {
-    font-size: 14px;
-    font-weight: 400;
-    color: #6b7280;
-  }
-
-  /* Response badge */
-  .avm-contact-badge {
-    background: #EEF4FF;
-    border-radius: 8px;
-    padding: 16px 20px;
-    margin-top: 16px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #1a5fa8;
+    color: #9ca3af;
   }
 
   /* LinkedIn */
   .avm-contact-linkedin {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 6px;
-    background: #EEF4FF;
-    margin-top: 24px;
-    transition: background 0.2s ease;
+    gap: 8px;
+    margin-top: 32px;
     text-decoration: none;
+    color: #0A66C2;
+    font-size: 14px;
+    transition: opacity 0.2s;
   }
 
   .avm-contact-linkedin:hover {
-    background: #0A66C2;
-  }
-
-  .avm-contact-linkedin:hover svg {
-    fill: #fff;
+    opacity: 0.75;
   }
 
   .avm-contact-linkedin svg {
-    fill: #1a5fa8;
-    transition: fill 0.2s ease;
+    fill: #0A66C2;
+    flex-shrink: 0;
   }
 
   /* ---- Map ---- */
@@ -297,7 +262,7 @@
     }
 
     .avm-contact-hero__title {
-      font-size: 30px;
+      font-size: 32px;
     }
 
     .avm-contact-body {
@@ -306,15 +271,11 @@
 
     .avm-contact-body__inner {
       grid-template-columns: 1fr;
-      gap: 40px;
+      gap: 48px;
     }
 
     .avm-contact-form__row {
       grid-template-columns: 1fr;
-    }
-
-    .avm-contact-info {
-      padding: 28px 20px;
     }
   }
 </style>
@@ -323,9 +284,8 @@
 
   <!-- ===== HERO ===== -->
   <div class="avm-contact-hero">
-    <span class="avm-contact-hero__label">Get in Touch</span>
-    <h1 class="avm-contact-hero__title">Contact AVM Healthcare</h1>
-    <p class="avm-contact-hero__sub">Our team responds to all enquiries within 24 hours, Monday to Friday.</p>
+    <h1 class="avm-contact-hero__title">Contact Us</h1>
+    <p class="avm-contact-hero__sub">Reach out to our team for product enquiries, bulk orders, or partnership opportunities.</p>
   </div>
 
   <!-- ===== BODY: form + info ===== -->
@@ -360,7 +320,6 @@
                 name="contact[name]"
                 value="{{ form.name }}"
                 autocomplete="name"
-                placeholder="Dr. Anil Kumar"
               >
             </div>
             <div>
@@ -373,33 +332,20 @@
                 autocomplete="email"
                 autocorrect="off"
                 autocapitalize="off"
-                placeholder="you@hospital.com"
                 {%- if form.errors contains 'email' %} aria-invalid="true"{%- endif %}
               >
             </div>
           </div>
 
-          <div class="avm-contact-form__row">
-            <div>
-              <label for="ContactForm-phone">Phone Number</label>
-              <input
-                type="tel"
-                id="ContactForm-phone"
-                name="contact[phone]"
-                value="{{ form.phone }}"
-                autocomplete="tel"
-                placeholder="+91 98765 43210"
-              >
-            </div>
-            <div>
-              <label for="ContactForm-company">Company / Hospital / Facility</label>
-              <input
-                type="text"
-                id="ContactForm-company"
-                name="contact[company]"
-                placeholder="Apollo Hospital, Delhi"
-              >
-            </div>
+          <div class="avm-contact-form__field">
+            <label for="ContactForm-phone">Phone Number</label>
+            <input
+              type="tel"
+              id="ContactForm-phone"
+              name="contact[phone]"
+              value="{{ form.phone }}"
+              autocomplete="tel"
+            >
           </div>
 
           <div class="avm-contact-form__field">
@@ -408,7 +354,6 @@
               id="ContactForm-body"
               name="contact[body]"
               rows="5"
-              placeholder="Tell us about your requirements, product categories, or quantities..."
             >{{ form.body }}</textarea>
           </div>
 
@@ -419,6 +364,10 @@
 
       <!-- RIGHT: Info panel -->
       <div class="avm-contact-info">
+
+        <p class="avm-contact-info__intro">
+          Prefer to reach out directly? We're available Monday to Friday, 9AM to 6PM IST.
+        </p>
 
         <ul class="avm-contact-info__list">
 
@@ -458,20 +407,15 @@
 
         </ul>
 
-        <div class="avm-contact-hours">
-          <span class="avm-contact-hours__label">Business Hours</span>
-          <div class="avm-contact-hours__row">
-            <span class="avm-contact-hours__days">Mon &ndash; Fri</span>
-            <span class="avm-contact-hours__time">9:00 AM &ndash; 6:00 PM</span>
-          </div>
-          <div class="avm-contact-hours__row">
-            <span class="avm-contact-hours__days">Sat &ndash; Sun</span>
-            <span class="avm-contact-hours__time--closed">Closed</span>
-          </div>
-        </div>
+        <hr class="avm-contact-divider">
 
-        <div class="avm-contact-badge">
-          &#9889; We typically respond within 24 hours
+        <div class="avm-contact-hours__row">
+          <span class="avm-contact-hours__days">Mon &ndash; Fri</span>
+          <span class="avm-contact-hours__time">9:00 AM &ndash; 6:00 PM</span>
+        </div>
+        <div class="avm-contact-hours__row">
+          <span class="avm-contact-hours__days">Sat &ndash; Sun</span>
+          <span class="avm-contact-hours__time--closed">Closed</span>
         </div>
 
         <a href="https://www.linkedin.com/company/avm-healthcare-products-pvt-ltd/"
@@ -479,11 +423,12 @@
            rel="noopener noreferrer"
            class="avm-contact-linkedin"
            aria-label="AVM Healthcare on LinkedIn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
             <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
             <rect x="2" y="9" width="4" height="12"/>
             <circle cx="4" cy="4" r="2"/>
           </svg>
+          Follow us on LinkedIn
         </a>
 
       </div>
