@@ -1,0 +1,154 @@
+<style>
+  .avm-hiw {
+    background: #0f1f3d;
+    padding: 80px 48px;
+    font-family: 'Google Sans Flex', sans-serif;
+  }
+
+  .avm-hiw * {
+    box-sizing: border-box;
+    font-family: 'Google Sans Flex', sans-serif;
+  }
+
+  .avm-hiw__label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #93c5fd;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .avm-hiw__title {
+    font-size: 40px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    margin: 0 auto 60px;
+    letter-spacing: -0.4px;
+  }
+
+  .avm-hiw__steps {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    position: relative;
+  }
+
+  /* Dotted connector line */
+  .avm-hiw__steps::before {
+    content: '';
+    position: absolute;
+    top: 16px; /* vertically centred with the number circles */
+    left: calc(12.5% + 16px);
+    right: calc(12.5% + 16px);
+    border-top: 2px dashed rgba(147, 197, 253, 0.3);
+    pointer-events: none;
+  }
+
+  .avm-hiw__step {
+    text-align: center;
+    padding: 0 16px;
+    position: relative;
+  }
+
+  .avm-hiw__step-number {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #1a5fa8;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .avm-hiw__step-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 8px;
+  }
+
+  .avm-hiw__step-text {
+    font-size: 14px;
+    color: #93c5fd;
+    line-height: 1.6;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: 768px) {
+    .avm-hiw {
+      padding: 60px 24px;
+    }
+
+    .avm-hiw__title {
+      font-size: 28px;
+      margin-bottom: 40px;
+    }
+
+    .avm-hiw__steps {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px 16px;
+    }
+
+    .avm-hiw__steps::before {
+      display: none;
+    }
+  }
+</style>
+
+<div class="avm-hiw">
+  <span class="avm-hiw__label">The Process</span>
+  <h2 class="avm-hiw__title">How to request a quote</h2>
+
+  <div class="avm-hiw__steps">
+
+    <div class="avm-hiw__step">
+      <div class="avm-hiw__step-number">1</div>
+      <h3 class="avm-hiw__step-title">Browse the catalogue</h3>
+      <p class="avm-hiw__step-text">Explore 10,000+ surgical and medical instruments across 6 categories.</p>
+    </div>
+
+    <div class="avm-hiw__step">
+      <div class="avm-hiw__step-number">2</div>
+      <h3 class="avm-hiw__step-title">Add to quote</h3>
+      <p class="avm-hiw__step-text">Select the products and quantities you need and add them to your quote list.</p>
+    </div>
+
+    <div class="avm-hiw__step">
+      <div class="avm-hiw__step-number">3</div>
+      <h3 class="avm-hiw__step-title">Submit your request</h3>
+      <p class="avm-hiw__step-text">Fill in your contact details and submit. Takes less than 2 minutes.</p>
+    </div>
+
+    <div class="avm-hiw__step">
+      <div class="avm-hiw__step-number">4</div>
+      <h3 class="avm-hiw__step-title">Receive your quote</h3>
+      <p class="avm-hiw__step-text">Our team responds within 24 hours with pricing, lead times, and availability.</p>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "How It Works",
+  "tag": "section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "How It Works"
+    }
+  ]
+}
+{% endschema %}

@@ -1,1 +1,157 @@
-{"sections":{"image_banner":{"type":"image-banner","blocks":{"heading":{"type":"heading","settings":{"heading":"Decades of Excellence in Medical & Surgical Solutions","heading_size":"h1"}},"text_HqEqai":{"type":"text","settings":{"text":"Committed to improving healthcare outcomes through innovative products and a worldwide network.","text_style":"body"}}},"block_order":["heading","text_HqEqai"],"settings":{"image":"shopify:\/\/shop_images\/pexels-cottonbro-7585320.jpg","image_overlay_opacity":60,"image_height":"medium","image_behavior":"zoom-in","desktop_content_position":"bottom-left","desktop_content_alignment":"left","show_text_box":false,"color_scheme":"scheme-3","stack_images_on_mobile":false,"mobile_content_alignment":"center","show_text_below":false}},"image_with_text_FhGmUV":{"type":"image-with-text","blocks":{"heading_cjM9hx":{"type":"heading","settings":{"heading":"Your Trusted Partner in Medical & Surgical Solutions","heading_size":"h2"}},"text_c3HXXD":{"type":"text","settings":{"text":"<p>AVM Healthcare Products Pvt. Ltd. is a leading manufacturer, trader, and consultant in the medical and surgical equipment industry.<br\/><br\/>We serve hospitals, clinics, laboratories, and distributors with a commitment to quality, innovation, and timely delivery.<\/p>","text_style":"body"}}},"block_order":["heading_cjM9hx","text_c3HXXD"],"name":"t:sections.image-with-text.presets.name","settings":{"image":"shopify:\/\/shop_images\/pexels-shvetsa-4483327.jpg","height":"small","desktop_image_width":"medium","layout":"image_first","image_behavior":"zoom-in","content_layout":"no-overlap","desktop_content_position":"top","desktop_content_alignment":"left","mobile_content_alignment":"left","section_color_scheme":"","color_scheme":"","padding_top":36,"padding_bottom":36}},"featured_collection":{"type":"featured-collection","settings":{"collection":"all","products_to_show":8,"title":"New Prodcuts Introduced","heading_size":"h2","description":"","show_description":false,"description_style":"body","columns_desktop":4,"enable_desktop_slider":false,"full_width":false,"show_view_all":true,"view_all_style":"solid","color_scheme":"scheme-1","image_ratio":"adapt","image_shape":"default","show_secondary_image":true,"show_vendor":false,"show_rating":false,"quick_add":"none","columns_mobile":"2","swipe_on_mobile":false,"padding_top":44,"padding_bottom":36}},"multicolumn_U9UxbM":{"type":"multicolumn","blocks":{"column_UBtHLn":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/verified_user.svg","title":"Quality Assured","text":"<p>Certified products from trusted global manufacturers, meeting international healthcare standards.<\/p>","link_label":"","link":""}},"column_cUhnp3":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/language.svg","title":"Global Presence","text":"<p>Operations in India, Germany, Taiwan, and Dubai, serving clients across multiple continents.<br\/><br\/><\/p>","link_label":"","link":""}},"column_M3wdYp":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/lightbulb.svg","title":"Innovation Driven","text":"<p>Continuously evolving product range to meet the dynamic needs of modern healthcare.<\/p>","link_label":"","link":""}},"column_d4yxni":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/Group_1_4.svg","title":"Customer Commitment","text":"<p>Building lasting relationships through tailored solutions and responsive service.<\/p><p><\/p>","link_label":"","link":""}}},"block_order":["column_UBtHLn","column_cUhnp3","column_M3wdYp","column_d4yxni"],"custom_css":[],"name":"t:sections.multicolumn.presets.name","settings":{"title":"Our Values","heading_size":"h2","image_width":"full","image_ratio":"adapt","button_label":"","button_link":"","columns_desktop":4,"column_alignment":"left","background_style":"none","color_scheme":"","columns_mobile":"1","swipe_on_mobile":true,"padding_top":36,"padding_bottom":36}},"collection_list_FRXDpK":{"type":"collection-list","blocks":{"featured_collection_DEUbGk":{"type":"featured_collection","settings":{"collection":"neurosurgical-instruments"}},"featured_collection_t8PrqA":{"type":"featured_collection","settings":{"collection":"endoscopy-solutions"}},"featured_collection_ReKRhg":{"type":"featured_collection","settings":{"collection":"lab-diagnostics-equipment"}}},"block_order":["featured_collection_DEUbGk","featured_collection_t8PrqA","featured_collection_ReKRhg"],"custom_css":[],"name":"t:sections.collection-list.presets.name","settings":{"title":"Categories","heading_size":"h2","image_ratio":"square","columns_desktop":3,"color_scheme":"","show_view_all":true,"columns_mobile":"2","swipe_on_mobile":true,"padding_top":36,"padding_bottom":36}}},"order":["image_banner","image_with_text_FhGmUV","featured_collection","multicolumn_U9UxbM","collection_list_FRXDpK"]}
+{
+  "sections": {
+    "image_banner": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Decades of Excellence in Medical & Surgical Solutions",
+            "heading_size": "h1"
+          }
+        },
+        "text_HqEqai": {
+          "type": "text",
+          "settings": {
+            "text": "Committed to improving healthcare outcomes through innovative products and a worldwide network.",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": ["heading", "text_HqEqai"],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/pexels-cottonbro-7585320.jpg",
+        "image_overlay_opacity": 60,
+        "image_height": "medium",
+        "image_behavior": "zoom-in",
+        "desktop_content_position": "bottom-left",
+        "desktop_content_alignment": "left",
+        "show_text_box": false,
+        "color_scheme": "scheme-3",
+        "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
+        "show_text_below": false
+      }
+    },
+    "image_with_text_FhGmUV": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_cjM9hx": {
+          "type": "heading",
+          "settings": {
+            "heading": "Your Trusted Partner in Medical & Surgical Solutions",
+            "heading_size": "h2"
+          }
+        },
+        "text_c3HXXD": {
+          "type": "text",
+          "settings": {
+            "text": "<p>AVM Healthcare Products Pvt. Ltd. is a leading manufacturer, trader, and consultant in the medical and surgical equipment industry.<br\/><br\/>We serve hospitals, clinics, laboratories, and distributors with a commitment to quality, innovation, and timely delivery.<\/p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": ["heading_cjM9hx", "text_c3HXXD"],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/pexels-shvetsa-4483327.jpg",
+        "height": "small",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "zoom-in",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "all",
+        "products_to_show": 8,
+        "title": "New Prodcuts Introduced",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 44,
+        "padding_bottom": 36
+      }
+    },
+    "our_values": {
+      "type": "section-our-values",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "how_it_works": {
+      "type": "section-how-it-works",
+      "settings": {}
+    },
+    "collection_list_FRXDpK": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_DEUbGk": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "neurosurgical-instruments"
+          }
+        },
+        "featured_collection_t8PrqA": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "endoscopy-solutions"
+          }
+        },
+        "featured_collection_ReKRhg": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "lab-diagnostics-equipment"
+          }
+        }
+      },
+      "block_order": ["featured_collection_DEUbGk", "featured_collection_t8PrqA", "featured_collection_ReKRhg"],
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "title": "Categories",
+        "heading_size": "h2",
+        "image_ratio": "square",
+        "columns_desktop": 3,
+        "color_scheme": "",
+        "show_view_all": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "image_banner",
+    "image_with_text_FhGmUV",
+    "featured_collection",
+    "our_values",
+    "how_it_works",
+    "collection_list_FRXDpK"
+  ]
+}
