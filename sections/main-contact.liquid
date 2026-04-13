@@ -1,0 +1,520 @@
+<style>
+  .avm-contact * {
+    box-sizing: border-box;
+    font-family: 'Google Sans Flex', sans-serif;
+  }
+
+  /* ---- Hero ---- */
+  .avm-contact-hero {
+    background: #0f1f3d;
+    padding: 48px;
+  }
+
+  .avm-contact-hero__label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #93c5fd;
+    margin-bottom: 14px;
+  }
+
+  .avm-contact-hero__title {
+    font-size: 40px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 14px;
+    letter-spacing: -0.4px;
+  }
+
+  .avm-contact-hero__sub {
+    font-size: 16px;
+    color: #93c5fd;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* ---- Body ---- */
+  .avm-contact-body {
+    background: #fff;
+    padding: 80px 48px;
+  }
+
+  .avm-contact-body__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 55fr 45fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  /* ---- Left: Form ---- */
+  .avm-contact-form__label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #1a5fa8;
+    margin-bottom: 12px;
+  }
+
+  .avm-contact-form__title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0f1f3d;
+    margin: 0 0 32px;
+    letter-spacing: -0.3px;
+  }
+
+  .avm-contact-form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .avm-contact-form__field {
+    margin-bottom: 16px;
+  }
+
+  .avm-contact-form__field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 6px;
+  }
+
+  .avm-contact-form__field input,
+  .avm-contact-form__field textarea {
+    width: 100%;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 15px;
+    color: #111827;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.15s ease;
+    font-family: 'Google Sans Flex', sans-serif;
+  }
+
+  .avm-contact-form__field input:focus,
+  .avm-contact-form__field textarea:focus {
+    border-color: #1a5fa8;
+  }
+
+  .avm-contact-form__field textarea {
+    resize: vertical;
+    min-height: 140px;
+  }
+
+  .avm-contact-form__submit {
+    width: 100%;
+    background: #1a5fa8;
+    color: #fff;
+    padding: 14px 32px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    margin-top: 8px;
+    font-family: 'Google Sans Flex', sans-serif;
+  }
+
+  .avm-contact-form__submit:hover {
+    background: #1550a0;
+  }
+
+  .avm-contact-form__success {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 8px;
+    padding: 16px 20px;
+    color: #166534;
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+
+  .avm-contact-form__error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 16px 20px;
+    color: #991b1b;
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+
+  /* ---- Right: Info panel ---- */
+  .avm-contact-info {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 40px 36px;
+  }
+
+  .avm-contact-info__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .avm-contact-info__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+
+  .avm-contact-info__icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: #1a5fa8;
+    margin-top: 2px;
+  }
+
+  .avm-contact-info__icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .avm-contact-info__text {
+    font-size: 15px;
+    color: #374151;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .avm-contact-info__text a {
+    color: #374151;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .avm-contact-info__text a:hover {
+    color: #1a5fa8;
+  }
+
+  /* Hours box */
+  .avm-contact-hours {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px 24px;
+    border-left: 3px solid #1a5fa8;
+    margin-top: 24px;
+  }
+
+  .avm-contact-hours__label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #1a5fa8;
+    margin-bottom: 12px;
+  }
+
+  .avm-contact-hours__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .avm-contact-hours__days {
+    font-size: 14px;
+    color: #6b7280;
+  }
+
+  .avm-contact-hours__time {
+    font-size: 15px;
+    font-weight: 500;
+    color: #0f1f3d;
+  }
+
+  .avm-contact-hours__time--closed {
+    font-size: 14px;
+    font-weight: 400;
+    color: #6b7280;
+  }
+
+  /* Response badge */
+  .avm-contact-badge {
+    background: #EEF4FF;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1a5fa8;
+  }
+
+  /* LinkedIn */
+  .avm-contact-linkedin {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    background: #EEF4FF;
+    margin-top: 24px;
+    transition: background 0.2s ease;
+    text-decoration: none;
+  }
+
+  .avm-contact-linkedin:hover {
+    background: #0A66C2;
+  }
+
+  .avm-contact-linkedin:hover svg {
+    fill: #fff;
+  }
+
+  .avm-contact-linkedin svg {
+    fill: #1a5fa8;
+    transition: fill 0.2s ease;
+  }
+
+  /* ---- Map ---- */
+  .avm-contact-map {
+    width: 100%;
+    height: 400px;
+    display: block;
+    border: 0;
+  }
+
+  /* ---- Mobile ---- */
+  @media screen and (max-width: 768px) {
+    .avm-contact-hero {
+      padding: 48px 24px;
+    }
+
+    .avm-contact-hero__title {
+      font-size: 30px;
+    }
+
+    .avm-contact-body {
+      padding: 48px 20px;
+    }
+
+    .avm-contact-body__inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .avm-contact-form__row {
+      grid-template-columns: 1fr;
+    }
+
+    .avm-contact-info {
+      padding: 28px 20px;
+    }
+  }
+</style>
+
+<div class="avm-contact">
+
+  <!-- ===== HERO ===== -->
+  <div class="avm-contact-hero">
+    <span class="avm-contact-hero__label">Get in Touch</span>
+    <h1 class="avm-contact-hero__title">Contact AVM Healthcare</h1>
+    <p class="avm-contact-hero__sub">Our team responds to all enquiries within 24 hours, Monday to Friday.</p>
+  </div>
+
+  <!-- ===== BODY: form + info ===== -->
+  <div class="avm-contact-body">
+    <div class="avm-contact-body__inner">
+
+      <!-- LEFT: Form -->
+      <div class="avm-contact-form">
+        <span class="avm-contact-form__label">Send us a message</span>
+        <h2 class="avm-contact-form__title">How can we help?</h2>
+
+        {%- form 'contact', id: 'ContactForm' -%}
+
+          {%- if form.posted_successfully? -%}
+            <div class="avm-contact-form__success">
+              Thank you for reaching out. We'll get back to you within 24 hours.
+            </div>
+          {%- endif -%}
+
+          {%- if form.errors -%}
+            <div class="avm-contact-form__error">
+              Please correct the errors below and try again.
+            </div>
+          {%- endif -%}
+
+          <div class="avm-contact-form__row">
+            <div>
+              <label for="ContactForm-name">Full Name</label>
+              <input
+                type="text"
+                id="ContactForm-name"
+                name="contact[name]"
+                value="{{ form.name }}"
+                autocomplete="name"
+                placeholder="Dr. Anil Kumar"
+              >
+            </div>
+            <div>
+              <label for="ContactForm-email">Email</label>
+              <input
+                type="email"
+                id="ContactForm-email"
+                name="contact[email]"
+                value="{{ form.email }}"
+                autocomplete="email"
+                autocorrect="off"
+                autocapitalize="off"
+                placeholder="you@hospital.com"
+                {%- if form.errors contains 'email' %} aria-invalid="true"{%- endif %}
+              >
+            </div>
+          </div>
+
+          <div class="avm-contact-form__row">
+            <div>
+              <label for="ContactForm-phone">Phone Number</label>
+              <input
+                type="tel"
+                id="ContactForm-phone"
+                name="contact[phone]"
+                value="{{ form.phone }}"
+                autocomplete="tel"
+                placeholder="+91 98765 43210"
+              >
+            </div>
+            <div>
+              <label for="ContactForm-company">Company / Hospital / Facility</label>
+              <input
+                type="text"
+                id="ContactForm-company"
+                name="contact[company]"
+                placeholder="Apollo Hospital, Delhi"
+              >
+            </div>
+          </div>
+
+          <div class="avm-contact-form__field">
+            <label for="ContactForm-body">Message</label>
+            <textarea
+              id="ContactForm-body"
+              name="contact[body]"
+              rows="5"
+              placeholder="Tell us about your requirements, product categories, or quantities..."
+            >{{ form.body }}</textarea>
+          </div>
+
+          <button type="submit" class="avm-contact-form__submit">Send Message</button>
+
+        {%- endform -%}
+      </div>
+
+      <!-- RIGHT: Info panel -->
+      <div class="avm-contact-info">
+
+        <ul class="avm-contact-info__list">
+
+          <li class="avm-contact-info__item">
+            <span class="avm-contact-info__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+            </span>
+            <p class="avm-contact-info__text">
+              17-19 A Block Chattarpur Extension,<br>
+              Rajpur Road, New Delhi &ndash; 110074
+            </p>
+          </li>
+
+          <li class="avm-contact-info__item">
+            <span class="avm-contact-info__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </span>
+            <p class="avm-contact-info__text">
+              <a href="mailto:info@avmhealthcare.com">info@avmhealthcare.com</a>
+            </p>
+          </li>
+
+          <li class="avm-contact-info__item">
+            <span class="avm-contact-info__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.948V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+              </svg>
+            </span>
+            <p class="avm-contact-info__text">
+              <a href="tel:+919958538469">+91 99585 38469</a>
+            </p>
+          </li>
+
+        </ul>
+
+        <div class="avm-contact-hours">
+          <span class="avm-contact-hours__label">Business Hours</span>
+          <div class="avm-contact-hours__row">
+            <span class="avm-contact-hours__days">Mon &ndash; Fri</span>
+            <span class="avm-contact-hours__time">9:00 AM &ndash; 6:00 PM</span>
+          </div>
+          <div class="avm-contact-hours__row">
+            <span class="avm-contact-hours__days">Sat &ndash; Sun</span>
+            <span class="avm-contact-hours__time--closed">Closed</span>
+          </div>
+        </div>
+
+        <div class="avm-contact-badge">
+          &#9889; We typically respond within 24 hours
+        </div>
+
+        <a href="https://www.linkedin.com/company/avm-healthcare-products-pvt-ltd/"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="avm-contact-linkedin"
+           aria-label="AVM Healthcare on LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== MAP ===== -->
+  <iframe
+    class="avm-contact-map"
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.8!2d77.1645!3d28.4987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1f9a3e5b1234%3A0x1234567890abcdef!2sChattarpur%20Extension%2C%20New%20Delhi!5e0!3m2!1sen!2sin!4v1234567890"
+    width="100%"
+    height="400"
+    frameborder="0"
+    allowfullscreen
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    title="AVM Healthcare office location"
+  ></iframe>
+
+</div>
+
+{% schema %}
+{
+  "name": "Contact Page",
+  "tag": "section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Contact Page"
+    }
+  ]
+}
+{% endschema %}
