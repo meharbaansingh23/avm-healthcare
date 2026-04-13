@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "image_banner": {
@@ -18,9 +27,12 @@
           }
         }
       },
-      "block_order": ["heading", "text_HqEqai"],
+      "block_order": [
+        "heading",
+        "text_HqEqai"
+      ],
       "settings": {
-        "image": "shopify:\/\/shop_images\/pexels-cottonbro-7585320.jpg",
+        "image": "shopify://shop_images/pexels-cottonbro-7585320.jpg",
         "image_overlay_opacity": 60,
         "image_height": "medium",
         "image_behavior": "zoom-in",
@@ -46,15 +58,18 @@
         "text_c3HXXD": {
           "type": "text",
           "settings": {
-            "text": "<p>AVM Healthcare Products Pvt. Ltd. is a leading manufacturer, trader, and consultant in the medical and surgical equipment industry.<br\/><br\/>We serve hospitals, clinics, laboratories, and distributors with a commitment to quality, innovation, and timely delivery.<\/p>",
+            "text": "<p>AVM Healthcare Products Pvt. Ltd. is a leading manufacturer, trader, and consultant in the medical and surgical equipment industry.<br/><br/>We serve hospitals, clinics, laboratories, and distributors with a commitment to quality, innovation, and timely delivery.</p>",
             "text_style": "body"
           }
         }
       },
-      "block_order": ["heading_cjM9hx", "text_c3HXXD"],
+      "block_order": [
+        "heading_cjM9hx",
+        "text_c3HXXD"
+      ],
       "name": "t:sections.image-with-text.presets.name",
       "settings": {
-        "image": "shopify:\/\/shop_images\/pexels-shvetsa-4483327.jpg",
+        "image": "shopify://shop_images/pexels-shvetsa-4483327.jpg",
         "height": "small",
         "desktop_image_width": "medium",
         "layout": "image_first",
@@ -111,26 +126,30 @@
     "collection_list_FRXDpK": {
       "type": "collection-list",
       "blocks": {
+        "featured_collection_88q4iR": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "general-surgery"
+          }
+        },
+        "featured_collection_JXHY7m": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "cardiovascular-instruments"
+          }
+        },
         "featured_collection_DEUbGk": {
           "type": "featured_collection",
           "settings": {
             "collection": "neurosurgical-instruments"
           }
-        },
-        "featured_collection_t8PrqA": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "endoscopy-solutions"
-          }
-        },
-        "featured_collection_ReKRhg": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "lab-diagnostics-equipment"
-          }
         }
       },
-      "block_order": ["featured_collection_DEUbGk", "featured_collection_t8PrqA", "featured_collection_ReKRhg"],
+      "block_order": [
+        "featured_collection_88q4iR",
+        "featured_collection_JXHY7m",
+        "featured_collection_DEUbGk"
+      ],
       "name": "t:sections.collection-list.presets.name",
       "settings": {
         "title": "Categories",
