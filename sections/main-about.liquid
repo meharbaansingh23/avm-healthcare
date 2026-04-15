@@ -80,6 +80,10 @@
   .avm-about-stats__item {
     text-align: center;
     padding: 0 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .avm-about-stats__item + .avm-about-stats__item {
@@ -93,6 +97,9 @@
     color: #0f1f3d;
     line-height: 1;
     margin-bottom: 6px;
+    text-align: center;
+    min-width: 100%;
+    font-variant-numeric: tabular-nums;
   }
 
   .avm-about-stats__label {
@@ -614,6 +621,10 @@
       border-right: 1px solid #e5e7eb !important;
       border-bottom: 1px solid #e5e7eb !important;
       text-align: center !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
     }
     .avm-about-stats__item:nth-child(2) {
       border-right: none !important;
@@ -1049,7 +1060,7 @@
       var startTime = null;
 
       statEls.forEach(function (el) {
-        el.textContent = '0';
+        el.innerHTML = '<span style="display:inline-block;min-width:120px;text-align:center;">0</span>';
       });
 
       function tick(timestamp) {
@@ -1062,7 +1073,7 @@
           var target = parseFloat(el.getAttribute('data-target'));
           var suffix = el.getAttribute('data-suffix') || '';
           var current = target * eased;
-          el.textContent = Math.floor(current).toLocaleString() + suffix;
+          el.querySelector('span').textContent = Math.floor(current).toLocaleString() + suffix;
         });
 
         if (progress < 1) {
@@ -1071,7 +1082,7 @@
           statEls.forEach(function (el) {
             var target = parseFloat(el.getAttribute('data-target'));
             var suffix = el.getAttribute('data-suffix') || '';
-            el.textContent = target.toLocaleString() + suffix;
+            el.querySelector('span').textContent = target.toLocaleString() + suffix;
           });
         }
       }
