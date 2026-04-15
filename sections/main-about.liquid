@@ -596,23 +596,34 @@
       font-size: 15px !important;
     }
 
-    /* Stats: 2-col, swap dividers */
+    /* Stats: 2-col grid, no overflow */
     .avm-about-stats {
-      padding: 48px 20px;
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 0 !important;
     }
     .avm-about-stats__inner {
-      grid-template-columns: 1fr 1fr;
+      display: contents;
     }
-    .avm-about-stats__item + .avm-about-stats__item {
-      border-left: none;
+    .avm-about-stats__item {
+      padding: 32px 16px !important;
+      border-right: 1px solid #e5e7eb !important;
+      border-bottom: 1px solid #e5e7eb !important;
+      text-align: center !important;
     }
-    .avm-about-stats__item:nth-child(even) {
-      border-left: 1px solid #e5e7eb;
+    .avm-about-stats__item:nth-child(2),
+    .avm-about-stats__item:nth-child(4) {
+      border-right: none !important;
     }
-    .avm-about-stats__item:nth-child(n+3) {
-      border-top: 1px solid #e5e7eb;
-      padding-top: 28px;
-      margin-top: 4px;
+    .avm-about-stats__item:nth-child(3),
+    .avm-about-stats__item:nth-child(4) {
+      border-bottom: none !important;
+    }
+    .avm-about-stats__number {
+      font-size: 36px !important;
+    }
+    .avm-about-stats__label {
+      font-size: 13px !important;
     }
 
     /* Story: single col, image first */
@@ -1021,10 +1032,14 @@
     var statEls = document.querySelectorAll('.avm-about-stats__number[data-target]');
     if (!statEls.length) return;
 
-    var easeOutQuart = function (t) { return 1 - Math.pow(1 - t, 4); };
+    var easeOutQuart = function (t) {
+      return t < 0.5
+        ? 2 * t * t
+        : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    };
 
     var animateStats = function () {
-      var duration = 2000;
+      var duration = 3500;
       var startTime = null;
 
       statEls.forEach(function (el) {
