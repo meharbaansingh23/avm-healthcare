@@ -87,6 +87,7 @@
     justify-content: center;
     width: 25%;
     overflow: hidden;
+    min-width: 0;
   }
 
   .avm-about-stats__item + .avm-about-stats__item {
@@ -101,7 +102,9 @@
     line-height: 1;
     margin-bottom: 6px;
     text-align: center;
-    min-width: 100%;
+    white-space: nowrap;
+    overflow: visible;
+    width: 100%;
     font-variant-numeric: tabular-nums;
   }
 
@@ -628,6 +631,7 @@
       flex-direction: column !important;
       align-items: center !important;
       justify-content: center !important;
+      width: 50% !important;
     }
     .avm-about-stats__item:nth-child(2) {
       border-right: none !important;
@@ -1048,74 +1052,54 @@
 </div>
 
 <script>
-  (function () {
-    var statEls = document.querySelectorAll('.avm-about-stats__number[data-target]');
-    if (!statEls.length) return;
+document.addEventListener('DOMContentLoaded', function() {
+  var stats = document.querySelectorAll('[data-target]');
+  if (!stats.length) return;
 
-    var easing = function (t) {
-      return t < 0.5
-        ? 2 * t * t
-        : 1 - Math.pow(-2 * t + 2, 2) / 2;
-    };
+  function animateCount(el) {
+    var target = parseInt(el.getAttribute('data-target'));
+    var suffix = el.getAttribute('data-suffix') || '';
+    var duration = 3500;
+    var start = null;
 
-    // First pass: render final values while hidden to lock in container width
-    statEls.forEach(function (el) {
-      var target = parseInt(el.getAttribute('data-target'), 10);
-      var suffix = el.getAttribute('data-suffix') || '';
-      el.style.visibility = 'hidden';
-      el.textContent = target.toLocaleString() + suffix;
-    });
-
-    var animateStats = function () {
-      var duration = 3500;
-      var startTime = null;
-
-      statEls.forEach(function (el) {
-        el.style.visibility = 'visible';
-        el.textContent = '0';
-      });
-
-      function tick(timestamp) {
-        if (!startTime) startTime = timestamp;
-        var elapsed = timestamp - startTime;
-        var progress = Math.min(elapsed / duration, 1);
-        var eased = easing(progress);
-
-        statEls.forEach(function (el) {
-          var target = parseInt(el.getAttribute('data-target'), 10);
-          var suffix = el.getAttribute('data-suffix') || '';
-          el.textContent = Math.floor(target * eased).toLocaleString() + suffix;
-        });
-
-        if (progress < 1) {
-          requestAnimationFrame(tick);
+    function step(timestamp) {
+      if (!start) start = timestamp;
+      var progress = Math.min((timestamp - start) / duration, 1);
+      var ease = 1 - Math.pow(1 - progress, 3);
+      var current = Math.floor(ease * target);
+      if (target >= 1000) {
+        el.textContent = current.toLocaleString('en-IN') + suffix;
+      } else {
+        el.textContent = current + suffix;
+      }
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        if (target >= 1000) {
+          el.textContent = target.toLocaleString('en-IN') + suffix;
         } else {
-          statEls.forEach(function (el) {
-            var target = parseInt(el.getAttribute('data-target'), 10);
-            var suffix = el.getAttribute('data-suffix') || '';
-            el.textContent = target.toLocaleString() + suffix;
-          });
+          el.textContent = target + suffix;
         }
       }
-
-      requestAnimationFrame(tick);
-    };
-
-    var statsSection = document.querySelector('.avm-about-stats');
-    if (statsSection && 'IntersectionObserver' in window) {
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            observer.disconnect();
-            animateStats();
-          }
-        });
-      }, { threshold: 0.3 });
-      observer.observe(statsSection);
-    } else {
-      animateStats();
     }
-  })();
+
+    requestAnimationFrame(step);
+  }
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        stats.forEach(function(el) {
+          animateCount(el);
+        });
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+
+  var container = stats[0].closest('section') || stats[0].parentElement;
+  observer.observe(container);
+});
 </script>
 
 <script>
