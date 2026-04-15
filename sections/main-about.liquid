@@ -75,6 +75,7 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    width: 100%;
   }
 
   .avm-about-stats__item {
@@ -84,6 +85,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 25%;
+    overflow: hidden;
   }
 
   .avm-about-stats__item + .avm-about-stats__item {
@@ -1049,40 +1052,48 @@
     var statEls = document.querySelectorAll('.avm-about-stats__number[data-target]');
     if (!statEls.length) return;
 
-    var easeOutQuart = function (t) {
+    var easing = function (t) {
       return t < 0.5
         ? 2 * t * t
         : 1 - Math.pow(-2 * t + 2, 2) / 2;
     };
+
+    // First pass: render final values while hidden to lock in container width
+    statEls.forEach(function (el) {
+      var target = parseInt(el.getAttribute('data-target'), 10);
+      var suffix = el.getAttribute('data-suffix') || '';
+      el.style.visibility = 'hidden';
+      el.textContent = target.toLocaleString() + suffix;
+    });
 
     var animateStats = function () {
       var duration = 3500;
       var startTime = null;
 
       statEls.forEach(function (el) {
-        el.innerHTML = '<span style="display:inline-block;min-width:120px;text-align:center;">0</span>';
+        el.style.visibility = 'visible';
+        el.textContent = '0';
       });
 
       function tick(timestamp) {
         if (!startTime) startTime = timestamp;
         var elapsed = timestamp - startTime;
         var progress = Math.min(elapsed / duration, 1);
-        var eased = easeOutQuart(progress);
+        var eased = easing(progress);
 
         statEls.forEach(function (el) {
-          var target = parseFloat(el.getAttribute('data-target'));
+          var target = parseInt(el.getAttribute('data-target'), 10);
           var suffix = el.getAttribute('data-suffix') || '';
-          var current = target * eased;
-          el.querySelector('span').textContent = Math.floor(current).toLocaleString() + suffix;
+          el.textContent = Math.floor(target * eased).toLocaleString() + suffix;
         });
 
         if (progress < 1) {
           requestAnimationFrame(tick);
         } else {
           statEls.forEach(function (el) {
-            var target = parseFloat(el.getAttribute('data-target'));
+            var target = parseInt(el.getAttribute('data-target'), 10);
             var suffix = el.getAttribute('data-suffix') || '';
-            el.querySelector('span').textContent = target.toLocaleString() + suffix;
+            el.textContent = target.toLocaleString() + suffix;
           });
         }
       }
