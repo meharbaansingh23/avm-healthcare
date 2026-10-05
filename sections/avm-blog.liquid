@@ -1,0 +1,68 @@
+{%- comment -%}
+  AVM blog index — mirrors the article grid on blog/page.tsx.
+  The page heading above it is an "AVM page hero" section (PageHero.tsx).
+  Card label = publish date ("April 2026"), as on the live site.
+{%- endcomment -%}
+
+{{ 'avm-article-card.css' | asset_url | stylesheet_tag }}
+{{ 'avm-blog.css' | asset_url | stylesheet_tag }}
+
+<div class="avm avm-blog">
+  <div class="avm-blog__inner">
+    {%- paginate blog.articles by section.settings.per_page -%}
+      <div class="avm-blog__grid">
+        {%- for article in blog.articles -%}
+          {%- liquid
+            assign excerpt = article.excerpt | strip_html | strip
+            if excerpt == blank
+              assign excerpt = article.content | strip_html | truncatewords: 30
+            endif
+            assign published_label = article.published_at | date: '%B %Y'
+          -%}
+          {%- render 'avm-article-card',
+            url: article.url,
+            title: article.title,
+            category: published_label,
+            excerpt: excerpt,
+            image: article.image,
+            delay_index: forloop.index0,
+            variant: 'index'
+          -%}
+        {%- else -%}
+          <p class="avm-blog__empty">No articles yet.</p>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="avm-blog__pagination" aria-label="Pagination">
+          {%- if paginate.previous -%}
+            <a href="{{ paginate.previous.url }}" class="avm-pill">← Newer articles</a>
+          {%- endif -%}
+          <span class="avm-blog__page">Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
+          {%- if paginate.next -%}
+            <a href="{{ paginate.next.url }}" class="avm-pill">Older articles →</a>
+          {%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "AVM blog grid",
+  "tag": "section",
+  "class": "avm-blog-section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "per_page",
+      "label": "Articles per page",
+      "min": 6,
+      "max": 24,
+      "step": 3,
+      "default": 12
+    }
+  ]
+}
+{% endschema %}

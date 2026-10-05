@@ -1,0 +1,246 @@
+/* AVM page hero — About / Careers / Innovation heroes and PageHero.tsx */
+
+.avm-page-hero {
+  padding: 80px var(--avm-gutter) 64px;
+  text-align: center;
+  /* keep the Innovation glow (which bleeds past the image) from causing sideways scroll on phones */
+  overflow-x: clip;
+}
+
+.avm-page-hero--white {
+  background-color: var(--avm-white);
+}
+
+.avm-page-hero--off-white {
+  background-color: var(--avm-off-white);
+}
+
+.avm-page-hero--banner {
+  padding: var(--avm-section-y-sm) var(--avm-gutter);
+}
+
+.avm-page-hero--bordered {
+  border-bottom: 1px solid var(--avm-border);
+}
+
+.avm-page-hero__content {
+  margin: 0 auto;
+}
+
+.avm-page-hero__content--3xl {
+  max-width: var(--avm-container-3xl);
+}
+
+.avm-page-hero__content--4xl {
+  max-width: var(--avm-container-4xl);
+}
+
+.avm-page-hero__content--5xl {
+  max-width: var(--avm-container-5xl);
+}
+
+.avm-page-hero__rule {
+  display: block;
+  width: 48px;
+  height: 1px;
+  margin: 0 auto calc(var(--avm-space) * 8);
+  background-color: var(--avm-blue-600);
+}
+
+.avm-page-hero__label--muted {
+  color: var(--avm-muted);
+}
+
+.avm-page-hero__label--green {
+  color: var(--avm-green);
+}
+
+.avm-page-hero__heading {
+  margin: calc(var(--avm-space) * 5) 0 0;
+  font-size: var(--avm-text-5xl);
+  font-weight: var(--avm-weight-bold);
+  font-style: normal;
+  color: var(--avm-navy);
+  word-break: normal;
+}
+
+/* About hero: grey label sits mt-6 above the heading */
+.avm-page-hero__label--muted + .avm-page-hero__heading {
+  margin-top: calc(var(--avm-space) * 6);
+}
+
+/* text-5xl md:text-7xl font-bold tracking-tighter leading-[1.05] */
+.avm-page-hero__heading--tight {
+  letter-spacing: var(--avm-tracking-tighter);
+  line-height: var(--avm-leading-heading);
+}
+
+/* PageHero.tsx: .display-heading text-5xl md:text-7xl mt-4 */
+.avm-page-hero__heading--display {
+  margin-top: calc(var(--avm-space) * 4);
+  letter-spacing: var(--avm-tracking-display);
+  line-height: var(--avm-leading-display);
+}
+
+.avm-page-hero__text {
+  margin: calc(var(--avm-space) * 6) auto 0;
+  font-size: var(--avm-text-base);
+  line-height: var(--avm-leading-relaxed);
+  letter-spacing: normal;
+  color: var(--avm-slate);
+}
+
+.avm-page-hero__text--xl {
+  max-width: var(--avm-container-xl);
+}
+
+.avm-page-hero__text--2xl {
+  max-width: var(--avm-container-2xl);
+}
+
+.avm-page-hero__text--700 {
+  max-width: 700px;
+  margin-top: calc(var(--avm-space) * 8);
+  font-size: var(--avm-text-lg);
+}
+
+.avm-page-hero--banner .avm-page-hero__text {
+  margin-top: calc(var(--avm-space) * 5);
+  font-size: var(--avm-text-lg);
+}
+
+.avm-page-hero__button {
+  display: inline-block;
+  margin-top: calc(var(--avm-space) * 8);
+  padding: calc(var(--avm-space) * 4) calc(var(--avm-space) * 8);
+  border-radius: var(--avm-radius-lg);
+  background-color: var(--avm-navy);
+  color: var(--avm-white);
+  font-size: var(--avm-text-sm);
+  line-height: var(--avm-text-sm-lh);
+  font-weight: var(--avm-weight-semibold);
+  letter-spacing: normal;
+  text-decoration: none;
+  transition: background-color 150ms var(--avm-ease);
+}
+
+.avm-page-hero__button:hover {
+  background-color: var(--avm-navy-hover);
+  color: var(--avm-white);
+}
+
+.avm-page-hero__button--green:hover {
+  background-color: var(--avm-green);
+}
+
+/* ─── Image ─── */
+.avm-page-hero__media {
+  position: relative;
+  width: 100%;
+  margin: calc(var(--avm-space) * 14) auto 0;
+}
+
+.avm-page-hero__media--wide {
+  max-width: 1280px;
+}
+
+.avm-page-hero__media--medium {
+  max-width: var(--avm-container-4xl);
+}
+
+.avm-page-hero__frame {
+  position: relative;
+  overflow: hidden;
+}
+
+.avm-page-hero__img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* About: Ken Burns, rounded, border, big soft shadow */
+.avm-page-hero__media--kenburns .avm-page-hero__frame {
+  border: 1px solid var(--avm-border);
+  border-radius: var(--avm-radius-2xl);
+  box-shadow: 0 25px 50px -12px rgba(10, 22, 40, 0.1);
+}
+
+.avm-page-hero__media--kenburns .avm-page-hero__img {
+  animation: avm-kenburns 20s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes avm-kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+/* Careers: grayscale image + navy mix-blend-color overlay */
+.avm-page-hero__media--duotone .avm-page-hero__frame {
+  border-radius: var(--avm-radius-2xl);
+  box-shadow: 0 20px 25px -5px rgba(10, 22, 40, 0.1), 0 8px 10px -6px rgba(10, 22, 40, 0.1);
+}
+
+.avm-page-hero__media--duotone .avm-page-hero__img {
+  filter: grayscale(100%);
+}
+
+.avm-page-hero__duotone {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background-color: var(--avm-navy);
+  mix-blend-mode: color;
+  pointer-events: none;
+}
+
+/* Innovation: soft blurred blue radial glow behind the image */
+.avm-page-hero__media--glow {
+  isolation: isolate;
+}
+
+.avm-page-hero__media--glow .avm-page-hero__frame {
+  overflow: visible;
+}
+
+.avm-page-hero__media--glow .avm-page-hero__img {
+  object-fit: contain;
+}
+
+.avm-page-hero__glow {
+  position: absolute;
+  inset: -64px;
+  z-index: -1;
+  display: block;
+  pointer-events: none;
+  background: radial-gradient(circle at center, rgba(37, 99, 235, 0.12) 0%, rgba(37, 99, 235, 0.06) 50%, transparent 75%);
+  filter: blur(60px);
+}
+
+@media (min-width: 768px) {
+  .avm-page-hero {
+    padding: 96px var(--avm-gutter-md) 80px;
+  }
+
+  .avm-page-hero--banner {
+    padding: var(--avm-section-y-md) var(--avm-gutter-md);
+  }
+
+  .avm-page-hero__heading {
+    font-size: var(--avm-text-7xl);
+  }
+
+  .avm-page-hero__text--2xl,
+  .avm-page-hero__text--xl {
+    font-size: var(--avm-text-lg);
+  }
+
+  .avm-page-hero__glow {
+    inset: -112px;
+  }
+}

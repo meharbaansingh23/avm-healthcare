@@ -1,0 +1,56 @@
+{%- comment -%}
+  AVM stats strip — mirrors About page section 2 (count-up stats, no card).
+{%- endcomment -%}
+
+{{ 'avm-about.css' | asset_url | stylesheet_tag }}
+
+<div class="avm avm-stats-strip">
+  <div class="avm-stats-strip__grid" data-avm-reveal>
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign stat_display = block.settings.target
+        if block.settings.thousands and block.settings.target >= 1000
+          assign stat_thousands = block.settings.target | divided_by: 1000
+          assign stat_rest = block.settings.target | modulo: 1000 | prepend: '00' | slice: -3, 3
+          assign stat_display = stat_thousands | append: ',' | append: stat_rest
+        endif
+      -%}
+      <div class="avm-stats-strip__stat" {{ block.shopify_attributes }}>
+        <span
+          class="avm-stats-strip__value avm-tabular-nums"
+          data-avm-counter
+          data-target="{{ block.settings.target }}"
+          data-suffix="{{ block.settings.suffix | escape }}"
+          {% if block.settings.thousands %}
+            data-thousands
+          {% endif %}
+        >
+          {{- stat_display }}{{ block.settings.suffix | escape -}}
+        </span>
+        <div class="avm-stats-strip__label">{{ block.settings.label | escape }}</div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "AVM stats strip",
+  "tag": "section",
+  "class": "avm-stats-strip-section",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "number", "id": "target", "label": "Number", "default": 100 },
+        { "type": "text", "id": "suffix", "label": "Suffix", "default": "+" },
+        { "type": "checkbox", "id": "thousands", "label": "Thousands separator", "default": false },
+        { "type": "text", "id": "label", "label": "Label", "default": "Stat" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "AVM stats strip" }]
+}
+{% endschema %}

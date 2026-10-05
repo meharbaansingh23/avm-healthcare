@@ -1,0 +1,64 @@
+{%- comment -%}
+  AVM mission cards — mirrors About page section 4 (Mission, Motive & Collaboration).
+  A card with the green accent gets a green marker and title (German Collaboration).
+{%- endcomment -%}
+
+{{ 'avm-about.css' | asset_url | stylesheet_tag }}
+
+<div class="avm avm-mission">
+  <div class="avm-mission__inner">
+    <div class="avm-section-header" data-avm-reveal>
+      {%- if section.settings.label != blank -%}
+        <p class="avm-section-label">{{ section.settings.label | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="avm-display-heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+    </div>
+
+    <div class="avm-mission__grid">
+      {%- for block in section.blocks -%}
+        <div class="avm-mission__cell" data-avm-reveal style="--avm-reveal-delay: {{ forloop.index0 | times: 0.15 }}s;" {{ block.shopify_attributes }}>
+          <div class="avm-mission__card{% if block.settings.accent == 'green' %} avm-mission__card--green{% endif %}">
+            <span class="avm-mission__marker" aria-hidden="true"></span>
+            <h3 class="avm-mission__title">{{ block.settings.title | escape }}</h3>
+            <p class="avm-mission__text">{{ block.settings.text | escape }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "AVM mission cards",
+  "tag": "section",
+  "class": "avm-mission-section",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "Purpose" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Mission, Motive & Collaboration" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Card title" },
+        { "type": "textarea", "id": "text", "label": "Text" },
+        {
+          "type": "select",
+          "id": "accent",
+          "label": "Accent",
+          "options": [
+            { "value": "blue", "label": "Blue" },
+            { "value": "green", "label": "Green" }
+          ],
+          "default": "blue"
+        }
+      ]
+    }
+  ],
+  "presets": [{ "name": "AVM mission cards" }]
+}
+{% endschema %}

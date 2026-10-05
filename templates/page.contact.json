@@ -1,18 +1,51 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "main": {
-      "type": "main-contact",
-      "settings": {}
+    "contact": {
+      "type": "avm-contact",
+      "blocks": {
+        "office_1": {
+          "type": "office",
+          "settings": {
+            "name": "New Delhi — Registered Office",
+            "address": "17-19 A Block Chatarpur Extension, Rajpur Road, New Delhi — 110074, India",
+            "maps_url": "https://maps.app.goo.gl/ypyPSd5SSeybPpA1A"
+          }
+        },
+        "office_2": {
+          "type": "office",
+          "settings": {
+            "name": "Mumbai — Corporate Office",
+            "address": "1403, 14th Floor, Peninsula Park, Off Link Road, Andheri West, Mumbai — 400083, India",
+            "maps_url": ""
+          }
+        },
+        "office_3": {
+          "type": "office",
+          "settings": {
+            "name": "Hamburg — ANI Medizintechnik GmbH",
+            "address": "Hans-Henny-Jahnn-Weg 53, 22085 Hamburg, Germany",
+            "maps_url": "https://maps.app.goo.gl/x6ej4DSTVWZViqKo9"
+          }
+        }
+      },
+      "block_order": [
+        "office_1",
+        "office_2",
+        "office_3"
+      ],
+      "settings": {
+        "label": "Contact us",
+        "heading": "Get In Touch",
+        "text": "Our team is based in New Delhi and is available Monday to Saturday, 9:30am to 6:30pm IST.",
+        "whatsapp_label": "Message us",
+        "hours": "Monday – Saturday · 9:30 am – 6:30 pm IST",
+        "form_action": "",
+        "form_heading": "Send Us A Message",
+        "success_message": "Thank you! We’ll be in touch within one business day."
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "contact"
+  ]
 }

@@ -1,0 +1,12 @@
+{%- comment -%}
+  SuccessState from the Next.js forms (replaces the form after sending).
+  Accepts: title, message
+{%- endcomment -%}
+<div class="avm-form-success" role="status" aria-live="polite" tabindex="-1" data-avm-form-success hidden>
+  <svg width="56" height="56" viewBox="0 0 56 56" fill="none" aria-hidden="true" focusable="false">
+    <circle cx="28" cy="28" r="28" fill="#2563EB"/>
+    <path d="M19 28l6 6 12-12" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <h3 class="avm-form-success__title">{{ title | default: 'Thank you' | escape }}</h3>
+  <p class="avm-form-success__text">{{ message | escape }}</p>
+</div>

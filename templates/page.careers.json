@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "hero": {
+      "type": "avm-page-hero",
+      "settings": {
+        "background": "off-white",
+        "spacing": "page",
+        "label": "Careers at AVM",
+        "label_color": "blue",
+        "heading": "Join The Team Shaping Surgical Care In India",
+        "heading_style": "tight",
+        "content_width": "3xl",
+        "text": "We don’t have specific openings listed right now — but we’re always interested in meeting talented people who care about healthcare and want to make a difference.",
+        "text_width": "xl",
+        "button_label": "Express your interest",
+        "button_link": "#apply",
+        "button_hover_green": false,
+        "asset": "avm-careers.webp",
+        "image_alt": "AVM Healthcare team",
+        "image_style": "duotone",
+        "image_width": "medium"
+      }
+    },
+    "apply": {
+      "type": "avm-careers-form",
+      "settings": {
+        "anchor": "apply",
+        "heading": "Express Your Interest",
+        "form_action": ""
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "apply"
+  ]
+}

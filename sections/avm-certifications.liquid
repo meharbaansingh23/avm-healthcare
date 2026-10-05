@@ -4,7 +4,7 @@
 
 {{ 'avm-certifications.css' | asset_url | stylesheet_tag }}
 
-<div class="avm avm-certs">
+<div class="avm avm-certs avm-certs--{{ section.settings.background }}">
   <div class="avm-certs__inner">
     <div class="avm-section-header" data-avm-reveal>
       {%- if section.settings.label != blank -%}
@@ -41,6 +41,16 @@
   "tag": "section",
   "class": "avm-certs-section",
   "settings": [
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "off-white", "label": "Off-white" }
+      ],
+      "default": "white"
+    },
     {
       "type": "text",
       "id": "label",

@@ -1,0 +1,11 @@
+{%- comment -%}
+  Bot-filter fields expected by the Next.js API routes (src/lib/spam-guard.ts):
+  - company_website: honeypot, must stay empty
+  - form_started_at: ms timestamp, filled in by avm-forms.js when the form loads
+  Accepts: prefix (id prefix, e.g. 'ct')
+{%- endcomment -%}
+<div class="avm-form-honeypot" aria-hidden="true">
+  <label for="{{ prefix }}-company-website">Company website</label>
+  <input id="{{ prefix }}-company-website" name="company_website" type="text" tabindex="-1" autocomplete="off">
+</div>
+<input type="hidden" name="form_started_at" value="">

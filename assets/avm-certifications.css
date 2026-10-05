@@ -5,6 +5,10 @@
   padding: var(--avm-section-y-sm) var(--avm-gutter);
 }
 
+.avm-certs--off-white {
+  background-color: var(--avm-off-white);
+}
+
 .avm-certs__inner {
   max-width: var(--avm-container-6xl);
   margin: 0 auto;

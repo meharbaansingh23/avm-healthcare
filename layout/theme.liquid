@@ -34,6 +34,7 @@
     {% endif %}
 
     {% render 'meta-tags' %}
+    {% render 'avm-organization-schema' %}
 
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
@@ -48,6 +49,28 @@
     {%- endif -%}
 
     {{ content_for_header }}
+
+    {%- unless request.design_mode -%}
+      {%- if settings.avm_ga4_id != blank -%}
+        {%- assign avm_ga4_id = settings.avm_ga4_id | strip | escape -%}
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ avm_ga4_id }}"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '{{ avm_ga4_id }}');
+        </script>
+      {%- endif -%}
+      {%- if settings.avm_clarity_id != blank -%}
+        <script>
+          (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "{{ settings.avm_clarity_id | strip | escape }}");
+        </script>
+      {%- endif -%}
+    {%- endunless -%}
 
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'

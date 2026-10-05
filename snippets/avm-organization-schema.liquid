@@ -1,0 +1,69 @@
+{%- comment -%}
+  Organization + WebSite structured data — mirrors OrganizationSchema.tsx on the
+  Next.js site. Contact details and social profiles come from Theme settings → AVM site.
+  Certification claims are left out on purpose, as on the live site.
+{%- endcomment -%}
+{%- liquid
+  assign base_url = request.origin
+  assign phone_tel = settings.avm_phone_tel | default: settings.avm_phone | remove: ' '
+  assign logo_url = 'avm-logo-dark.png' | asset_url | prepend: 'https:'
+-%}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": {{ base_url | append: '/#organization' | json }},
+        "name": "AVM Healthcare Products Pvt. Ltd.",
+        "alternateName": "AVM Healthcare",
+        "url": {{ base_url | json }},
+        "logo": { "@type": "ImageObject", "url": {{ logo_url | json }} },
+        "description": "New Delhi-based manufacturer of surgical instruments for neurosurgery, general surgery, cardiovascular, gynaecology and reconstructive surgery, supplying hospitals and institutions in India and internationally since 1996.",
+        "foundingDate": "1996",
+        "email": {{ settings.avm_email | json }},
+        "telephone": {{ phone_tel | json }},
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "17-19 A Block, Chatarpur Extension, Rajpur Road",
+          "addressLocality": "New Delhi",
+          "addressRegion": "Delhi",
+          "postalCode": "110074",
+          "addressCountry": "IN"
+        },
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "contactType": "sales",
+            "email": {{ settings.avm_email | json }},
+            "telephone": {{ phone_tel | json }},
+            "areaServed": "Worldwide",
+            "availableLanguage": ["en", "hi"]
+          }
+        ],
+        "sameAs": [
+          {%- assign same_as_first = true -%}
+          {%- if settings.avm_linkedin_url != blank -%}{{ settings.avm_linkedin_url | json }}{%- assign same_as_first = false -%}{%- endif -%}
+          {%- if settings.avm_facebook_url != blank -%}{%- unless same_as_first -%},{%- endunless -%}{{ settings.avm_facebook_url | json }}{%- assign same_as_first = false -%}{%- endif -%}
+          {%- if settings.avm_instagram_url != blank -%}{%- unless same_as_first -%},{%- endunless -%}{{ settings.avm_instagram_url | json }}{%- endif -%}
+        ],
+        "knowsAbout": [
+          "Surgical instruments",
+          "Neurosurgical instruments",
+          "Cardiovascular surgical instruments",
+          "Gynaecological instruments",
+          "Surgical instrument manufacturing",
+          "Surgical instrument reprocessing"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": {{ base_url | append: '/#website' | json }},
+        "url": {{ base_url | json }},
+        "name": "AVM Healthcare",
+        "publisher": { "@id": {{ base_url | append: '/#organization' | json }} },
+        "inLanguage": "en-IN"
+      }
+    ]
+  }
+</script>

@@ -1,0 +1,236 @@
+{%- comment -%}
+  AVM page hero — one section for the inner-page heroes on the Next.js site:
+  - About:      muted label, tight H1, Ken Burns image (wide)
+  - Careers:    off-white, blue label, button to #apply, navy duotone image
+  - Innovation: green label, button to #proposal (green hover), image with blue glow
+  - Blog index: PageHero.tsx — rule above label, display H1, off-white with bottom border
+{%- endcomment -%}
+
+{{ 'avm-page-hero.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+  assign has_image = false
+  if s.image != blank or s.asset != blank
+    assign has_image = true
+  endif
+-%}
+
+<div class="avm avm-page-hero avm-page-hero--{{ s.background }} avm-page-hero--{{ s.spacing }}{% if s.border_bottom %} avm-page-hero--bordered{% endif %}">
+  <div class="avm-page-hero__content avm-page-hero__content--{{ s.content_width }}" data-avm-reveal>
+    {%- if s.show_rule -%}
+      <span class="avm-page-hero__rule" aria-hidden="true"></span>
+    {%- endif -%}
+    {%- if s.label != blank -%}
+      <p class="avm-section-label avm-page-hero__label avm-page-hero__label--{{ s.label_color }}">{{ s.label | escape }}</p>
+    {%- endif -%}
+    {%- if s.heading != blank -%}
+      <h1 class="avm-page-hero__heading avm-page-hero__heading--{{ s.heading_style }}">{{ s.heading | escape }}</h1>
+    {%- endif -%}
+    {%- if s.text != blank -%}
+      <p class="avm-page-hero__text avm-page-hero__text--{{ s.text_width }}">{{ s.text | escape }}</p>
+    {%- endif -%}
+    {%- if s.button_label != blank and s.button_link != blank -%}
+      <a href="{{ s.button_link | escape }}" class="avm-page-hero__button{% if s.button_hover_green %} avm-page-hero__button--green{% endif %}">
+        {{- s.button_label | escape -}}
+      </a>
+    {%- endif -%}
+  </div>
+
+  {%- if has_image -%}
+    <div class="avm-page-hero__media avm-page-hero__media--{{ s.image_style }} avm-page-hero__media--{{ s.image_width }}" data-avm-reveal style="--avm-reveal-delay: 0.1s;">
+      {%- if s.image_style == 'glow' -%}
+        <span class="avm-page-hero__glow" aria-hidden="true"></span>
+      {%- endif -%}
+      <div class="avm-page-hero__frame">
+        {%- liquid
+          if s.image_width == 'wide'
+            assign img_sizes = '100vw'
+          else
+            assign img_sizes = '(min-width: 1024px) 896px, 100vw'
+          endif
+        -%}
+        {%- render 'avm-image',
+          image: s.image,
+          asset: s.asset,
+          alt: s.image_alt,
+          class: 'avm-page-hero__img',
+          sizes: img_sizes,
+          widths: '600, 900, 1200, 1600, 2000, 2600',
+          loading: 'eager',
+          fetchpriority: 'high'
+        -%}
+        {%- if s.image_style == 'duotone' -%}
+          <span class="avm-page-hero__duotone" aria-hidden="true"></span>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "AVM page hero",
+  "tag": "section",
+  "class": "avm-page-hero-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "off-white", "label": "Off-white" }
+      ],
+      "default": "white"
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        { "value": "page", "label": "Page top (About, Careers, Innovation)" },
+        { "value": "banner", "label": "Banner (Blog)" }
+      ],
+      "default": "page"
+    },
+    {
+      "type": "checkbox",
+      "id": "border_bottom",
+      "label": "Bottom border",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rule",
+      "label": "Show short line above label",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label"
+    },
+    {
+      "type": "select",
+      "id": "label_color",
+      "label": "Label colour",
+      "options": [
+        { "value": "blue", "label": "Blue" },
+        { "value": "muted", "label": "Grey" },
+        { "value": "green", "label": "Green" }
+      ],
+      "default": "blue"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_style",
+      "label": "Heading style",
+      "options": [
+        { "value": "tight", "label": "Tight (most pages)" },
+        { "value": "display", "label": "Display (Blog)" }
+      ],
+      "default": "tight"
+    },
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "Text block width",
+      "options": [
+        { "value": "3xl", "label": "Narrow" },
+        { "value": "4xl", "label": "Medium" },
+        { "value": "5xl", "label": "Wide" }
+      ],
+      "default": "3xl"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "id": "text_width",
+      "label": "Text width",
+      "options": [
+        { "value": "xl", "label": "Narrow" },
+        { "value": "2xl", "label": "Medium" },
+        { "value": "700", "label": "Wide" }
+      ],
+      "default": "xl"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "text",
+      "id": "button_link",
+      "label": "Button link",
+      "info": "A URL or an anchor on the page, e.g. #apply"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_hover_green",
+      "label": "Green button hover (Innovation)",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "asset",
+      "label": "Bundled image (fallback)",
+      "info": "Theme asset used when no image is picked. Leave as is."
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text"
+    },
+    {
+      "type": "select",
+      "id": "image_style",
+      "label": "Image style",
+      "options": [
+        { "value": "kenburns", "label": "Slow zoom, framed (About)" },
+        { "value": "duotone", "label": "Navy duotone (Careers)" },
+        { "value": "glow", "label": "Soft blue glow (Innovation)" }
+      ],
+      "default": "kenburns"
+    },
+    {
+      "type": "select",
+      "id": "image_width",
+      "label": "Image width",
+      "options": [
+        { "value": "wide", "label": "Wide" },
+        { "value": "medium", "label": "Medium" }
+      ],
+      "default": "medium"
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVM page hero"
+    }
+  ]
+}
+{% endschema %}

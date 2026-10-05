@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "catalogue": {
+      "type": "avm-catalogue-request",
+      "settings": {
+        "asset": "avm-catalogue-cover.webp",
+        "form_action": ""
+      }
+    }
+  },
+  "order": [
+    "catalogue"
+  ]
+}

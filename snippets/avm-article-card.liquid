@@ -1,15 +1,25 @@
 {%- comment -%}
-  AVM article card — mirrors the blog cards on the Next.js homepage and /blog.
+  AVM article card — the blog cards on the Next.js homepage and /blog.
 
   Accepts:
-  - url, title, category, excerpt
+  - url, title, excerpt
+  - category: small blue label above the title (homepage: first tag; blog index: "Month YYYY")
   - image: article image (optional)
   - asset: bundled image filename when there is no article image (optional)
   - delay_index: position in the grid, for the staggered reveal (optional)
+  - variant: 'home' (default) or 'index' (blog page: taller image, h2 title, small pill)
 {%- endcomment -%}
-{%- assign card_delay = delay_index | default: 0 | times: 0.1 -%}
+{%- liquid
+  assign card_delay = delay_index | default: 0 | times: 0.1
+  assign card_variant = variant | default: 'home'
+  if card_variant == 'index'
+    assign title_tag = 'h2'
+  else
+    assign title_tag = 'h3'
+  endif
+-%}
 <div class="avm-article-card-cell" data-avm-reveal style="--avm-reveal-delay: {{ card_delay }}s;">
-  <a href="{{ url }}" class="avm-article-card avm-pill-group">
+  <a href="{{ url }}" class="avm-article-card avm-article-card--{{ card_variant }} avm-pill-group">
     <div class="avm-article-card__media">
       {%- render 'avm-image',
         image: image,
@@ -24,12 +34,16 @@
       {%- if category != blank -%}
         <p class="avm-article-card__category">{{ category | escape }}</p>
       {%- endif -%}
-      <h3 class="avm-article-card__title">{{ title | escape }}</h3>
+      <{{ title_tag }} class="avm-article-card__title">{{ title | escape }}</{{ title_tag }}>
       <p class="avm-article-card__excerpt">{{ excerpt | escape }}</p>
       <div class="avm-article-card__action">
-        <span class="avm-pill">
+        <span class="avm-pill{% if card_variant == 'index' %} avm-pill--sm{% endif %}">
           Read article
-          {%- render 'avm-icon', icon: 'arrow-right', size: 16 -%}
+          {%- if card_variant == 'index' -%}
+            {%- render 'avm-icon', icon: 'arrow-right', size: 14 -%}
+          {%- else -%}
+            {%- render 'avm-icon', icon: 'arrow-right', size: 16 -%}
+          {%- endif -%}
         </span>
       </div>
     </div>

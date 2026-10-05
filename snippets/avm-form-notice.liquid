@@ -1,0 +1,6 @@
+{%- comment -%} Theme-editor-only reminder when a form section has no action URL. Accepts: action {%- endcomment -%}
+{%- if request.design_mode and action == blank -%}
+  <p class="avm-form-notice">
+    Editor note (not shown to visitors): set "Form action URL" in this section's settings. Until then, submissions show the error message.
+  </p>
+{%- endif -%}

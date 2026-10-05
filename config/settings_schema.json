@@ -1544,6 +1544,27 @@
         "label": "Show floating \"View Quote\" tab",
         "info": "Off hides the tab with CSS only; the quote system itself keeps running.",
         "default": false
+      },
+      {
+        "type": "header",
+        "content": "Analytics"
+      },
+      {
+        "type": "paragraph",
+        "content": "Loaded on the storefront only (not inside the theme editor). Leave an ID empty to turn that tool off."
+      },
+      {
+        "type": "text",
+        "id": "avm_ga4_id",
+        "label": "Google Analytics 4 measurement ID",
+        "info": "Format G-XXXXXXXXXX. If GA4 is also connected through Shopify's Google & YouTube app, remove one to avoid double counting.",
+        "default": "G-R2J9MXLTPJ"
+      },
+      {
+        "type": "text",
+        "id": "avm_clarity_id",
+        "label": "Microsoft Clarity project ID",
+        "default": "y8zp8gi8u3"
       }
     ]
   }

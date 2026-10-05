@@ -35,6 +35,9 @@
   --avm-green-50: oklch(98.2% 0.018 155.826);
   --avm-green-200: oklch(92.5% 0.084 155.995);
   --avm-green-800: oklch(44.8% 0.119 151.328);
+  --avm-red-50: oklch(97.1% 0.013 17.38);
+  --avm-red-200: oklch(88.5% 0.062 18.334);
+  --avm-red-800: oklch(44.4% 0.177 26.899);
 
   /* ─── Typography ─── */
   /* Helvetica Neue first (design system), Inter as the loaded substitute. */

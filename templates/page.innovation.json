@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "hero": {
+      "type": "avm-page-hero",
+      "settings": {
+        "background": "white",
+        "spacing": "page",
+        "label": "Innovation",
+        "label_color": "green",
+        "heading": "Build The Next Generation Of Surgical Instruments With Us",
+        "heading_style": "tight",
+        "content_width": "5xl",
+        "text": "We partner with surgeons, researchers, and institutions to develop instruments that solve real problems in the operating theatre.",
+        "text_width": "2xl",
+        "button_label": "Submit a proposal",
+        "button_link": "#proposal",
+        "button_hover_green": true,
+        "asset": "avm-general-surgery-detail.webp",
+        "image_alt": "Close-up of AVM surgical instruments arranged on a sterile field",
+        "image_style": "glow",
+        "image_width": "medium"
+      }
+    },
+    "proposal": {
+      "type": "avm-innovation-form",
+      "settings": {
+        "anchor": "proposal",
+        "heading": "Submit A Proposal",
+        "form_action": ""
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "proposal"
+  ]
+}

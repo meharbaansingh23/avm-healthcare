@@ -1,0 +1,73 @@
+{%- comment -%}
+  AVM FAQ — mirrors About page section 7 + AboutFaq.tsx: one row open at a
+  time, height + opacity animation, question turns blue and the + rotates.
+  Answers are rich text so email addresses can be links (the live site
+  linkifies them).
+{%- endcomment -%}
+
+{{ 'avm-about.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'avm-faq.js' | asset_url }}" defer="defer"></script>
+
+<div class="avm avm-faq">
+  <div class="avm-faq__inner">
+    <div class="avm-faq__header" data-avm-reveal>
+      {%- if section.settings.label != blank -%}
+        <p class="avm-section-label">{{ section.settings.label | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="avm-display-heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <p class="avm-section-text">{{ section.settings.text | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    <avm-faq class="avm-faq__list" data-avm-reveal style="--avm-reveal-delay: 0.1s;">
+      {%- for block in section.blocks -%}
+        <div class="avm-faq__item" {{ block.shopify_attributes }}>
+          <h3 class="avm-faq__heading">
+            <button
+              type="button"
+              class="avm-faq__question"
+              aria-expanded="false"
+              aria-controls="AvmFaq-{{ block.id }}"
+              id="AvmFaqQ-{{ block.id }}"
+            >
+              <span class="avm-faq__question-text">{{ block.settings.question | escape }}</span>
+              <span class="avm-faq__icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M8 2v12M2 8h12"/></svg>
+              </span>
+            </button>
+          </h3>
+          <div class="avm-faq__answer" id="AvmFaq-{{ block.id }}" role="region" aria-labelledby="AvmFaqQ-{{ block.id }}" hidden>
+            <div class="avm-faq__answer-inner">{{ block.settings.answer }}</div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </avm-faq>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "AVM FAQ",
+  "tag": "section",
+  "class": "avm-faq-section",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "FAQ" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently Asked Questions" },
+    { "type": "textarea", "id": "text", "label": "Text" }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Question" },
+        { "type": "richtext", "id": "answer", "label": "Answer" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "AVM FAQ" }]
+}
+{% endschema %}
