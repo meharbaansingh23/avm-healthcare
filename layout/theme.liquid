@@ -19,6 +19,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex&display=swap" rel="stylesheet">
+    {%- comment -%} Inter: substitute for Helvetica Neue in AVM sections (mirrors next/font on the Next.js site) {%- endcomment -%}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
     <title>
       {{ page_title }}
@@ -262,6 +264,7 @@
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'quote-system.css' | asset_url | stylesheet_tag }}
+    {{ 'avm-base.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}

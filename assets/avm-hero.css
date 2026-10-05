@@ -1,0 +1,263 @@
+/* AVM hero + quote strip — mirrors HomeContent.tsx sections 1–2 and HeroSlideshow.tsx */
+
+/* ─── Hero ─── */
+.avm-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - 64px);
+  min-height: calc(100svh - 64px);
+  overflow: hidden;
+  background-color: var(--avm-navy);
+}
+
+.avm-hero__slideshow {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.avm-hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.5s var(--avm-ease-in-out);
+}
+
+.avm-hero__slide.is-active {
+  opacity: 1;
+}
+
+.avm-hero__img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+/* Empty <span>s: Dawn hides div:empty, so overlays are spans set to block. */
+.avm-hero__gradient,
+.avm-hero__vignette {
+  position: absolute;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+}
+
+.avm-hero__gradient {
+  background: linear-gradient(to right, rgba(10, 22, 40, 0.85) 0%, rgba(10, 22, 40, 0.4) 100%);
+}
+
+.avm-hero__vignette {
+  background: radial-gradient(120% 100% at 50% 50%, transparent 55%, rgba(10, 22, 40, 0.5) 100%);
+}
+
+.avm-hero__dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  gap: calc(var(--avm-space) * 2);
+  margin-bottom: calc(var(--avm-space) * 12);
+}
+
+.avm-hero__dot {
+  appearance: none;
+  display: block;
+  width: 8px;
+  height: 8px;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: var(--avm-radius-full);
+  background-color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: background-color 150ms var(--avm-ease);
+}
+
+.avm-hero__dot:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.avm-hero__dot[aria-current='true'] {
+  background-color: var(--avm-white);
+}
+
+.avm-hero__inner {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: var(--avm-container-wide);
+  margin: 0 auto;
+  padding: calc(var(--avm-space) * 24) var(--avm-gutter);
+}
+
+.avm-hero__content {
+  max-width: 640px;
+  text-align: left;
+}
+
+.avm-hero__eyebrow,
+.avm-hero__heading,
+.avm-hero__intro,
+.avm-hero__actions {
+  animation: avm-fade-up 0.6s var(--avm-ease-out) both;
+}
+
+.avm-hero__eyebrow {
+  margin: 0;
+  font-size: var(--avm-text-xs);
+  line-height: var(--avm-text-xs-lh);
+  font-weight: var(--avm-weight-medium);
+  letter-spacing: var(--avm-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--avm-sky-100);
+}
+
+.avm-hero__heading {
+  margin: calc(var(--avm-space) * 6) 0 0;
+  font-size: var(--avm-text-5xl);
+  line-height: var(--avm-leading-heading);
+  font-weight: var(--avm-weight-bold);
+  font-style: normal;
+  letter-spacing: var(--avm-tracking-tighter);
+  word-break: normal;
+  color: var(--avm-white);
+  animation-delay: 0.1s;
+}
+
+.avm-hero__intro {
+  margin: calc(var(--avm-space) * 7) 0 0;
+  font-size: var(--avm-text-lg);
+  line-height: var(--avm-leading-relaxed);
+  letter-spacing: normal;
+  color: rgba(255, 255, 255, 0.9);
+  animation-delay: 0.2s;
+}
+
+.avm-hero__actions {
+  margin-top: calc(var(--avm-space) * 9);
+  animation-delay: 0.3s;
+}
+
+.avm-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--avm-space) * 2);
+  padding: calc(var(--avm-space) * 4) calc(var(--avm-space) * 8);
+  border-radius: var(--avm-radius-lg);
+  background-color: var(--avm-white);
+  color: var(--avm-navy);
+  font-size: var(--avm-text-sm);
+  line-height: var(--avm-text-sm-lh);
+  font-weight: var(--avm-weight-semibold);
+  letter-spacing: normal;
+  text-decoration: none;
+  transition: all var(--avm-duration) var(--avm-ease);
+}
+
+.avm-hero__cta:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--avm-shadow-xl);
+  color: var(--avm-navy);
+}
+
+.avm-hero__cta svg {
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .avm-hero__inner {
+    padding-left: var(--avm-gutter-md);
+    padding-right: var(--avm-gutter-md);
+  }
+
+  .avm-hero__heading {
+    font-size: var(--avm-text-7xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .avm-hero__inner {
+    padding-left: var(--avm-gutter-lg);
+    padding-right: var(--avm-gutter-lg);
+  }
+}
+
+/* ─── Quote strip ─── */
+.avm-quote {
+  background-color: var(--avm-white);
+  padding: var(--avm-section-y) var(--avm-gutter);
+}
+
+.avm-quote__inner {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.avm-quote__rule {
+  display: block;
+  width: 48px;
+  height: 1px;
+  margin: 0 auto;
+  background-color: var(--avm-blue-600);
+}
+
+.avm-quote__text {
+  margin: calc(var(--avm-space) * 8) 0 0;
+  padding: 0;
+  border: 0;
+  font-size: var(--avm-text-3xl);
+  line-height: var(--avm-leading-display);
+  font-weight: var(--avm-weight-bold);
+  font-style: italic;
+  letter-spacing: var(--avm-tracking-display);
+  color: var(--avm-navy);
+}
+
+/* Reveal on scroll (framer whileInView: y 30 → 0, 0.8s easeOut).
+   :defined means the hidden state only applies once the JS has loaded. */
+avm-reveal {
+  display: block;
+}
+
+avm-reveal:defined .avm-quote__text {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s var(--avm-ease-out), transform 0.8s var(--avm-ease-out);
+}
+
+avm-reveal.is-visible .avm-quote__text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.avm-quote__attribution {
+  margin: calc(var(--avm-space) * 8) 0 0;
+  font-size: var(--avm-text-xs);
+  line-height: var(--avm-text-xs-lh);
+  font-weight: var(--avm-weight-medium);
+  letter-spacing: var(--avm-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--avm-muted);
+}
+
+@media (min-width: 768px) {
+  .avm-quote {
+    padding-left: var(--avm-gutter-md);
+    padding-right: var(--avm-gutter-md);
+  }
+
+  .avm-quote__text {
+    font-size: var(--avm-text-5xl);
+  }
+}
