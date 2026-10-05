@@ -1,0 +1,73 @@
+/* AVM certifications — HomeContent.tsx section 6 */
+
+.avm-certs {
+  background-color: var(--avm-white);
+  padding: var(--avm-section-y-sm) var(--avm-gutter);
+}
+
+.avm-certs__inner {
+  max-width: var(--avm-container-6xl);
+  margin: 0 auto;
+}
+
+.avm-certs__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(var(--avm-space) * 6);
+  margin-top: calc(var(--avm-space) * 16);
+}
+
+.avm-certs__cell {
+  height: 100%;
+}
+
+.avm-certs__card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--avm-space) * 4);
+  padding: calc(var(--avm-space) * 8);
+  text-align: center;
+  background-color: var(--avm-white);
+  border: 1px solid var(--avm-border);
+  border-radius: var(--avm-radius-xl);
+  transition: all var(--avm-duration) var(--avm-ease);
+}
+
+.avm-certs__card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--avm-shadow-lg);
+  border-color: var(--avm-blue-200);
+}
+
+.avm-certs__img {
+  display: block;
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  transition: transform var(--avm-duration) var(--avm-ease);
+}
+
+.avm-certs__card:hover .avm-certs__img {
+  transform: scale(1.05);
+}
+
+.avm-certs__name {
+  font-size: var(--avm-text-sm);
+  line-height: var(--avm-text-sm-lh);
+  font-weight: var(--avm-weight-semibold);
+  letter-spacing: normal;
+  color: var(--avm-navy);
+}
+
+@media (min-width: 768px) {
+  .avm-certs {
+    padding: var(--avm-section-y-md) var(--avm-gutter-md);
+  }
+
+  .avm-certs__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

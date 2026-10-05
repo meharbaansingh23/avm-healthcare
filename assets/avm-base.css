@@ -124,6 +124,13 @@
   font-family: var(--avm-font-sans) !important;
 }
 
+.avm,
+.avm *,
+.avm *::before,
+.avm *::after {
+  box-sizing: border-box;
+}
+
 .avm {
   color: var(--avm-navy);
   font-size: var(--avm-text-base);
@@ -165,4 +172,148 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ═══ Shared components (mirrors globals.css @layer components + common section patterns) ═══ */
+
+/* Centered section intro block: label + heading (+ optional text). */
+.avm-section-header {
+  max-width: var(--avm-container-2xl);
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Eyebrow label — .section-label (Tailwind blue-600) */
+.avm-section-label {
+  margin: 0;
+  font-size: var(--avm-text-xs);
+  line-height: var(--avm-text-xs-lh);
+  font-weight: var(--avm-weight-medium);
+  letter-spacing: var(--avm-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--avm-blue-600);
+}
+
+/* Same label with the hard-coded #2563EB used on some sections */
+.avm-section-label--accent {
+  color: var(--avm-accent);
+}
+
+/* On navy backgrounds */
+.avm-section-label--light {
+  color: var(--avm-sky-100);
+}
+
+/* H2 using .display-heading (tracking -0.04em, line-height 1.02) */
+.avm-display-heading,
+.avm-heading {
+  margin: calc(var(--avm-space) * 4) 0 0;
+  font-size: var(--avm-text-4xl);
+  font-weight: var(--avm-weight-bold);
+  font-style: normal;
+  color: var(--avm-navy);
+  word-break: normal;
+}
+
+.avm-display-heading {
+  letter-spacing: var(--avm-tracking-display);
+  line-height: var(--avm-leading-display);
+}
+
+/* H2 using font-bold tracking-tighter leading-[1.05] */
+.avm-heading {
+  letter-spacing: var(--avm-tracking-tighter);
+  line-height: var(--avm-leading-heading);
+}
+
+@media (min-width: 768px) {
+  .avm-display-heading,
+  .avm-heading {
+    font-size: var(--avm-text-6xl);
+  }
+}
+
+.avm-section-text {
+  margin: calc(var(--avm-space) * 5) 0 0;
+  font-size: var(--avm-text-base);
+  line-height: var(--avm-leading-relaxed);
+  letter-spacing: normal;
+  color: var(--avm-slate);
+}
+
+/* PillButton.tsx */
+.avm-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--avm-space) * 2);
+  padding: 10px 20px;
+  border: 1px solid var(--avm-border);
+  border-radius: var(--avm-radius-full);
+  background-color: var(--avm-white);
+  color: var(--avm-navy);
+  font-size: var(--avm-text-sm);
+  line-height: var(--avm-text-sm-lh);
+  font-weight: var(--avm-weight-medium);
+  letter-spacing: normal;
+  text-decoration: none;
+  box-shadow: var(--avm-shadow-sm);
+  cursor: pointer;
+  transition: all var(--avm-duration) var(--avm-ease);
+}
+
+.avm-pill:hover {
+  background-color: var(--avm-off-white);
+  box-shadow: var(--avm-shadow-md);
+  color: var(--avm-navy);
+}
+
+.avm-pill svg {
+  flex-shrink: 0;
+  transition: transform var(--avm-duration) var(--avm-ease);
+}
+
+.avm-pill:hover svg,
+.avm-pill-group:hover .avm-pill svg {
+  transform: translateX(2px);
+}
+
+.avm-pill--sm {
+  gap: 6px;
+  padding: 8px 14px;
+  font-size: var(--avm-text-xs);
+  line-height: var(--avm-text-xs-lh);
+}
+
+.avm-pill--dark {
+  background-color: var(--avm-navy);
+  border-color: var(--avm-navy);
+  color: var(--avm-white);
+}
+
+.avm-pill--dark:hover {
+  background-color: var(--avm-navy-hover);
+  color: var(--avm-white);
+}
+
+/* FadeInWhenVisible: opacity 0 → 1, y 20 → 0, 0.6s easeOut, once, margin -100px.
+   Hidden state only applies once avm-global.js has added .avm-reveal-ready. */
+.avm-reveal-ready [data-avm-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--avm-ease-out) var(--avm-reveal-delay, 0s),
+    transform 0.6s var(--avm-ease-out) var(--avm-reveal-delay, 0s);
+}
+
+.avm-reveal-ready [data-avm-reveal='card'] {
+  transform: translateY(28px);
+  transition-duration: 0.5s;
+}
+
+.avm-reveal-ready [data-avm-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+.avm-tabular-nums {
+  font-variant-numeric: tabular-nums;
 }

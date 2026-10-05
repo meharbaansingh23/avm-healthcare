@@ -1,0 +1,131 @@
+/* AVM specialties — HomeContent.tsx section 3 + globals.css .marquee */
+
+.avm-specialties {
+  background-color: var(--avm-white);
+  padding: var(--avm-section-y-sm) 0;
+  overflow: hidden;
+}
+
+.avm-specialties__header {
+  padding: 0 var(--avm-gutter);
+}
+
+.avm-marquee {
+  position: relative;
+  overflow: hidden;
+  margin-top: calc(var(--avm-space) * 16);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+
+.avm-marquee__track {
+  display: flex;
+  width: max-content;
+  animation: avm-marquee-scroll var(--avm-marquee-duration, 40s) linear infinite;
+  will-change: transform;
+}
+
+.avm-marquee:hover .avm-marquee__track {
+  animation-play-state: paused;
+}
+
+@keyframes avm-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.avm-marquee__group {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.avm-marquee__item {
+  flex-shrink: 0;
+  margin-right: calc(var(--avm-space) * 6);
+}
+
+.avm-specialty-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 300px;
+  overflow: hidden;
+  background-color: var(--avm-white);
+  border: 1px solid var(--avm-border);
+  border-radius: var(--avm-radius-2xl);
+  color: inherit;
+  text-decoration: none;
+  transition: all var(--avm-duration) var(--avm-ease);
+}
+
+.avm-specialty-card:hover {
+  border-color: var(--avm-blue-200);
+  box-shadow: var(--avm-shadow-xl);
+}
+
+.avm-specialty-card__media {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background-color: var(--avm-off-white);
+}
+
+.avm-specialty-card__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 500ms var(--avm-ease);
+}
+
+.avm-specialty-card:hover .avm-specialty-card__img {
+  transform: scale(1.05);
+}
+
+.avm-specialty-card__body {
+  flex: 1;
+  padding: calc(var(--avm-space) * 6);
+  text-align: center;
+}
+
+.avm-specialty-card__title {
+  margin: 0;
+  font-size: var(--avm-text-xl);
+  line-height: var(--avm-text-xl-lh);
+  font-weight: var(--avm-weight-bold);
+  letter-spacing: var(--avm-tracking-tight);
+  color: var(--avm-navy);
+}
+
+.avm-specialty-card__text {
+  margin: calc(var(--avm-space) * 2) 0 0;
+  font-size: var(--avm-text-sm);
+  line-height: var(--avm-leading-relaxed);
+  letter-spacing: normal;
+  color: var(--avm-slate);
+}
+
+@media (min-width: 640px) {
+  .avm-specialty-card {
+    width: 340px;
+  }
+}
+
+@media (min-width: 768px) {
+  .avm-specialties {
+    padding: var(--avm-section-y-md) 0;
+  }
+
+  .avm-specialties__header {
+    padding: 0 var(--avm-gutter-md);
+  }
+
+  .avm-specialty-card__title {
+    font-size: var(--avm-text-2xl);
+    line-height: var(--avm-text-2xl-lh);
+  }
+}

@@ -1,0 +1,88 @@
+{%- comment -%}
+  AVM certifications — mirrors HomeContent.tsx section 6.
+{%- endcomment -%}
+
+{{ 'avm-certifications.css' | asset_url | stylesheet_tag }}
+
+<div class="avm avm-certs">
+  <div class="avm-certs__inner">
+    <div class="avm-section-header" data-avm-reveal>
+      {%- if section.settings.label != blank -%}
+        <p class="avm-section-label">{{ section.settings.label | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="avm-display-heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+    </div>
+
+    <div class="avm-certs__grid">
+      {%- for block in section.blocks -%}
+        <div class="avm-certs__cell" data-avm-reveal style="--avm-reveal-delay: {{ forloop.index0 | times: 0.1 }}s;" {{ block.shopify_attributes }}>
+          <div class="avm-certs__card">
+            {%- render 'avm-image',
+              image: block.settings.image,
+              asset: block.settings.asset,
+              alt: block.settings.name,
+              class: 'avm-certs__img',
+              sizes: '120px',
+              widths: '120, 240, 360'
+            -%}
+            <div class="avm-certs__name">{{ block.settings.name | escape }}</div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "AVM certifications",
+  "tag": "section",
+  "class": "avm-certs-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Certifications & Compliance"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Built To The Highest Standards"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "certification",
+      "name": "Certification",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo"
+        },
+        {
+          "type": "text",
+          "id": "asset",
+          "label": "Bundled logo (fallback)",
+          "info": "Theme asset used when no logo is picked. Leave as is."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Certified"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVM certifications"
+    }
+  ]
+}
+{% endschema %}

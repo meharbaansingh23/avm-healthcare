@@ -1496,26 +1496,43 @@
       },
       {
         "type": "header",
+        "content": "Certification wording"
+      },
+      {
+        "type": "textarea",
+        "id": "avm_certification_wording",
+        "label": "Certification wording",
+        "info": "Used for \"Global Quality Standards\" on the homepage and anywhere else certifications are described.",
+        "default": "CE, ISO and CDSCO (India's regulatory authority, equivalent to the FDA) certified. Quality is monitored at every stage of manufacturing, from raw material to final product."
+      },
+      {
+        "type": "header",
         "content": "Social links"
       },
       {
         "type": "paragraph",
-        "content": "Each icon only shows in the footer once its URL is set."
+        "content": "Each icon shows in the footer while its URL is filled in."
       },
       {
-        "type": "url",
+        "type": "text",
         "id": "avm_linkedin_url",
-        "label": "LinkedIn"
+        "label": "LinkedIn",
+        "default": "https://www.linkedin.com/in/avm-health-care-5571711b7/",
+        "info": "Full URL. Leave empty to hide the icon."
       },
       {
-        "type": "url",
+        "type": "text",
         "id": "avm_facebook_url",
-        "label": "Facebook"
+        "label": "Facebook",
+        "default": "https://www.facebook.com/share/1HaLMG9NUM/",
+        "info": "Full URL. Leave empty to hide the icon."
       },
       {
-        "type": "url",
+        "type": "text",
         "id": "avm_instagram_url",
-        "label": "Instagram"
+        "label": "Instagram",
+        "default": "https://www.instagram.com/healthcareavm/",
+        "info": "Full URL. Leave empty to hide the icon."
       },
       {
         "type": "header",

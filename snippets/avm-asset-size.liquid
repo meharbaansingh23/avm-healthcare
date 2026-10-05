@@ -1,0 +1,40 @@
+{%- comment -%}
+  Prints "<width> <height>" for a bundled AVM image asset (used for explicit
+  width/height and aspect ratios when no image has been picked in the editor).
+  Add a line here whenever a new avm-* image asset is added.
+
+  Usage: {%- capture size -%}{% render 'avm-asset-size', asset: 'avm-hero-1.webp' %}{%- endcapture -%}
+{%- endcomment -%}
+{%- case asset -%}
+  {%- when 'avm-blog-1.webp' -%}1536 1024
+  {%- when 'avm-blog-2.webp' -%}1536 1024
+  {%- when 'avm-blog-3.webp' -%}1820 1024
+  {%- when 'avm-cert-cdsco.png' -%}800 800
+  {%- when 'avm-cert-ce.png' -%}800 800
+  {%- when 'avm-cert-iso.png' -%}800 800
+  {%- when 'avm-cert-nsic.png' -%}800 800
+  {%- when 'avm-company-aceweise.jpg' -%}1280 332
+  {%- when 'avm-company-ani.png' -%}964 436
+  {%- when 'avm-company-avm-surgicare.png' -%}2483 1211
+  {%- when 'avm-gallery-gynaecology.webp' -%}973 949
+  {%- when 'avm-gallery-instruments-array.webp' -%}6000 3594
+  {%- when 'avm-gallery-kerrison.webp' -%}1733 754
+  {%- when 'avm-gallery-neurosurgical.webp' -%}1500 1000
+  {%- when 'avm-gallery-tray-1.webp' -%}1503 1003
+  {%- when 'avm-gallery-tray-2.webp' -%}1503 1003
+  {%- when 'avm-gallery-tray-3.webp' -%}1503 1003
+  {%- when 'avm-gallery-tray-instruments.webp' -%}1504 1004
+  {%- when 'avm-gallery-trident.webp' -%}1924 1084
+  {%- when 'avm-gallery-why-choose-avm.webp' -%}1504 1003
+  {%- when 'avm-hero-1.webp' -%}3011 2545
+  {%- when 'avm-hero-2.webp' -%}1924 1083
+  {%- when 'avm-hero-3.webp' -%}1504 1004
+  {%- when 'avm-logo-dark.png' -%}1015 251
+  {%- when 'avm-specialty-cardiovascular.webp' -%}1502 1004
+  {%- when 'avm-specialty-containers-pads.webp' -%}1503 1004
+  {%- when 'avm-specialty-general-surgery.webp' -%}1504 1003
+  {%- when 'avm-specialty-gynaecology.webp' -%}1503 1005
+  {%- when 'avm-specialty-neurosurgical.webp' -%}1785 923
+  {%- when 'avm-specialty-plastic-oral.webp' -%}1503 1004
+  {%- else -%}1500 1000
+{%- endcase -%}

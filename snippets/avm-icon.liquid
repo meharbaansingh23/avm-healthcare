@@ -1,0 +1,28 @@
+{%- comment -%}
+  Inline AVM icons (stroke = currentColor).
+  Accepts:
+  - icon: 'arrow' (custom hero/CTA arrow), 'arrow-right' (lucide ArrowRight, used by pill buttons), 'download' (lucide Download)
+  - size: pixel size (default 18)
+{%- endcomment -%}
+{%- assign icon_size = size | default: 18 -%}
+<svg
+  width="{{ icon_size }}"
+  height="{{ icon_size }}"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+>
+  {%- case icon -%}
+    {%- when 'arrow' -%}
+      <path d="M5 12h14M13 6l6 6-6 6"/>
+    {%- when 'arrow-right' -%}
+      <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+    {%- when 'download' -%}
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/>
+  {%- endcase -%}
+</svg>

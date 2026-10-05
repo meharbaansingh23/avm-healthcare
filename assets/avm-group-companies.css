@@ -1,0 +1,122 @@
+/* AVM group of companies — GroupOfCompanies.tsx */
+
+.avm-group {
+  background-color: var(--avm-off-white);
+  padding: var(--avm-section-y-sm) var(--avm-gutter);
+}
+
+.avm-group__inner {
+  max-width: var(--avm-container-6xl);
+  margin: 0 auto;
+}
+
+.avm-group__header {
+  margin-bottom: calc(var(--avm-space) * 16);
+}
+
+.avm-group__text {
+  margin: calc(var(--avm-space) * 5) 0 0;
+  font-size: var(--avm-text-sm);
+  line-height: var(--avm-leading-relaxed);
+  letter-spacing: normal;
+  color: var(--avm-slate);
+}
+
+.avm-group__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(var(--avm-space) * 6);
+}
+
+.avm-group__cell {
+  height: 100%;
+}
+
+.avm-group__card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: calc(var(--avm-space) * 8);
+  text-align: center;
+  background-color: var(--avm-white);
+  border: 1px solid var(--avm-border);
+  border-radius: var(--avm-radius-2xl);
+  color: inherit;
+  text-decoration: none;
+  transition: all var(--avm-duration) var(--avm-ease);
+}
+
+.avm-group__card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--avm-shadow-lg);
+  border-color: var(--avm-blue-200);
+}
+
+.avm-group__logo {
+  height: 64px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avm-group__logo-img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-height: 48px;
+  max-width: 140px;
+  object-fit: contain;
+  transform: scale(var(--avm-logo-scale, 1));
+  transition: transform var(--avm-duration) var(--avm-ease);
+}
+
+.avm-group__card:hover .avm-group__logo-img {
+  transform: scale(var(--avm-logo-scale-hover, 1.05));
+}
+
+.avm-group__meta {
+  width: 100%;
+  margin-top: calc(var(--avm-space) * 6);
+  padding-top: calc(var(--avm-space) * 6);
+  border-top: 1px solid var(--avm-border);
+}
+
+.avm-group__name {
+  font-size: var(--avm-text-sm);
+  line-height: var(--avm-text-sm-lh);
+  font-weight: var(--avm-weight-semibold);
+  letter-spacing: normal;
+  color: var(--avm-navy);
+  transition: color 150ms var(--avm-ease);
+}
+
+.avm-group__card:hover .avm-group__name {
+  color: var(--avm-blue-600);
+}
+
+.avm-group__external {
+  margin-left: 4px;
+  font-size: var(--avm-text-xs);
+  color: var(--avm-blue-600);
+}
+
+.avm-group__sub {
+  margin-top: 4px;
+  font-size: var(--avm-text-xs);
+  line-height: var(--avm-text-xs-lh);
+  color: var(--avm-muted);
+}
+
+@media (min-width: 768px) {
+  .avm-group {
+    padding: var(--avm-section-y-md) var(--avm-gutter-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .avm-group__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

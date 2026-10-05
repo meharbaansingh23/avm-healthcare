@@ -1,0 +1,180 @@
+/* AVM why choose — HomeContent.tsx section 5 (sticky showcase + WhyCard) */
+
+.avm-why {
+  position: relative;
+  /* clip (not hidden) so the sticky intro column can stick to the viewport */
+  overflow: hidden;
+  overflow: clip;
+  padding: var(--avm-section-y) var(--avm-gutter);
+  background: linear-gradient(180deg, var(--avm-sky-100) 0%, var(--avm-sky-50) 100%);
+}
+
+/* globals.css .noise-overlay */
+.avm-why__noise {
+  position: absolute;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.avm-why__inner {
+  position: relative;
+  max-width: var(--avm-container-6xl);
+  margin: 0 auto;
+  display: grid;
+  gap: calc(var(--avm-space) * 12);
+  align-items: start;
+}
+
+.avm-why__intro {
+  align-self: start;
+  text-align: center;
+}
+
+.avm-why__text {
+  max-width: var(--avm-container-md);
+  margin: calc(var(--avm-space) * 6) auto 0;
+  font-size: var(--avm-text-lg);
+  line-height: var(--avm-leading-relaxed);
+  letter-spacing: normal;
+  color: var(--avm-slate);
+}
+
+.avm-why__stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: calc(var(--avm-space) * 10);
+}
+
+.avm-why__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--avm-space) * 8) calc(var(--avm-space) * 4);
+  text-align: center;
+}
+
+.avm-why__stat:nth-child(even) {
+  border-left: 1px solid rgba(10, 22, 40, 0.1);
+}
+
+.avm-why__stat:nth-child(n + 3) {
+  border-top: 1px solid rgba(10, 22, 40, 0.1);
+}
+
+.avm-why__stat-value {
+  /* 48px like the live site, scaled down on narrow phones so "10,000+" fits its half-width cell */
+  font-size: clamp(30px, 9vw, var(--avm-text-5xl));
+  line-height: var(--avm-leading-none);
+  font-weight: var(--avm-weight-bold);
+  letter-spacing: var(--avm-tracking-display);
+  color: var(--avm-navy);
+}
+
+.avm-why__stat-label {
+  margin-top: calc(var(--avm-space) * 2);
+  font-size: var(--avm-text-xs);
+  line-height: var(--avm-text-xs-lh);
+  font-weight: var(--avm-weight-medium);
+  letter-spacing: var(--avm-tracking-wider);
+  text-transform: uppercase;
+  color: var(--avm-muted);
+}
+
+.avm-why__cards {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--avm-space) * 5);
+}
+
+.avm-why__card {
+  position: relative;
+  overflow: hidden;
+  padding: calc(var(--avm-space) * 8);
+  padding-left: calc(var(--avm-space) * 10);
+  text-align: left;
+  background-color: var(--avm-white);
+  border: 1px solid var(--avm-border);
+  border-radius: var(--avm-radius-2xl);
+  box-shadow: var(--avm-shadow-sm);
+}
+
+/* 2px blue bar that wipes down the left edge as the card reveals */
+.avm-why__card-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  display: block;
+  width: 2px;
+  background-color: var(--avm-blue-600);
+  transform-origin: top;
+}
+
+.avm-reveal-ready .avm-why__card-bar {
+  transform: scaleY(0);
+  transition: transform 0.5s var(--avm-ease-out) 0.15s;
+}
+
+.avm-reveal-ready .avm-why__card.is-revealed .avm-why__card-bar {
+  transform: scaleY(1);
+}
+
+.avm-why__card-title {
+  margin: 0;
+  font-size: var(--avm-text-xl);
+  line-height: var(--avm-text-xl-lh);
+  font-weight: var(--avm-weight-bold);
+  letter-spacing: var(--avm-tracking-tight);
+  color: var(--avm-navy);
+}
+
+.avm-why__card-text {
+  margin: calc(var(--avm-space) * 3) 0 0;
+  font-size: var(--avm-text-base);
+  line-height: var(--avm-leading-relaxed);
+  letter-spacing: normal;
+  color: var(--avm-slate);
+}
+
+@media (min-width: 768px) {
+  .avm-why {
+    padding: var(--avm-section-y-lg) var(--avm-gutter-md);
+  }
+
+  .avm-why__stat {
+    padding-left: calc(var(--avm-space) * 6);
+    padding-right: calc(var(--avm-space) * 6);
+  }
+
+  .avm-why__stat-value {
+    font-size: var(--avm-text-6xl);
+  }
+
+  .avm-why__card-title {
+    font-size: var(--avm-text-2xl);
+    line-height: var(--avm-text-2xl-lh);
+  }
+}
+
+@media (min-width: 1024px) {
+  .avm-why__inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: calc(var(--avm-space) * 16);
+  }
+
+  .avm-why__intro {
+    position: sticky;
+    top: 112px;
+    text-align: left;
+  }
+
+  .avm-why__text {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

@@ -1,0 +1,137 @@
+{%- comment -%}
+  AVM specialties — mirrors HomeContent.tsx section 3 (Marquee.tsx + SpecialtyCard).
+  Cards scroll in an infinite loop (list rendered twice, track moves -50%).
+{%- endcomment -%}
+
+{{ 'avm-specialties.css' | asset_url | stylesheet_tag }}
+
+{%- capture cards -%}
+  {%- for block in section.blocks -%}
+    <div class="avm-marquee__item" {{ block.shopify_attributes }}>
+      {%- if block.settings.link != blank -%}
+        <a href="{{ block.settings.link }}" class="avm-specialty-card">
+      {%- else -%}
+        <div class="avm-specialty-card">
+      {%- endif -%}
+      <div class="avm-specialty-card__media">
+        {%- render 'avm-image',
+          image: block.settings.image,
+          asset: block.settings.asset,
+          alt: block.settings.alt,
+          class: 'avm-specialty-card__img',
+          sizes: '(min-width: 640px) 340px, 300px',
+          widths: '300, 340, 600, 680, 1020'
+        -%}
+      </div>
+      <div class="avm-specialty-card__body">
+        <h3 class="avm-specialty-card__title">{{ block.settings.name | escape }}</h3>
+        {%- if block.settings.text != blank -%}
+          <p class="avm-specialty-card__text">{{ block.settings.text | escape }}</p>
+        {%- endif -%}
+      </div>
+      {%- if block.settings.link != blank -%}
+        </a>
+      {%- else -%}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endfor -%}
+{%- endcapture -%}
+
+<div class="avm avm-specialties">
+  <div class="avm-specialties__header avm-section-header" data-avm-reveal>
+    {%- if section.settings.label != blank -%}
+      <p class="avm-section-label">{{ section.settings.label | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="avm-display-heading">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="avm-marquee" style="--avm-marquee-duration: {{ section.settings.duration }}s;">
+      <div class="avm-marquee__track">
+        <div class="avm-marquee__group">{{ cards }}</div>
+        <div class="avm-marquee__group" aria-hidden="true" inert>{{ cards }}</div>
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "AVM specialties",
+  "tag": "section",
+  "class": "avm-specialties-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Our Specialties"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Multi-Disciplines, One Commitment To Quality"
+    },
+    {
+      "type": "range",
+      "id": "duration",
+      "label": "Seconds per loop",
+      "min": 10,
+      "max": 90,
+      "step": 2,
+      "unit": "s",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "specialty",
+      "name": "Specialty",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "asset",
+          "label": "Bundled image (fallback)",
+          "info": "Theme asset used when no image is picked. Leave as is."
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Image alt text"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Specialty"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Description"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link",
+          "info": "Optional, e.g. the matching collection once the catalogue is live."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVM specialties"
+    }
+  ]
+}
+{% endschema %}

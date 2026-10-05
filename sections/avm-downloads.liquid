@@ -1,0 +1,124 @@
+{%- comment -%}
+  AVM product support documents — mirrors HomeContent.tsx section 10.
+  PDFs: upload to Content → Files and paste each file's URL into its block.
+{%- endcomment -%}
+
+{{ 'avm-downloads.css' | asset_url | stylesheet_tag }}
+
+<div class="avm avm-downloads">
+  <div class="avm-downloads__inner">
+    <div class="avm-section-header" data-avm-reveal>
+      {%- if section.settings.label != blank -%}
+        <p class="avm-section-label">{{ section.settings.label | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="avm-display-heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <p class="avm-section-text">{{ section.settings.text | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="avm-downloads__grid">
+      {%- for block in section.blocks -%}
+        <div class="avm-downloads__cell" data-avm-reveal style="--avm-reveal-delay: {{ forloop.index0 | times: 0.1 }}s;" {{ block.shopify_attributes }}>
+          <div class="avm-downloads__card">
+            <div class="avm-downloads__frame">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true" focusable="false">
+                <circle cx="24" cy="24" r="22" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+                <circle cx="24" cy="24" r="16" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                <path d="M24 12 L26 22 L36 24 L26 26 L24 36 L22 26 L12 24 L22 22 Z" fill="rgba(255,255,255,0.6)"/>
+              </svg>
+              {%- if block.settings.eyebrow != blank -%}
+                <p class="avm-downloads__eyebrow">{{ block.settings.eyebrow | escape }}</p>
+              {%- endif -%}
+              <h3 class="avm-downloads__title">{{ block.settings.title | escape }}</h3>
+              <span class="avm-downloads__rule" aria-hidden="true"></span>
+              {%- if block.settings.text != blank -%}
+                <p class="avm-downloads__text">{{ block.settings.text | escape }}</p>
+              {%- endif -%}
+              {%- if block.settings.file_url != blank and block.settings.button_label != blank -%}
+                <div class="avm-downloads__action">
+                  <a href="{{ block.settings.file_url | escape }}" download class="avm-downloads__button">
+                    {{- block.settings.button_label | escape }}
+                    {% render 'avm-icon', icon: 'download', size: 14 -%}
+                  </a>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "AVM downloads",
+  "tag": "section",
+  "class": "avm-downloads-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Resources"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Product Support Documents"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Download our warranty and care documentation for AVM surgical instruments."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "document",
+      "name": "Document",
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "DOCUMENT OF"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Document"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Download"
+        },
+        {
+          "type": "text",
+          "id": "file_url",
+          "label": "File URL",
+          "info": "Upload the PDF in Content → Files, then paste its URL here. The button is hidden while this is empty."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVM downloads"
+    }
+  ]
+}
+{% endschema %}
