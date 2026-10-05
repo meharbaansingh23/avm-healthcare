@@ -22,22 +22,9 @@
         "quote": "Our motto is to provide world-class instruments for the benefit of mankind.",
         "quote_attribution": "Anil Chaba · Director"
       }
-    },
-    "our_values": {
-      "type": "section-our-values",
-      "settings": {
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "how_it_works": {
-      "type": "section-how-it-works",
-      "settings": {}
     }
   },
   "order": [
-    "avm_hero",
-    "our_values",
-    "how_it_works"
+    "avm_hero"
   ]
 }
