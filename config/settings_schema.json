@@ -1451,5 +1451,83 @@
         "default": "scheme-1"
       }
     ]
+  },
+  {
+    "name": "AVM site",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Contact details"
+      },
+      {
+        "type": "paragraph",
+        "content": "Used by the AVM header, footer, contact page and forms."
+      },
+      {
+        "type": "text",
+        "id": "avm_phone",
+        "label": "Phone (display)",
+        "default": "+91 98103 45155"
+      },
+      {
+        "type": "text",
+        "id": "avm_phone_tel",
+        "label": "Phone (dialling, no spaces)",
+        "default": "+919810345155"
+      },
+      {
+        "type": "text",
+        "id": "avm_email",
+        "label": "Email",
+        "default": "sales@avmhealthcare.com"
+      },
+      {
+        "type": "textarea",
+        "id": "avm_address",
+        "label": "Address",
+        "default": "17-19 A Block, Chatarpur Extension, Rajpur Road, New Delhi — 110074, India"
+      },
+      {
+        "type": "text",
+        "id": "avm_whatsapp_number",
+        "label": "WhatsApp number",
+        "info": "Digits only, with country code. Used for wa.me links.",
+        "default": "919810345155"
+      },
+      {
+        "type": "header",
+        "content": "Social links"
+      },
+      {
+        "type": "paragraph",
+        "content": "Each icon only shows in the footer once its URL is set."
+      },
+      {
+        "type": "url",
+        "id": "avm_linkedin_url",
+        "label": "LinkedIn"
+      },
+      {
+        "type": "url",
+        "id": "avm_facebook_url",
+        "label": "Facebook"
+      },
+      {
+        "type": "url",
+        "id": "avm_instagram_url",
+        "label": "Instagram"
+      },
+      {
+        "type": "header",
+        "content": "Quote system"
+      },
+      {
+        "type": "checkbox",
+        "id": "avm_show_quote_float_tab",
+        "label": "Show floating \"View Quote\" tab",
+        "info": "Off hides the tab with CSS only; the quote system itself keeps running.",
+        "default": false
+      }
+    ]
   }
 ]
