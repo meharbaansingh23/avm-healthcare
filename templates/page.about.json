@@ -286,7 +286,7 @@
           "type": "question",
           "settings": {
             "question": "Are Your Products CE And ISO Certified?",
-            "answer": "<p>Yes. All AVM products are CE certified, ISO compliant, and FDA registered. Quality is monitored at every stage of manufacturing.</p>"
+            "answer": "<p>Yes. [certification_wording]</p>"
           }
         },
         "question_5": {

@@ -2,7 +2,8 @@
   AVM FAQ — mirrors About page section 7 + AboutFaq.tsx: one row open at a
   time, height + opacity animation, question turns blue and the + rotates.
   Answers are rich text so email addresses can be links (the live site
-  linkifies them).
+  linkifies them). [certification_wording] in an answer is replaced with the
+  certification wording theme setting.
 {%- endcomment -%}
 
 {{ 'avm-about.css' | asset_url | stylesheet_tag }}
@@ -40,7 +41,8 @@
             </button>
           </h3>
           <div class="avm-faq__answer" id="AvmFaq-{{ block.id }}" role="region" aria-labelledby="AvmFaqQ-{{ block.id }}" hidden>
-            <div class="avm-faq__answer-inner">{{ block.settings.answer }}</div>
+            {%- assign certification_wording = settings.avm_certification_wording | escape -%}
+            <div class="avm-faq__answer-inner">{{ block.settings.answer | replace: '[certification_wording]', certification_wording }}</div>
           </div>
         </div>
       {%- endfor -%}
@@ -64,7 +66,12 @@
       "name": "Question",
       "settings": [
         { "type": "text", "id": "question", "label": "Question", "default": "Question" },
-        { "type": "richtext", "id": "answer", "label": "Answer" }
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "info": "Type [certification_wording] to insert the certification wording from Theme settings → AVM site."
+        }
       ]
     }
   ],

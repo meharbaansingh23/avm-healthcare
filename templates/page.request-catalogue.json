@@ -4,7 +4,8 @@
       "type": "avm-catalogue-request",
       "settings": {
         "asset": "avm-catalogue-cover.webp",
-        "form_action": ""
+        "form_action": "",
+        "error_message": "Something went wrong. Please try again or email us directly at sales@avmhealthcare.com."
       }
     }
   },
