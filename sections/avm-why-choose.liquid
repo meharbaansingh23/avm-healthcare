@@ -23,8 +23,8 @@
       <div class="avm-why__stats">
         {%- for block in section.blocks -%}
           {%- if block.type == 'stat' -%}
+            {%- comment -%} Final value rendered server-side (shown without JS); avm-global.js counts up to it. {%- endcomment -%}
             {%- liquid
-              # Final value rendered server-side (shown without JS); avm-global.js counts up to it.
               assign stat_display = block.settings.target
               if block.settings.thousands and block.settings.target >= 1000
                 assign stat_thousands = block.settings.target | divided_by: 1000
