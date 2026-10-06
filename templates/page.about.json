@@ -1,0 +1,366 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "avm-page-hero",
+      "settings": {
+        "background": "white",
+        "spacing": "page",
+        "border_bottom": false,
+        "show_rule": false,
+        "label": "Est. 1996 · New Delhi, India",
+        "label_color": "muted",
+        "heading": "An Innovative Company, Made In India",
+        "heading_style": "tight",
+        "content_width": "4xl",
+        "text": "Indigenous surgical products developed in German collaboration — supplying premier institutions across India and worldwide since 1996.",
+        "text_width": "700",
+        "asset": "avm-about-hero.webp",
+        "image_alt": "A wide-angle view of AVM surgical instruments laid out on a sterile tray in an operating theatre",
+        "image_style": "kenburns",
+        "image_width": "wide"
+      }
+    },
+    "stats": {
+      "type": "avm-stats-strip",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "target": 10000,
+            "suffix": "+",
+            "thousands": true,
+            "label": "Surgical Products"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "target": 3000,
+            "suffix": "+",
+            "thousands": true,
+            "label": "Institutions Served"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "target": 100,
+            "suffix": "%",
+            "thousands": false,
+            "label": "On-Time Fulfilment"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "target": 30,
+            "suffix": "+",
+            "thousands": false,
+            "label": "Years Active"
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4"
+      ],
+      "settings": {}
+    },
+    "who_we_are": {
+      "type": "avm-text-image",
+      "settings": {
+        "background": "off-white",
+        "label": "Who We Are",
+        "heading": "The Leading Manufacturer Of Advanced Surgical Instruments",
+        "text": "<p>AVM Healthcare Products Pvt. Ltd. is a New Delhi–based manufacturer and supplier of surgical instruments and medical devices, engaged in the design, development, innovation, production and sales across Neurosurgery, Cranio Surgery, Plastic Surgery, implants, Spinal Surgery, Cardiovascular, Gynaecology, ENT, Orthopaedics, and more.</p><p>We produce AVM indigenous products in German collaboration and ANI products made in Germany, supplying to premier institutes of India and exporting to overseas markets.</p>",
+        "asset": "avm-specialty-neurosurgical.webp",
+        "image_alt": "AVM neurosurgical instrument set"
+      }
+    },
+    "mission": {
+      "type": "avm-mission-cards",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "title": "Our Mission",
+            "text": "To provide world-class instruments for the benefit of mankind. Our motto is to continuously evolve our product range to meet the dynamic requirements of surgical users.",
+            "accent": "blue"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "title": "Our Motive",
+            "text": "Surgeon priority with hundred percent satisfactory installations worldwide. Offering complete solutions from idea conceptualisation and product design to product launch, including validation with Govt. and Non-Govt. bodies under OEM arrangements.",
+            "accent": "blue"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "title": "German Collaboration",
+            "text": "AVM produces indigenous products in collaboration with German engineering standards, and ANI products made in Germany — combining the best of Indian manufacturing with European precision.",
+            "accent": "green"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3"
+      ],
+      "settings": {
+        "label": "Purpose",
+        "heading": "Mission, Motive & Collaboration"
+      }
+    },
+    "instruments": {
+      "type": "avm-gallery",
+      "blocks": {
+        "image_1": {
+          "type": "image",
+          "settings": {
+            "asset": "avm-general-surgery-detail.webp",
+            "alt": "General surgery instrument, close detail"
+          }
+        },
+        "image_2": {
+          "type": "image",
+          "settings": {
+            "asset": "avm-about-gallery-5.webp",
+            "alt": "Surgical instruments arranged on a surface"
+          }
+        },
+        "image_3": {
+          "type": "image",
+          "settings": {
+            "asset": "avm-about-gallery-7.webp",
+            "alt": "Polished surgical instruments in detail"
+          }
+        },
+        "image_4": {
+          "type": "image",
+          "settings": {
+            "asset": "avm-about-gallery-1.webp",
+            "alt": "General surgery instrument set"
+          }
+        },
+        "image_5": {
+          "type": "image",
+          "settings": {
+            "asset": "avm-about-gallery-kerrison-2.webp",
+            "alt": "Kerrison rongeur instrument detail"
+          }
+        },
+        "image_6": {
+          "type": "image",
+          "settings": {
+            "asset": "avm-specialty-neurosurgical.webp",
+            "alt": "Neurosurgical instruments"
+          }
+        },
+        "image_7": {
+          "type": "image",
+          "settings": {
+            "asset": "avm-specialty-cardiovascular.webp",
+            "alt": "Cardiovascular surgical instruments"
+          }
+        },
+        "image_8": {
+          "type": "image",
+          "settings": {
+            "asset": "avm-specialty-plastic-oral.webp",
+            "alt": "Plastic and oral surgery instruments",
+            "ratio": "1"
+          }
+        },
+        "image_9": {
+          "type": "image",
+          "settings": {
+            "asset": "avm-about-gallery-gs-alt.webp",
+            "alt": "General surgery instruments, alternate view"
+          }
+        }
+      },
+      "block_order": [
+        "image_1",
+        "image_2",
+        "image_3",
+        "image_4",
+        "image_5",
+        "image_6",
+        "image_7",
+        "image_8",
+        "image_9"
+      ],
+      "settings": {
+        "background": "off-white",
+        "label": "Our Instruments",
+        "label_style": "default",
+        "heading": "Built For Every Surgical Discipline",
+        "text": "Neurosurgery, Cardiovascular, Thoracic, Oncosurgery, Orthopaedics, G.I. Surgery, Urology — and other Super Specialities.",
+        "duration": 60
+      }
+    },
+    "ani_callout": {
+      "type": "avm-callout",
+      "settings": {
+        "text": "Based in Germany? Our products are also available through ANI Instruments — our German precision partner.",
+        "button_label": "Visit ANI Instruments",
+        "button_link": "https://www.animedtec.com/",
+        "new_tab": true
+      }
+    },
+    "certifications": {
+      "type": "avm-certifications",
+      "blocks": {
+        "certification_1": {
+          "type": "certification",
+          "settings": {
+            "asset": "avm-cert-ce.png",
+            "name": "CE Certified"
+          }
+        },
+        "certification_2": {
+          "type": "certification",
+          "settings": {
+            "asset": "avm-cert-iso.png",
+            "name": "ISO Certified"
+          }
+        },
+        "certification_3": {
+          "type": "certification",
+          "settings": {
+            "asset": "avm-cert-cdsco.png",
+            "name": "CDSCO Registered"
+          }
+        },
+        "certification_4": {
+          "type": "certification",
+          "settings": {
+            "asset": "avm-cert-nsic.png",
+            "name": "NSIC Registered"
+          }
+        }
+      },
+      "block_order": [
+        "certification_1",
+        "certification_2",
+        "certification_3",
+        "certification_4"
+      ],
+      "settings": {
+        "background": "off-white",
+        "label": "Certifications & Compliance",
+        "heading": "Built To The Highest Standards"
+      }
+    },
+    "faq": {
+      "type": "avm-faq",
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Do You Supply To Individual Doctors Or Only Institutions?",
+            "answer": "<p>We primarily supply to hospitals, surgical centres, government procurement agencies, and distributors. Individual practitioners may contact us to discuss their requirements directly.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "How Can I Request A Product Catalogue?",
+            "answer": "<p>You can request our full product catalogue through the Request Catalogue page on this website. Our team will send it to your inbox within one business day.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "Do You Export Outside India?",
+            "answer": "<p>Yes. We export to international markets and have an established presence through our German partner, ANI Medizintechnik GmbH, based in Hamburg.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Are Your Products CE And ISO Certified?",
+            "answer": "<p>Yes. [certification_wording]</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Can Instruments Be Customised To Specific Requirements?",
+            "answer": "<p>Absolutely. We offer customisation based on the specific needs of individual surgeons and institutions — from dimensions to materials and finishes.</p>"
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "What Is Your Delivery Timeline?",
+            "answer": "<p>Delivery timelines vary based on product and location. Please contact us directly at <a href=\"mailto:info@avmhealthcare.com\" title=\"mailto:info@avmhealthcare.com\">info@avmhealthcare.com</a> for specific delivery information.</p>"
+          }
+        },
+        "question_7": {
+          "type": "question",
+          "settings": {
+            "question": "How Do I Get After-Sales Service And Support?",
+            "answer": "<p>We offer 24×7 service support. Contact our team at <a href=\"mailto:info@avmhealthcare.com\" title=\"mailto:info@avmhealthcare.com\">info@avmhealthcare.com</a> or call our New Delhi office for assistance.</p>"
+          }
+        },
+        "question_8": {
+          "type": "question",
+          "settings": {
+            "question": "Do You Work With Government Hospitals?",
+            "answer": "<p>Yes. We supply to government institutions across India through both direct supply agreements and government procurement programs.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6",
+        "question_7",
+        "question_8"
+      ],
+      "settings": {
+        "label": "FAQ",
+        "heading": "Frequently Asked Questions",
+        "text": "Everything you need to know about AVM Healthcare Products."
+      }
+    },
+    "cta": {
+      "type": "avm-cta-card",
+      "settings": {
+        "heading": "Get Our Detailed Product Catalogue",
+        "text": "Over 10,000 Surgical Products across multiple specialties — delivered to your inbox within one business day.",
+        "button_label": "Request full catalogue →"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "stats",
+    "who_we_are",
+    "mission",
+    "instruments",
+    "ani_callout",
+    "certifications",
+    "faq",
+    "cta"
+  ]
+}

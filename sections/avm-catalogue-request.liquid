@@ -1,0 +1,157 @@
+{%- comment -%}
+  AVM request catalogue — mirrors request-catalogue/page.tsx + CatalogueForm.tsx:
+  form on the left, sticky catalogue cover on the right.
+
+  Shopify's native contact form ({% form 'contact' %}, id AvmCatalogueForm), submitted
+  natively. Fields: contact[Form] = "Catalogue request", contact[Name], contact[email],
+  contact[Phone], contact[Country], contact[Address], contact[Institution name],
+  contact[Institution type], contact[body] (Specific requirements).
+  After sending, the success state replaces the fields (live CatalogueForm.tsx).
+{%- endcomment -%}
+
+{{ 'avm-forms.css' | asset_url | stylesheet_tag }}
+{{ 'avm-catalogue-request.css' | asset_url | stylesheet_tag }}
+
+{%- assign s = section.settings -%}
+
+<div class="avm avm-catalogue-request">
+  <div class="avm-catalogue-request__inner">
+    <div class="avm-catalogue-request__grid">
+      <div data-avm-reveal>
+        {%- if s.label != blank -%}
+          <p class="avm-section-label avm-catalogue-request__label">{{ s.label | escape }}</p>
+        {%- endif -%}
+        {%- if s.heading != blank -%}
+          <h1 class="avm-catalogue-request__heading">{{ s.heading | escape }}</h1>
+        {%- endif -%}
+        {%- if s.text != blank -%}
+          <p class="avm-catalogue-request__text">{{ s.text | escape }}</p>
+        {%- endif -%}
+
+        {%- form 'contact', id: 'AvmCatalogueForm', class: 'avm-native-form' -%}
+          <input type="hidden" name="contact[Form]" value="Catalogue request">
+          <div class="avm-form" data-avm-form-fields {% if form.posted_successfully? %}hidden{% endif %}>
+            <div class="avm-form__row">
+              {%- render 'avm-form-field', id: 'rc-name', name: 'contact[Name]', label: 'Name', is_required: true -%}
+              {%- render 'avm-form-field', id: 'rc-email', name: 'contact[email]', label: 'Email', type: 'email', is_required: true, value: form.email -%}
+            </div>
+            <div class="avm-form__row">
+              {%- render 'avm-form-field', id: 'rc-phone', name: 'contact[Phone]', label: 'Phone', type: 'tel', is_required: true -%}
+              {%- render 'avm-form-field', id: 'rc-country', name: 'contact[Country]', label: 'Country', is_required: true -%}
+            </div>
+            {%- render 'avm-form-field', id: 'rc-address', name: 'contact[Address]', label: 'Address', type: 'textarea', rows: 3 -%}
+            <div class="avm-form__row">
+              {%- render 'avm-form-field', id: 'rc-institution', name: 'contact[Institution name]', label: 'Institution name', is_required: true -%}
+              {%- render 'avm-form-field',
+                id: 'rc-itype',
+                name: 'contact[Institution type]',
+                label: 'Institution type',
+                type: 'select',
+                is_required: true,
+                options: s.institution_types,
+                select_placeholder: 'Select a type'
+              -%}
+            </div>
+            {%- render 'avm-form-field',
+              id: 'rc-req',
+              name: 'contact[body]',
+              label: 'Specific requirements',
+              optional_note: '(optional)',
+              type: 'textarea',
+              rows: 3,
+              value: form.body
+            -%}
+
+            {%- if form.errors -%}
+              <div class="avm-form-alert avm-form-alert--error" role="alert" data-avm-form-state>
+                {{- s.error_message | escape -}}
+              </div>
+            {%- endif -%}
+
+            <button type="submit" class="avm-form-submit">Request full catalogue</button>
+          </div>
+          {%- if form.posted_successfully? -%}
+            {%- render 'avm-form-success', message: s.success_message, server_state: true -%}
+          {%- endif -%}
+        {%- endform -%}
+        {%- render 'avm-native-form-state', form_id: 'AvmCatalogueForm' -%}
+      </div>
+
+      <div class="avm-catalogue-request__aside" data-avm-reveal style="--avm-reveal-delay: 0.1s;">
+        <div class="avm-catalogue-request__cover">
+          {%- render 'avm-image',
+            image: s.image,
+            asset: s.asset,
+            alt: s.image_alt,
+            class: 'avm-catalogue-request__img',
+            sizes: '(max-width: 1024px) 100vw, 50vw',
+            widths: '400, 600, 800, 1100, 1500',
+            loading: 'eager'
+          -%}
+        </div>
+        {%- if s.caption != blank -%}
+          <p class="avm-catalogue-request__caption">{{ s.caption | escape }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "AVM request catalogue",
+  "tag": "section",
+  "class": "avm-catalogue-request-section",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "Request Catalogue" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Get Our Detailed Product Catalogue" },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Fill in your details and our team will send you the full catalogue within one business day."
+    },
+    {
+      "type": "textarea",
+      "id": "institution_types",
+      "label": "Institution types",
+      "info": "One per line.",
+      "default": "Government Hospital\nPrivate Hospital\nIndividual/Practitioner\nClinic\nResearch Institution\nOther"
+    },
+    {
+      "type": "header",
+      "content": "Catalogue cover"
+    },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    {
+      "type": "text",
+      "id": "asset",
+      "label": "Bundled image (fallback)",
+      "info": "Theme asset used when no image is picked. Leave as is."
+    },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "AVM Healthcare Products — Full Surgical Instruments Catalogue" },
+    { "type": "text", "id": "caption", "label": "Caption", "default": "AVM Healthcare Products · Full Surgical Instruments Catalogue" },
+    {
+      "type": "header",
+      "content": "Submission"
+    },
+    {
+      "type": "paragraph",
+      "content": "Sent through Shopify's contact form to the store's sender email, labelled \"Catalogue request\"."
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "We've received your catalogue request. We'll send the catalogue to your inbox within one business day."
+    },
+    {
+      "type": "text",
+      "id": "error_message",
+      "label": "Error message",
+      "default": "Something went wrong. Please try again or email us directly at sales@avmhealthcare.com."
+    }
+  ],
+  "presets": [{ "name": "AVM request catalogue" }]
+}
+{% endschema %}

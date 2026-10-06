@@ -1,0 +1,162 @@
+{%- comment -%}
+  AVM why choose — mirrors HomeContent.tsx section 5: sticky headline + count-up
+  stats on the left, stacked cards on the right.
+  Stat blocks render in the 2×2 grid; card blocks render in the right column.
+{%- endcomment -%}
+
+{{ 'avm-why-choose.css' | asset_url | stylesheet_tag }}
+
+<div class="avm avm-why">
+  <span class="avm-why__noise" aria-hidden="true"></span>
+  <div class="avm-why__inner">
+    <div class="avm-why__intro">
+      {%- if section.settings.label != blank -%}
+        <p class="avm-section-label">{{ section.settings.label | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="avm-heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <p class="avm-why__text">{{ section.settings.text | escape }}</p>
+      {%- endif -%}
+
+      <div class="avm-why__stats">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'stat' -%}
+            {%- comment -%} Final value rendered server-side (shown without JS); avm-global.js counts up to it. {%- endcomment -%}
+            {%- liquid
+              assign stat_display = block.settings.target
+              if block.settings.thousands and block.settings.target >= 1000
+                assign stat_thousands = block.settings.target | divided_by: 1000
+                assign stat_rest = block.settings.target | modulo: 1000 | prepend: '00' | slice: -3, 3
+                assign stat_display = stat_thousands | append: ',' | append: stat_rest
+              endif
+            -%}
+            <div class="avm-why__stat" {{ block.shopify_attributes }}>
+              <span
+                class="avm-why__stat-value avm-tabular-nums"
+                data-avm-counter
+                data-target="{{ block.settings.target }}"
+                data-suffix="{{ block.settings.suffix | escape }}"
+                {% if block.settings.thousands %}
+                  data-thousands
+                {% endif %}
+              >
+                {{- stat_display }}{{ block.settings.suffix | escape -}}
+              </span>
+              <div class="avm-why__stat-label">{{ block.settings.label | escape }}</div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="avm-why__cards">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'card' -%}
+          {%- liquid
+            if block.settings.use_certification_wording and settings.avm_certification_wording != blank
+              assign card_text = settings.avm_certification_wording
+            else
+              assign card_text = block.settings.text
+            endif
+          -%}
+          <div class="avm-why__card" data-avm-reveal="card" {{ block.shopify_attributes }}>
+            <span class="avm-why__card-bar" aria-hidden="true"></span>
+            <h3 class="avm-why__card-title">{{ block.settings.title | escape }}</h3>
+            <p class="avm-why__card-text">{{ card_text | escape }}</p>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "AVM why choose",
+  "tag": "section",
+  "class": "avm-why-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Why Choose AVM"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Built For The Demands Of Modern Surgery"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Every instrument we supply meets the highest standards of material quality, precision engineering, and surgical performance — because in the operating theatre, there is no margin for error."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "number",
+          "id": "target",
+          "label": "Number",
+          "default": 100
+        },
+        {
+          "type": "text",
+          "id": "suffix",
+          "label": "Suffix",
+          "default": "+"
+        },
+        {
+          "type": "checkbox",
+          "id": "thousands",
+          "label": "Thousands separator",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Stat"
+        }
+      ]
+    },
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Card title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "checkbox",
+          "id": "use_certification_wording",
+          "label": "Use certification wording",
+          "info": "Shows the wording from Theme settings → AVM site instead of the text above.",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVM why choose"
+    }
+  ]
+}
+{% endschema %}

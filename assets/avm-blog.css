@@ -1,0 +1,47 @@
+/* AVM blog index grid — blog/page.tsx */
+
+.avm-blog {
+  background-color: var(--avm-white);
+}
+
+.avm-blog__inner {
+  max-width: var(--avm-container-6xl);
+  margin: 0 auto;
+  padding: var(--avm-section-y-sm) var(--avm-gutter);
+}
+
+.avm-blog__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: calc(var(--avm-space) * 8);
+}
+
+.avm-blog__empty {
+  margin: 0;
+  text-align: center;
+  color: var(--avm-slate);
+}
+
+.avm-blog__pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--avm-space) * 4);
+  margin-top: calc(var(--avm-space) * 12);
+}
+
+.avm-blog__page {
+  font-size: var(--avm-text-sm);
+  color: var(--avm-muted);
+}
+
+@media (min-width: 768px) {
+  .avm-blog__inner {
+    padding: var(--avm-section-y-md) var(--avm-gutter-md);
+  }
+
+  .avm-blog__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

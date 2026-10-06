@@ -9,168 +9,460 @@
  */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "avm_hero": {
+      "type": "avm-hero",
+      "settings": {
+        "slide_1_alt": "Surgical instruments arranged on a blue surgical drape with warm bokeh",
+        "slide_2_alt": "Precision surgical instruments laid out on a green drape in an operating room",
+        "slide_3_alt": "A gloved hand placing a surgical instrument onto a tray",
+        "eyebrow": "Surgical Instruments · Made in India · Since 1996",
+        "heading": "Precision Instruments For Modern Surgical Care",
+        "intro": "AVM Healthcare Products supplies advanced Surgical instruments to premier hospitals across India — from Neurosurgery to Cardiovascular care.",
+        "button_label": "Request catalogue",
+        "quote": "Our motto is to provide world-class instruments for the benefit of mankind.",
+        "quote_attribution": "Anil Chaba · Director"
+      }
+    },
+    "avm_specialties": {
+      "type": "avm-specialties",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "specialty_1": {
+          "type": "specialty",
           "settings": {
-            "heading": "Decades of Excellence in Medical & Surgical Solutions",
-            "heading_size": "h1"
+            "asset": "avm-specialty-neurosurgical.webp",
+            "alt": "Neurosurgical instruments",
+            "name": "Neurosurgical",
+            "text": "Cranial, spinal and micro-neurosurgical instruments."
           }
         },
-        "text_HqEqai": {
-          "type": "text",
+        "specialty_2": {
+          "type": "specialty",
           "settings": {
-            "text": "Committed to improving healthcare outcomes through innovative products and a worldwide network.",
-            "text_style": "body"
+            "asset": "avm-specialty-general-surgery.webp",
+            "alt": "General surgery tools",
+            "name": "General Surgery",
+            "text": "Core instruments for the operating theatre."
+          }
+        },
+        "specialty_3": {
+          "type": "specialty",
+          "settings": {
+            "asset": "avm-specialty-cardiovascular.webp",
+            "alt": "Cardiovascular devices",
+            "name": "Cardiovascular",
+            "text": "Precision devices for cardiac and vascular work."
+          }
+        },
+        "specialty_4": {
+          "type": "specialty",
+          "settings": {
+            "asset": "avm-specialty-gynaecology.webp",
+            "alt": "Gynaecology instruments",
+            "name": "Gynaecology",
+            "text": "Specialised instruments for women's health."
+          }
+        },
+        "specialty_5": {
+          "type": "specialty",
+          "settings": {
+            "asset": "avm-specialty-plastic-oral.webp",
+            "alt": "Plastic & oral instruments",
+            "name": "Plastic & Oral Surgery",
+            "text": "Delicate tools for reconstructive and oral surgery."
+          }
+        },
+        "specialty_6": {
+          "type": "specialty",
+          "settings": {
+            "asset": "avm-specialty-containers-pads.webp",
+            "alt": "Containers & pads",
+            "name": "Containers & Pads",
+            "text": "Sterile storage and procedural support items."
           }
         }
       },
       "block_order": [
-        "heading",
-        "text_HqEqai"
+        "specialty_1",
+        "specialty_2",
+        "specialty_3",
+        "specialty_4",
+        "specialty_5",
+        "specialty_6"
       ],
       "settings": {
-        "image": "shopify://shop_images/pexels-cottonbro-7585320.jpg",
-        "image_overlay_opacity": 60,
-        "image_height": "medium",
-        "image_behavior": "zoom-in",
-        "desktop_content_position": "bottom-left",
-        "desktop_content_alignment": "left",
-        "show_text_box": false,
-        "color_scheme": "scheme-3",
-        "stack_images_on_mobile": false,
-        "mobile_content_alignment": "center",
-        "show_text_below": false
+        "label": "Our Specialties",
+        "heading": "Multi-Disciplines, One Commitment To Quality",
+        "duration": 36
       }
     },
-    "image_with_text_FhGmUV": {
-      "type": "image-with-text",
+    "avm_gallery": {
+      "type": "avm-gallery",
       "blocks": {
-        "heading_cjM9hx": {
-          "type": "heading",
+        "image_1": {
+          "type": "image",
           "settings": {
-            "heading": "Your Trusted Partner in Medical & Surgical Solutions",
-            "heading_size": "h2"
+            "asset": "avm-gallery-why-choose-avm.webp",
+            "alt": "Surgical instruments arranged on a dark display surface"
           }
         },
-        "text_c3HXXD": {
-          "type": "text",
+        "image_2": {
+          "type": "image",
           "settings": {
-            "text": "<p>AVM Healthcare Products Pvt. Ltd. is a leading manufacturer, trader, and consultant in the medical and surgical equipment industry.<br/><br/>We serve hospitals, clinics, laboratories, and distributors with a commitment to quality, innovation, and timely delivery.</p>",
-            "text_style": "body"
+            "asset": "avm-gallery-neurosurgical.webp",
+            "alt": "Neurosurgical instrument set"
+          }
+        },
+        "image_3": {
+          "type": "image",
+          "settings": {
+            "asset": "avm-gallery-kerrison.webp",
+            "alt": "Kerrison rongeur, close detail"
+          }
+        },
+        "image_4": {
+          "type": "image",
+          "settings": {
+            "asset": "avm-gallery-trident.webp",
+            "alt": "Trident surgical instrument detail"
+          }
+        },
+        "image_5": {
+          "type": "image",
+          "settings": {
+            "asset": "avm-gallery-tray-instruments.webp",
+            "alt": "Surgical tray laid with instruments"
+          }
+        },
+        "image_6": {
+          "type": "image",
+          "settings": {
+            "asset": "avm-gallery-instruments-array.webp",
+            "alt": "An array of polished surgical instruments"
+          }
+        },
+        "image_7": {
+          "type": "image",
+          "settings": {
+            "asset": "avm-gallery-tray-1.webp",
+            "alt": "Sterilisation tray with surgical instruments"
+          }
+        },
+        "image_8": {
+          "type": "image",
+          "settings": {
+            "asset": "avm-gallery-tray-2.webp",
+            "alt": "Surgical instrument tray, alternate view"
+          }
+        },
+        "image_9": {
+          "type": "image",
+          "settings": {
+            "asset": "avm-gallery-tray-3.webp",
+            "alt": "Surgical instrument tray, detail view"
+          }
+        },
+        "image_10": {
+          "type": "image",
+          "settings": {
+            "asset": "avm-gallery-gynaecology.webp",
+            "alt": "Gynaecology surgical instruments"
           }
         }
       },
       "block_order": [
-        "heading_cjM9hx",
-        "text_c3HXXD"
+        "image_1",
+        "image_2",
+        "image_3",
+        "image_4",
+        "image_5",
+        "image_6",
+        "image_7",
+        "image_8",
+        "image_9",
+        "image_10"
       ],
-      "name": "t:sections.image-with-text.presets.name",
       "settings": {
-        "image": "shopify://shop_images/pexels-shvetsa-4483327.jpg",
-        "height": "small",
-        "desktop_image_width": "medium",
-        "layout": "image_first",
-        "image_behavior": "zoom-in",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "section_color_scheme": "",
-        "color_scheme": "",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "label": "Our Craft",
+        "heading": "Crafted With Precision",
+        "duration": 60
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "avm_video": {
+      "type": "avm-video",
       "settings": {
-        "collection": "all",
-        "products_to_show": 8,
-        "title": "New Prodcuts Introduced",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 44,
-        "padding_bottom": 36
+        "label": "Inside AVM",
+        "heading": "See Our Story In Motion",
+        "video": "https://www.youtube.com/watch?v=_QNRNKJiNuA",
+        "video_title": "AVM Healthcare Products — Our Story"
       }
     },
-    "our_values": {
-      "type": "section-our-values",
-      "settings": {
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "how_it_works": {
-      "type": "section-how-it-works",
-      "settings": {}
-    },
-    "collection_list_FRXDpK": {
-      "type": "collection-list",
+    "avm_why_choose": {
+      "type": "avm-why-choose",
       "blocks": {
-        "featured_collection_88q4iR": {
-          "type": "featured_collection",
+        "stat_1": {
+          "type": "stat",
           "settings": {
-            "collection": "general-surgery"
+            "target": 10000,
+            "suffix": "+",
+            "thousands": true,
+            "label": "Surgical Products"
           }
         },
-        "featured_collection_JXHY7m": {
-          "type": "featured_collection",
+        "stat_2": {
+          "type": "stat",
           "settings": {
-            "collection": "cardiovascular-instruments"
+            "target": 3000,
+            "suffix": "+",
+            "thousands": true,
+            "label": "Institutions Served"
           }
         },
-        "featured_collection_DEUbGk": {
-          "type": "featured_collection",
+        "stat_3": {
+          "type": "stat",
           "settings": {
-            "collection": "neurosurgical-instruments"
+            "target": 100,
+            "suffix": "%",
+            "thousands": false,
+            "label": "On-Time Fulfilment"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "target": 30,
+            "suffix": "+",
+            "thousands": false,
+            "label": "Years Active"
+          }
+        },
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "title": "Premium Grade Materials",
+            "text": "Hardened non-rusting steel meeting the toughest requirements for elasticity, tenacity and corrosion resistance — instruments built to last.",
+            "use_certification_wording": false
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "title": "Surgeon-Driven Innovation",
+            "text": "New products developed directly from surgeons' concepts and ideas, ensuring every instrument meets real operating theatre needs.",
+            "use_certification_wording": false
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "title": "Customisation On Request",
+            "text": "Products tailored to the specific requirements of individual users and institutions — from dimensions to materials.",
+            "use_certification_wording": false
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "title": "Global Quality Standards",
+            "text": "CE, ISO and CDSCO (India's regulatory authority, equivalent to the FDA) certified. Quality is monitored at every stage of manufacturing, from raw material to final product.",
+            "use_certification_wording": true
+          }
+        },
+        "card_5": {
+          "type": "card",
+          "settings": {
+            "title": "24×7 Service Support",
+            "text": "Round-the-clock service facility ensuring your instruments are always in optimal condition when you need them most.",
+            "use_certification_wording": false
+          }
+        },
+        "card_6": {
+          "type": "card",
+          "settings": {
+            "title": "Continuously Evolving Range",
+            "text": "Our catalogue is constantly updated to meet the dynamic and changing requirements of surgical users worldwide.",
+            "use_certification_wording": false
           }
         }
       },
       "block_order": [
-        "featured_collection_88q4iR",
-        "featured_collection_JXHY7m",
-        "featured_collection_DEUbGk"
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4",
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4",
+        "card_5",
+        "card_6"
       ],
-      "name": "t:sections.collection-list.presets.name",
       "settings": {
-        "title": "Categories",
-        "heading_size": "h2",
-        "image_ratio": "square",
-        "columns_desktop": 3,
-        "color_scheme": "",
-        "show_view_all": true,
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "label": "Why Choose AVM",
+        "heading": "Built For The Demands Of Modern Surgery",
+        "text": "Every instrument we supply meets the highest standards of material quality, precision engineering, and surgical performance — because in the operating theatre, there is no margin for error."
+      }
+    },
+    "avm_certifications": {
+      "type": "avm-certifications",
+      "blocks": {
+        "certification_1": {
+          "type": "certification",
+          "settings": {
+            "asset": "avm-cert-ce.png",
+            "name": "CE Certified"
+          }
+        },
+        "certification_2": {
+          "type": "certification",
+          "settings": {
+            "asset": "avm-cert-iso.png",
+            "name": "ISO Certified"
+          }
+        },
+        "certification_3": {
+          "type": "certification",
+          "settings": {
+            "asset": "avm-cert-cdsco.png",
+            "name": "CDSCO Registered"
+          }
+        },
+        "certification_4": {
+          "type": "certification",
+          "settings": {
+            "asset": "avm-cert-nsic.png",
+            "name": "NSIC Registered"
+          }
+        }
+      },
+      "block_order": [
+        "certification_1",
+        "certification_2",
+        "certification_3",
+        "certification_4"
+      ],
+      "settings": {
+        "label": "Certifications & Compliance",
+        "heading": "Built To The Highest Standards"
+      }
+    },
+    "avm_catalogue_cta": {
+      "type": "avm-catalogue-cta",
+      "settings": {
+        "label": "Get Started",
+        "heading": "Request Our Detailed Product Catalogue",
+        "text": "Over 10,000 Surgical Products across multiple specialties — delivered to your inbox within one business day.",
+        "button_label": "Request full catalogue"
+      }
+    },
+    "avm_blog_preview": {
+      "type": "avm-blog-preview",
+      "settings": {
+        "label": "AVM Insights",
+        "heading": "From Our Knowledge Base",
+        "text": "Insights on surgical instrument care, innovation, and best practices.",
+        "blog": "blog",
+        "count": 3,
+        "view_all_label": "View all articles"
+      }
+    },
+    "avm_group_companies": {
+      "type": "avm-group-companies",
+      "blocks": {
+        "company_1": {
+          "type": "company",
+          "settings": {
+            "asset": "avm-logo-dark.png",
+            "logo_scale": 100,
+            "name": "AVM Healthcare Products",
+            "subtitle": "Parent company"
+          }
+        },
+        "company_2": {
+          "type": "company",
+          "settings": {
+            "asset": "avm-company-avm-surgicare.png",
+            "logo_scale": 100,
+            "name": "AVM Surgicare",
+            "subtitle": "Surgical solutions"
+          }
+        },
+        "company_3": {
+          "type": "company",
+          "settings": {
+            "asset": "avm-company-ani.png",
+            "logo_scale": 160,
+            "name": "ANI Instruments",
+            "subtitle": "German precision · animedtec.com",
+            "link": "https://www.animedtec.com/"
+          }
+        },
+        "company_4": {
+          "type": "company",
+          "settings": {
+            "asset": "avm-company-aceweise.jpg",
+            "logo_scale": 100,
+            "name": "AceWeise",
+            "subtitle": "Surgical solutions"
+          }
+        }
+      },
+      "block_order": [
+        "company_1",
+        "company_2",
+        "company_3",
+        "company_4"
+      ],
+      "settings": {
+        "label": "Our group",
+        "heading": "Part Of A Larger Family",
+        "text": "AVM Healthcare is part of a group of companies united by a shared commitment to advancing surgical care."
+      }
+    },
+    "avm_downloads": {
+      "type": "avm-downloads",
+      "blocks": {
+        "document_1": {
+          "type": "document",
+          "settings": {
+            "eyebrow": "DOCUMENT OF",
+            "title": "Authenticity",
+            "text": "Official certificate of authenticity for AVM products.",
+            "button_label": "Download Certificate",
+            "file_url": "https://avmhealthcare.com/downloads/Certificate%20of%20Authenticity.pdf"
+          }
+        },
+        "document_2": {
+          "type": "document",
+          "settings": {
+            "eyebrow": "DOCUMENT OF",
+            "title": "Warranty",
+            "text": "Comprehensive warranty terms covering materials, craftsmanship, and the lifetime quality of every AVM instrument.",
+            "button_label": "Download Warranty",
+            "file_url": "https://avmhealthcare.com/downloads/Warranty%20offered%20by%20AVM.pdf"
+          }
+        }
+      },
+      "block_order": [
+        "document_1",
+        "document_2"
+      ],
+      "settings": {
+        "label": "Resources",
+        "heading": "Product Support Documents",
+        "text": "Download our warranty and care documentation for AVM surgical instruments."
       }
     }
   },
   "order": [
-    "image_banner",
-    "image_with_text_FhGmUV",
-    "featured_collection",
-    "our_values",
-    "how_it_works",
-    "collection_list_FRXDpK"
+    "avm_hero",
+    "avm_specialties",
+    "avm_gallery",
+    "avm_video",
+    "avm_why_choose",
+    "avm_certifications",
+    "avm_catalogue_cta",
+    "avm_blog_preview",
+    "avm_group_companies",
+    "avm_downloads"
   ]
 }

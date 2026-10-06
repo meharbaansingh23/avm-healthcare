@@ -9,14 +9,15 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "main-about",
+    "catalogue": {
+      "type": "avm-catalogue-request",
       "settings": {
-        "video_url": "https://www.youtube.com/embed/_QNRNKJiNuA"
+        "asset": "avm-catalogue-cover.webp",
+        "error_message": "Something went wrong. Please try again or email us directly at sales@avmhealthcare.com."
       }
     }
   },
   "order": [
-    "main"
+    "catalogue"
   ]
 }

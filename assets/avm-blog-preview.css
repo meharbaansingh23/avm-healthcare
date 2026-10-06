@@ -1,0 +1,33 @@
+/* AVM blog preview — HomeContent.tsx section 8. Card styles: avm-article-card.css */
+
+.avm-blog-preview {
+  background-color: var(--avm-white);
+  padding: var(--avm-section-y-sm) var(--avm-gutter);
+}
+
+.avm-blog-preview__inner {
+  max-width: var(--avm-container-6xl);
+  margin: 0 auto;
+}
+
+.avm-blog-preview__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: calc(var(--avm-space) * 8);
+  margin-top: calc(var(--avm-space) * 16);
+}
+
+.avm-blog-preview__more {
+  margin-top: calc(var(--avm-space) * 12);
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .avm-blog-preview {
+    padding: var(--avm-section-y-md) var(--avm-gutter-md);
+  }
+
+  .avm-blog-preview__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

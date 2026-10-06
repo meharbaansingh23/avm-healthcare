@@ -1,0 +1,218 @@
+{%- comment -%}
+  AVM header — mirrors the Next.js Navbar.tsx.
+  Links come from a Shopify menu (section setting). Top-level items render
+  inline; items with children get a small dropdown (desktop) / nested list (mobile).
+  The cart-notification markup and hidden #cart-icon-bubble are kept from
+  Dawn's header so cart/product scripts find what they expect.
+{%- endcomment -%}
+
+{{ 'avm-header.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'avm-header.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign menu = linklists[section.settings.menu]
+  assign cta_link = section.settings.cta_link | default: '/pages/request-catalogue'
+-%}
+
+{%- capture logo -%}
+  {%- if section.settings.logo != blank -%}
+    {{
+      section.settings.logo
+      | image_url: width: 600
+      | image_tag:
+        class: 'avm-header__logo-img',
+        widths: '200, 300, 400, 600',
+        sizes: '(min-width: 768px) 211px, 170px',
+        width: section.settings.logo.width,
+        height: section.settings.logo.height,
+        loading: 'eager',
+        alt: shop.name
+    }}
+  {%- else -%}
+    <img
+      src="{{ 'avm-logo-dark.png' | asset_url }}"
+      alt="AVM Healthcare Products"
+      width="1015"
+      height="251"
+      class="avm-header__logo-img"
+    >
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture quote_button -%}
+  {%- if section.settings.show_quote_icon -%}
+    <button type="button" class="avm-header__quote" data-avm-quote-open aria-label="View quote request">
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.75"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <rect x="8" y="2" width="8" height="4" rx="1"/>
+        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+        <path d="M9 12h6M9 16h6"/>
+      </svg>
+      <span class="avm-header__quote-count" data-avm-quote-count hidden>0</span>
+    </button>
+  {%- endif -%}
+{%- endcapture -%}
+
+<avm-header class="avm avm-header">
+  <div class="avm-header__bar">
+    <a href="{{ routes.root_url }}" class="avm-header__logo">{{ logo }}</a>
+
+    <nav class="avm-header__nav" aria-label="Main">
+      {%- for link in menu.links -%}
+        {%- if link.links.size > 0 -%}
+          <div class="avm-header__dropdown">
+            <a
+              href="{{ link.url }}"
+              class="avm-header__link"
+              {% if link.current %}
+                aria-current="page"
+              {% endif %}
+            >
+              {{- link.title | escape -}}
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+            </a>
+            <ul class="avm-header__dropdown-list" role="list">
+              {%- for child in link.links -%}
+                <li><a href="{{ child.url }}" class="avm-header__dropdown-link">{{ child.title | escape }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- else -%}
+          <a
+            href="{{ link.url }}"
+            class="avm-header__link"
+            {% if link.current %}
+              aria-current="page"
+            {% endif %}
+          >
+            {{- link.title | escape -}}
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if section.settings.cta_label != blank -%}
+        <a href="{{ cta_link }}" class="avm-header__cta">{{ section.settings.cta_label | escape }}</a>
+      {%- endif -%}
+
+      {{ quote_button }}
+    </nav>
+
+    <div class="avm-header__mobile-actions">
+      {{ quote_button }}
+      <button
+        type="button"
+        class="avm-header__toggle"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="AvmMobileMenu-{{ section.id }}"
+        data-avm-menu-toggle
+      >
+        <span class="avm-header__bar-line"></span>
+        <span class="avm-header__bar-line"></span>
+        <span class="avm-header__bar-line"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="avm-header__mobile" id="AvmMobileMenu-{{ section.id }}" hidden>
+    <nav class="avm-header__mobile-nav" aria-label="Main">
+      {%- for link in menu.links -%}
+        <a href="{{ link.url }}" class="avm-header__mobile-link">{{ link.title | escape }}</a>
+        {%- for child in link.links -%}
+          <a href="{{ child.url }}" class="avm-header__mobile-link avm-header__mobile-link--child">
+            {{- child.title | escape -}}
+          </a>
+        {%- endfor -%}
+      {%- endfor -%}
+      {%- if section.settings.cta_label != blank -%}
+        <a href="{{ cta_link }}" class="avm-header__cta avm-header__cta--mobile">
+          {{- section.settings.cta_label | escape -}}
+        </a>
+      {%- endif -%}
+    </nav>
+  </div>
+
+  {%- comment -%} Kept for Dawn's cart scripts (cart-notification.js replaces this element's contents). {%- endcomment -%}
+  <a
+    href="{{ routes.cart_url }}"
+    id="cart-icon-bubble"
+    class="avm-header__cart-compat"
+    tabindex="-1"
+    aria-hidden="true"
+    style="display: none"
+  ></a>
+</avm-header>
+
+{%- if settings.cart_type == 'notification' -%}
+  <link
+    rel="stylesheet"
+    href="{{ 'component-cart-notification.css' | asset_url }}"
+    media="print"
+    onload="this.media='all'"
+  >
+  <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
+  {%- render 'cart-notification', color_scheme: 'scheme-1', desktop_menu_type: 'dropdown' -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "AVM header",
+  "tag": "div",
+  "class": "avm-header-section",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo",
+      "info": "Leave empty to use the live site's logo."
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu",
+      "info": "Top-level items show in the bar. Items with sub-items get a dropdown."
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Label",
+      "default": "Request Catalogue"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Link",
+      "info": "Leave empty to link to /pages/request-catalogue."
+    },
+    {
+      "type": "header",
+      "content": "Quote"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quote_icon",
+      "label": "Show quote icon",
+      "info": "Opens the quote request and shows the item count.",
+      "default": false
+    }
+  ]
+}
+{% endschema %}

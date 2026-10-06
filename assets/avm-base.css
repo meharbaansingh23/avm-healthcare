@@ -1,0 +1,322 @@
+/*
+ * AVM base tokens — mirrored from the Next.js site
+ * (src/app/globals.css + Tailwind v4.2 default theme as used there).
+ *
+ * Dawn sets html { font-size: 62.5% }, so 1rem = 10px here, not 16px.
+ * Every size below is therefore in px so it matches Tailwind's 16px-rem values.
+ * Media queries elsewhere still use px breakpoints (md = 768px, lg = 1024px).
+ */
+
+:root {
+  /* ─── Colour: brand ─── */
+  --avm-navy: #0a1628;          /* primary text, dark backgrounds, primary button */
+  --avm-navy-hover: #0d1f38;    /* .btn-primary:hover */
+  --avm-navy-800: #1e293b;      /* bottom of navy gradients */
+  --avm-slate: #475569;         /* body copy / secondary text */
+  --avm-muted: #94a3b8;         /* captions, stat labels, placeholders */
+  --avm-border: #e2e8f0;        /* card + input borders */
+  --avm-off-white: #fafaf9;     /* alt section background */
+  --avm-white: #ffffff;
+  --avm-accent: #2563eb;        /* hard-coded accent: focus rings, eyebrow labels */
+  --avm-green: #059669;         /* secondary accent line */
+  --avm-sky-100: #dbeafe;       /* light-blue text on navy, gradient start */
+  --avm-sky-50: #eff6ff;        /* gradient end */
+
+  /* ─── Colour: Tailwind v4 palette utilities used by the site ─── */
+  --avm-blue-50: oklch(97% 0.014 254.604);
+  --avm-blue-100: oklch(93.2% 0.032 255.585);
+  --avm-blue-200: oklch(88.2% 0.059 254.128);
+  --avm-blue-300: oklch(80.9% 0.105 251.813);
+  --avm-blue-600: oklch(54.6% 0.245 262.881);
+  --avm-blue-700: oklch(48.8% 0.243 264.376);
+  --avm-slate-200: oklch(92.9% 0.013 255.508);
+  --avm-slate-600: oklch(44.6% 0.043 257.281);
+  --avm-slate-700: oklch(37.2% 0.044 257.287);
+  --avm-green-50: oklch(98.2% 0.018 155.826);
+  --avm-green-200: oklch(92.5% 0.084 155.995);
+  --avm-green-800: oklch(44.8% 0.119 151.328);
+  --avm-red-50: oklch(97.1% 0.013 17.38);
+  --avm-red-200: oklch(88.5% 0.062 18.334);
+  --avm-red-800: oklch(44.4% 0.177 26.899);
+
+  /* ─── Typography ─── */
+  /* Helvetica Neue first (design system), Inter as the loaded substitute. */
+  --avm-font-sans: "Helvetica Neue", "Inter", system-ui, -apple-system,
+    "Segoe UI", Roboto, Arial, sans-serif;
+
+  --avm-text-xs: 12px;   --avm-text-xs-lh: 16px;
+  --avm-text-sm: 14px;   --avm-text-sm-lh: 20px;
+  --avm-text-base: 16px; --avm-text-base-lh: 24px;
+  --avm-text-lg: 18px;   --avm-text-lg-lh: 28px;
+  --avm-text-xl: 20px;   --avm-text-xl-lh: 28px;
+  --avm-text-2xl: 24px;  --avm-text-2xl-lh: 32px;
+  --avm-text-3xl: 30px;  --avm-text-3xl-lh: 36px;
+  --avm-text-4xl: 36px;  --avm-text-4xl-lh: 40px;
+  --avm-text-5xl: 48px;
+  --avm-text-6xl: 60px;
+  --avm-text-7xl: 72px;
+
+  --avm-weight-medium: 500;
+  --avm-weight-semibold: 600;
+  --avm-weight-bold: 700;
+
+  --avm-leading-none: 1;
+  --avm-leading-display: 1.02;  /* .display-heading */
+  --avm-leading-heading: 1.05;  /* leading-[1.05] on H1/H2 */
+  --avm-leading-tight: 1.25;
+  --avm-leading-relaxed: 1.625;
+
+  --avm-tracking-tighter: -0.05em;
+  --avm-tracking-display: -0.04em;  /* .display-heading, stat numbers */
+  --avm-tracking-heading: -0.035em; /* .section-heading */
+  --avm-tracking-tight: -0.025em;
+  --avm-tracking-wider: 0.05em;
+  --avm-tracking-label: 0.15em;     /* form labels, blog category */
+  --avm-tracking-eyebrow: 0.2em;    /* eyebrow / section labels */
+  --avm-tracking-doc: 0.3em;        /* "DOCUMENT OF" */
+
+  /* ─── Spacing (Tailwind --spacing: 0.25rem = 4px; use calc(var(--avm-space) * n)) ─── */
+  --avm-space: 4px;
+  --avm-gutter: 24px;           /* px-6 */
+  --avm-gutter-md: 32px;        /* md:px-8 */
+  --avm-gutter-lg: 48px;        /* lg:px-12 */
+  --avm-section-y: 96px;        /* py-24 */
+  --avm-section-y-sm: 80px;     /* py-20 */
+  --avm-section-y-md: 112px;    /* md:py-28 */
+  --avm-section-y-lg: 128px;    /* md:py-32 */
+
+  /* ─── Container widths ─── */
+  --avm-container-wide: 1536px; /* max-w-[1536px] (hero, navbar) */
+  --avm-container-6xl: 1152px;
+  --avm-container-5xl: 1024px;
+  --avm-container-4xl: 896px;
+  --avm-container-3xl: 768px;
+  --avm-container-2xl: 672px;
+  --avm-container-xl: 576px;
+  --avm-container-md: 448px;
+
+  /* ─── Radius ─── */
+  --avm-radius-sm: 4px;         /* focus ring */
+  --avm-radius-md: 6px;
+  --avm-radius-lg: 8px;         /* buttons, inputs */
+  --avm-radius-xl: 12px;
+  --avm-radius-2xl: 16px;       /* cards */
+  --avm-radius-full: 9999px;    /* pills, dots */
+
+  /* ─── Shadow ─── */
+  --avm-shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --avm-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --avm-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --avm-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --avm-shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+
+  /* ─── Motion ─── */
+  --avm-ease: cubic-bezier(0.4, 0, 0.2, 1);          /* Tailwind transition default */
+  --avm-ease-out: cubic-bezier(0, 0, 0.58, 1);       /* framer-motion "easeOut" */
+  --avm-ease-in-out: cubic-bezier(0.42, 0, 0.58, 1); /* framer-motion "easeInOut" */
+  --avm-duration: 200ms;
+}
+
+/*
+ * Scope root for every AVM section. theme.liquid forces 'Google Sans Flex'
+ * on * with !important; `.avm *` out-specifies that so AVM sections render
+ * in the Next.js font stack while the rest of the theme is unchanged.
+ */
+.avm,
+.avm * {
+  font-family: var(--avm-font-sans) !important;
+}
+
+.avm,
+.avm *,
+.avm *::before,
+.avm *::after {
+  box-sizing: border-box;
+}
+
+.avm {
+  color: var(--avm-navy);
+  font-size: var(--avm-text-base);
+  line-height: 1.5;
+  letter-spacing: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.avm *:focus {
+  outline: none;
+}
+
+.avm *:focus-visible {
+  outline: 2px solid var(--avm-accent);
+  outline-offset: 2px;
+  border-radius: var(--avm-radius-sm);
+  box-shadow: none;
+}
+
+/* Entrance animation shared by AVM sections (framer: y 20 → 0, 0.6s easeOut). */
+@keyframes avm-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .avm *,
+  .avm *::before,
+  .avm *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ═══ Shared components (mirrors globals.css @layer components + common section patterns) ═══ */
+
+/* Centered section intro block: label + heading (+ optional text). */
+.avm-section-header {
+  max-width: var(--avm-container-2xl);
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Eyebrow label — .section-label (Tailwind blue-600) */
+.avm-section-label {
+  margin: 0;
+  font-size: var(--avm-text-xs);
+  line-height: var(--avm-text-xs-lh);
+  font-weight: var(--avm-weight-medium);
+  letter-spacing: var(--avm-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--avm-blue-600);
+}
+
+/* Same label with the hard-coded #2563EB used on some sections */
+.avm-section-label--accent {
+  color: var(--avm-accent);
+}
+
+/* On navy backgrounds */
+.avm-section-label--light {
+  color: var(--avm-sky-100);
+}
+
+/* H2 using .display-heading (tracking -0.04em, line-height 1.02) */
+.avm-display-heading,
+.avm-heading {
+  margin: calc(var(--avm-space) * 4) 0 0;
+  font-size: var(--avm-text-4xl);
+  font-weight: var(--avm-weight-bold);
+  font-style: normal;
+  color: var(--avm-navy);
+  word-break: normal;
+}
+
+.avm-display-heading {
+  letter-spacing: var(--avm-tracking-display);
+  line-height: var(--avm-leading-display);
+}
+
+/* H2 using font-bold tracking-tighter leading-[1.05] */
+.avm-heading {
+  letter-spacing: var(--avm-tracking-tighter);
+  line-height: var(--avm-leading-heading);
+}
+
+@media (min-width: 768px) {
+  .avm-display-heading,
+  .avm-heading {
+    font-size: var(--avm-text-6xl);
+  }
+}
+
+.avm-section-text {
+  margin: calc(var(--avm-space) * 5) 0 0;
+  font-size: var(--avm-text-base);
+  line-height: var(--avm-leading-relaxed);
+  letter-spacing: normal;
+  color: var(--avm-slate);
+}
+
+/* PillButton.tsx */
+.avm-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--avm-space) * 2);
+  padding: 10px 20px;
+  border: 1px solid var(--avm-border);
+  border-radius: var(--avm-radius-full);
+  background-color: var(--avm-white);
+  color: var(--avm-navy);
+  font-size: var(--avm-text-sm);
+  line-height: var(--avm-text-sm-lh);
+  font-weight: var(--avm-weight-medium);
+  letter-spacing: normal;
+  text-decoration: none;
+  box-shadow: var(--avm-shadow-sm);
+  cursor: pointer;
+  transition: all var(--avm-duration) var(--avm-ease);
+}
+
+.avm-pill:hover {
+  background-color: var(--avm-off-white);
+  box-shadow: var(--avm-shadow-md);
+  color: var(--avm-navy);
+}
+
+.avm-pill svg {
+  flex-shrink: 0;
+  transition: transform var(--avm-duration) var(--avm-ease);
+}
+
+.avm-pill:hover svg,
+.avm-pill-group:hover .avm-pill svg {
+  transform: translateX(2px);
+}
+
+.avm-pill--sm {
+  gap: 6px;
+  padding: 8px 14px;
+  font-size: var(--avm-text-xs);
+  line-height: var(--avm-text-xs-lh);
+}
+
+.avm-pill--dark {
+  background-color: var(--avm-navy);
+  border-color: var(--avm-navy);
+  color: var(--avm-white);
+}
+
+.avm-pill--dark:hover {
+  background-color: var(--avm-navy-hover);
+  color: var(--avm-white);
+}
+
+/* FadeInWhenVisible: opacity 0 → 1, y 20 → 0, 0.6s easeOut, once, margin -100px.
+   Hidden state only applies once avm-global.js has added .avm-reveal-ready. */
+.avm-reveal-ready [data-avm-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--avm-ease-out) var(--avm-reveal-delay, 0s),
+    transform 0.6s var(--avm-ease-out) var(--avm-reveal-delay, 0s);
+}
+
+.avm-reveal-ready [data-avm-reveal='card'] {
+  transform: translateY(28px);
+  transition-duration: 0.5s;
+}
+
+.avm-reveal-ready [data-avm-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+.avm-tabular-nums {
+  font-variant-numeric: tabular-nums;
+}

@@ -19,6 +19,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex&display=swap" rel="stylesheet">
+    {%- comment -%} Inter: substitute for Helvetica Neue in AVM sections (mirrors next/font on the Next.js site) {%- endcomment -%}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
     <title>
       {{ page_title }}
@@ -32,6 +34,7 @@
     {% endif %}
 
     {% render 'meta-tags' %}
+    {% render 'avm-organization-schema' %}
 
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
@@ -39,12 +42,35 @@
     <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'avm-global.js' | asset_url }}" defer="defer"></script>
 
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
     {{ content_for_header }}
+
+    {%- unless request.design_mode -%}
+      {%- if settings.avm_ga4_id != blank -%}
+        {%- assign avm_ga4_id = settings.avm_ga4_id | strip | escape -%}
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ avm_ga4_id }}"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '{{ avm_ga4_id }}');
+        </script>
+      {%- endif -%}
+      {%- if settings.avm_clarity_id != blank -%}
+        <script>
+          (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "{{ settings.avm_clarity_id | strip | escape }}");
+        </script>
+      {%- endif -%}
+    {%- endunless -%}
 
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
@@ -262,6 +288,15 @@
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'quote-system.css' | asset_url | stylesheet_tag }}
+    {{ 'avm-base.css' | asset_url | stylesheet_tag }}
+    {%- unless settings.avm_show_quote_float_tab -%}
+      {%- comment -%} Hides the quote-system snippet's floating tab without touching the snippet or its JS {%- endcomment -%}
+      <style>
+        #quote-float-btn {
+          display: none !important;
+        }
+      </style>
+    {%- endunless -%}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}

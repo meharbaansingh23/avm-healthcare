@@ -1,0 +1,67 @@
+{%- comment -%}
+  One labelled AVM form field (mirrors the .form-label / .form-input markup).
+
+  Accepts:
+  - id, name, label (required)
+  - type: 'text' (default), 'email', 'tel', 'textarea', 'select'
+  - is_required: true/false
+  - rows: textarea rows
+  - placeholder
+  - options: newline-separated list (select)
+  - select_placeholder: first, disabled option (select)
+  - optional_note: e.g. '(optional)' shown after the label in normal case
+  - value: prefilled value (e.g. form.email / form.body after a Shopify contact form error)
+{%- endcomment -%}
+{%- assign field_type = type | default: 'text' -%}
+<div>
+  <label for="{{ id }}" class="avm-form-label">
+    {{- label | escape -}}
+    {%- if optional_note != blank %} <span class="avm-form-label__optional">{{ optional_note | escape }}</span>{% endif -%}
+  </label>
+  {%- case field_type -%}
+    {%- when 'textarea' -%}
+      <textarea
+        id="{{ id }}"
+        name="{{ name }}"
+        rows="{{ rows | default: 3 }}"
+        class="avm-form-input"
+        {% if placeholder != blank %}
+          placeholder="{{ placeholder | escape }}"
+        {% endif %}
+        {% if is_required %}
+          required
+        {% endif %}
+        {% if value != blank %}
+          data-avm-prefill
+        {% endif %}
+      >{{ value | escape }}</textarea>
+    {%- when 'select' -%}
+      <select id="{{ id }}" name="{{ name }}" class="avm-form-input" {% if is_required %}required{% endif %}>
+        <option value="" disabled selected>{{ select_placeholder | default: 'Select an option' | escape }}</option>
+        {%- assign option_list = options | newline_to_br | split: '<br />' -%}
+        {%- for option in option_list -%}
+          {%- assign option_value = option | strip -%}
+          {%- if option_value != blank -%}
+            <option value="{{ option_value | escape }}">{{ option_value | escape }}</option>
+          {%- endif -%}
+        {%- endfor -%}
+      </select>
+    {%- else -%}
+      <input
+        id="{{ id }}"
+        name="{{ name }}"
+        type="{{ field_type }}"
+        class="avm-form-input"
+        {% if value != blank %}
+          value="{{ value | escape }}"
+          data-avm-prefill
+        {% endif %}
+        {% if placeholder != blank %}
+          placeholder="{{ placeholder | escape }}"
+        {% endif %}
+        {% if is_required %}
+          required
+        {% endif %}
+      >
+  {%- endcase -%}
+</div>

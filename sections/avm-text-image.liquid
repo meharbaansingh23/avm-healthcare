@@ -1,0 +1,69 @@
+{%- comment -%}
+  AVM text + image — mirrors About page section 3 ("Who We Are"):
+  centered label/heading/paragraphs, then a framed Ken Burns image.
+{%- endcomment -%}
+
+{{ 'avm-about.css' | asset_url | stylesheet_tag }}
+
+<div class="avm avm-text-image avm-bg--{{ section.settings.background }}">
+  <div class="avm-text-image__inner">
+    <div class="avm-text-image__text" data-avm-reveal>
+      {%- if section.settings.label != blank -%}
+        <p class="avm-section-label">{{ section.settings.label | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="avm-display-heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="avm-text-image__body">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.image != blank or section.settings.asset != blank -%}
+      <div class="avm-text-image__media" data-avm-reveal style="--avm-reveal-delay: 0.1s;">
+        <div class="avm-text-image__frame">
+          {%- render 'avm-image',
+            image: section.settings.image,
+            asset: section.settings.asset,
+            alt: section.settings.image_alt,
+            class: 'avm-text-image__img',
+            sizes: '(min-width: 1024px) 896px, 100vw',
+            widths: '600, 900, 1200, 1800'
+          -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "AVM text and image",
+  "tag": "section",
+  "class": "avm-text-image-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "off-white", "label": "Off-white" }
+      ],
+      "default": "off-white"
+    },
+    { "type": "text", "id": "label", "label": "Label", "default": "Who We Are" },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    {
+      "type": "text",
+      "id": "asset",
+      "label": "Bundled image (fallback)",
+      "info": "Theme asset used when no image is picked. Leave as is."
+    },
+    { "type": "text", "id": "image_alt", "label": "Image alt text" }
+  ],
+  "presets": [{ "name": "AVM text and image" }]
+}
+{% endschema %}

@@ -1,0 +1,91 @@
+/* AVM catalogue CTA — HomeContent.tsx section 7 */
+
+.avm-cta {
+  position: relative;
+  overflow: hidden;
+  padding: 112px var(--avm-gutter);
+  background-color: var(--avm-navy);
+}
+
+/* Slow heartbeat radial glow: opacity 0.05 → 0.1 → 0.05 over 4s */
+.avm-cta__glow {
+  position: absolute;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+  background: radial-gradient(55% 55% at 50% 45%, rgba(37, 99, 235, 0.55), transparent 70%);
+  opacity: 0.05;
+  animation: avm-cta-heartbeat 4s var(--avm-ease-in-out) infinite;
+}
+
+@keyframes avm-cta-heartbeat {
+  0%,
+  100% {
+    opacity: 0.05;
+  }
+  50% {
+    opacity: 0.1;
+  }
+}
+
+.avm-cta__content {
+  position: relative;
+  max-width: var(--avm-container-3xl);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.avm-cta__rule {
+  display: block;
+  width: 48px;
+  height: 1px;
+  margin: 0 auto;
+  background-color: var(--avm-green);
+}
+
+.avm-cta__label {
+  margin-top: calc(var(--avm-space) * 8);
+}
+
+.avm-cta__heading {
+  margin-top: calc(var(--avm-space) * 5);
+  color: var(--avm-white);
+}
+
+.avm-cta__text {
+  max-width: var(--avm-container-xl);
+  margin: calc(var(--avm-space) * 6) auto 0;
+  font-size: var(--avm-text-lg);
+  line-height: var(--avm-leading-relaxed);
+  letter-spacing: normal;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.avm-cta__button {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--avm-space) * 2);
+  margin-top: calc(var(--avm-space) * 10);
+  padding: calc(var(--avm-space) * 4) calc(var(--avm-space) * 9);
+  border-radius: var(--avm-radius-lg);
+  background-color: var(--avm-white);
+  color: var(--avm-navy);
+  font-size: var(--avm-text-sm);
+  line-height: var(--avm-text-sm-lh);
+  font-weight: var(--avm-weight-semibold);
+  letter-spacing: normal;
+  text-decoration: none;
+  transition: all var(--avm-duration) var(--avm-ease);
+}
+
+.avm-cta__button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--avm-shadow-xl);
+  color: var(--avm-navy);
+}
+
+@media (min-width: 768px) {
+  .avm-cta {
+    padding: 144px var(--avm-gutter-md);
+  }
+}

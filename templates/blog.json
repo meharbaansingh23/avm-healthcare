@@ -9,13 +9,31 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "main-blog",
+    "hero": {
+      "type": "avm-page-hero",
       "settings": {
-        "padding_top": 60,
-        "padding_bottom": 60
+        "background": "off-white",
+        "spacing": "banner",
+        "border_bottom": true,
+        "show_rule": true,
+        "label": "AVM Insights",
+        "label_color": "blue",
+        "heading": "From Our Knowledge Base",
+        "heading_style": "display",
+        "content_width": "3xl",
+        "text": "Insights on surgical instrument care, innovation, and best practices from AVM Healthcare.",
+        "text_width": "xl"
+      }
+    },
+    "main": {
+      "type": "avm-blog",
+      "settings": {
+        "per_page": 12
       }
     }
   },
-  "order": ["main"]
+  "order": [
+    "hero",
+    "main"
+  ]
 }

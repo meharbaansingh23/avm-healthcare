@@ -1,0 +1,40 @@
+{%- comment -%}
+  AVM callout strip — mirrors About page section 5 (ANI Instruments callout).
+{%- endcomment -%}
+
+{{ 'avm-about.css' | asset_url | stylesheet_tag }}
+
+<div class="avm avm-callout">
+  <div class="avm-callout__inner" data-avm-reveal>
+    {%- if section.settings.text != blank -%}
+      <p class="avm-callout__text">{{ section.settings.text | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+      <a
+        href="{{ section.settings.button_link }}"
+        class="avm-pill"
+        {% if section.settings.new_tab %}
+          target="_blank" rel="noopener noreferrer"
+        {% endif %}
+      >
+        {{- section.settings.button_label | escape }}
+        {% render 'avm-icon', icon: 'arrow-right', size: 16 -%}
+      </a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "AVM callout strip",
+  "tag": "div",
+  "class": "avm-callout-section",
+  "settings": [
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "checkbox", "id": "new_tab", "label": "Open link in new tab", "default": true }
+  ],
+  "presets": [{ "name": "AVM callout strip" }]
+}
+{% endschema %}

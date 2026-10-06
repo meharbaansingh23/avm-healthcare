@@ -10,33 +10,13 @@
 {
   "sections": {
     "main": {
-      "type": "main-article",
-      "blocks": {
-        "featured_image": {
-          "type": "featured_image",
-          "settings": {}
-        },
-        "title": {
-          "type": "title",
-          "settings": {
-            "blog_show_date": true,
-            "blog_show_author": false
-          }
-        },
-        "content": {
-          "type": "content",
-          "settings": {}
-        },
-        "share": {
-          "type": "share",
-          "settings": {
-            "share_label": "Share"
-          }
-        }
-      },
-      "block_order": ["featured_image", "title", "content", "share"],
-      "settings": {}
+      "type": "avm-article",
+      "settings": {
+        "cta_text": "Request our detailed catalogue — over 10,000 instruments across six specialties."
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }

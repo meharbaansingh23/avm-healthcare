@@ -1,0 +1,36 @@
+/* AVM video — HomeContent.tsx section 4.7 */
+
+.avm-video {
+  background-color: var(--avm-off-white);
+  padding: var(--avm-section-y) var(--avm-gutter);
+}
+
+.avm-video__wrap {
+  max-width: var(--avm-container-5xl);
+  margin: calc(var(--avm-space) * 14) auto 0;
+}
+
+.avm-video__frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--avm-radius-2xl);
+  box-shadow: var(--avm-shadow-2xl);
+}
+
+.avm-video__frame iframe {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@media (min-width: 768px) {
+  .avm-video {
+    padding-left: var(--avm-gutter-md);
+    padding-right: var(--avm-gutter-md);
+  }
+}

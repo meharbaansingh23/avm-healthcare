@@ -1,0 +1,74 @@
+{%- comment -%}
+  AVM catalogue CTA — mirrors HomeContent.tsx section 7 (navy + heartbeat glow).
+{%- endcomment -%}
+
+{{ 'avm-catalogue-cta.css' | asset_url | stylesheet_tag }}
+
+{%- assign button_link = section.settings.button_link | default: '/pages/request-catalogue' -%}
+
+<div class="avm avm-cta">
+  <span class="avm-cta__glow" aria-hidden="true"></span>
+  <div class="avm-cta__content" data-avm-reveal>
+    <span class="avm-cta__rule" aria-hidden="true"></span>
+    {%- if section.settings.label != blank -%}
+      <p class="avm-section-label avm-section-label--light avm-cta__label">{{ section.settings.label | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="avm-heading avm-cta__heading">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <p class="avm-cta__text">{{ section.settings.text | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <a href="{{ button_link }}" class="avm-cta__button">
+        {{- section.settings.button_label | escape -}}
+        {% render 'avm-icon', icon: 'arrow', size: 18 %}
+      </a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "AVM catalogue CTA",
+  "tag": "section",
+  "class": "avm-cta-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Get Started"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Request Our Detailed Product Catalogue"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Over 10,000 Surgical Products across multiple specialties — delivered to your inbox within one business day."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Request full catalogue"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "info": "Leave empty to link to /pages/request-catalogue."
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVM catalogue CTA"
+    }
+  ]
+}
+{% endschema %}

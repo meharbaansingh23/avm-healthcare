@@ -1451,5 +1451,121 @@
         "default": "scheme-1"
       }
     ]
+  },
+  {
+    "name": "AVM site",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Contact details"
+      },
+      {
+        "type": "paragraph",
+        "content": "Used by the AVM header, footer, contact page and forms."
+      },
+      {
+        "type": "text",
+        "id": "avm_phone",
+        "label": "Phone (display)",
+        "default": "+91 98103 45155"
+      },
+      {
+        "type": "text",
+        "id": "avm_phone_tel",
+        "label": "Phone (dialling, no spaces)",
+        "default": "+919810345155"
+      },
+      {
+        "type": "text",
+        "id": "avm_email",
+        "label": "Email",
+        "default": "sales@avmhealthcare.com"
+      },
+      {
+        "type": "textarea",
+        "id": "avm_address",
+        "label": "Address",
+        "default": "17-19 A Block, Chatarpur Extension, Rajpur Road, New Delhi — 110074, India"
+      },
+      {
+        "type": "text",
+        "id": "avm_whatsapp_number",
+        "label": "WhatsApp number",
+        "info": "Digits only, with country code. Used for wa.me links.",
+        "default": "919810345155"
+      },
+      {
+        "type": "header",
+        "content": "Certification wording"
+      },
+      {
+        "type": "textarea",
+        "id": "avm_certification_wording",
+        "label": "Certification wording",
+        "info": "Used for \"Global Quality Standards\" on the homepage and anywhere else certifications are described.",
+        "default": "CE, ISO and CDSCO (India's regulatory authority, equivalent to the FDA) certified. Quality is monitored at every stage of manufacturing, from raw material to final product."
+      },
+      {
+        "type": "header",
+        "content": "Social links"
+      },
+      {
+        "type": "paragraph",
+        "content": "Each icon shows in the footer while its URL is filled in."
+      },
+      {
+        "type": "text",
+        "id": "avm_linkedin_url",
+        "label": "LinkedIn",
+        "default": "https://www.linkedin.com/in/avm-health-care-5571711b7/",
+        "info": "Full URL. Leave empty to hide the icon."
+      },
+      {
+        "type": "text",
+        "id": "avm_facebook_url",
+        "label": "Facebook",
+        "default": "https://www.facebook.com/share/1HaLMG9NUM/",
+        "info": "Full URL. Leave empty to hide the icon."
+      },
+      {
+        "type": "text",
+        "id": "avm_instagram_url",
+        "label": "Instagram",
+        "default": "https://www.instagram.com/healthcareavm/",
+        "info": "Full URL. Leave empty to hide the icon."
+      },
+      {
+        "type": "header",
+        "content": "Quote system"
+      },
+      {
+        "type": "checkbox",
+        "id": "avm_show_quote_float_tab",
+        "label": "Show floating \"View Quote\" tab",
+        "info": "Off hides the tab with CSS only; the quote system itself keeps running.",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Analytics"
+      },
+      {
+        "type": "paragraph",
+        "content": "Loaded on the storefront only (not inside the theme editor). Leave an ID empty to turn that tool off."
+      },
+      {
+        "type": "text",
+        "id": "avm_ga4_id",
+        "label": "Google Analytics 4 measurement ID",
+        "info": "Format G-XXXXXXXXXX. If GA4 is also connected through Shopify's Google & YouTube app, remove one to avoid double counting.",
+        "default": "G-R2J9MXLTPJ"
+      },
+      {
+        "type": "text",
+        "id": "avm_clarity_id",
+        "label": "Microsoft Clarity project ID",
+        "default": "y8zp8gi8u3"
+      }
+    ]
   }
 ]

@@ -1,0 +1,321 @@
+/* AVM forms — mirrors globals.css .form-label/.form-input and the Next.js form components */
+
+.avm-form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--avm-space) * 6);
+}
+
+.avm-form[hidden] {
+  display: none;
+}
+
+.avm-form__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: calc(var(--avm-space) * 5);
+}
+
+@media (min-width: 640px) {
+  .avm-form__row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.avm-form__title {
+  margin: 0 0 calc(var(--avm-space) * 2);
+  font-size: var(--avm-text-3xl);
+  line-height: var(--avm-leading-display);
+  font-weight: var(--avm-weight-bold);
+  letter-spacing: var(--avm-tracking-display);
+  text-align: center;
+  color: var(--avm-navy);
+}
+
+@media (min-width: 768px) {
+  .avm-form__title {
+    font-size: var(--avm-text-4xl);
+  }
+}
+
+.avm-form-label {
+  display: block;
+  margin: 0 0 calc(var(--avm-space) * 2);
+  font-size: var(--avm-text-xs);
+  line-height: var(--avm-text-xs-lh);
+  font-weight: var(--avm-weight-semibold);
+  letter-spacing: var(--avm-tracking-label);
+  text-transform: uppercase;
+  color: var(--avm-slate);
+}
+
+.avm-form-label__optional {
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--avm-slate);
+}
+
+.avm-form-input {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: calc(var(--avm-space) * 3) calc(var(--avm-space) * 4);
+  border: 1px solid var(--avm-border);
+  border-radius: var(--avm-radius-lg);
+  background-color: var(--avm-white);
+  color: var(--avm-navy);
+  font-size: var(--avm-text-sm);
+  line-height: var(--avm-text-sm-lh);
+  letter-spacing: normal;
+  box-shadow: none;
+  transition: color 150ms var(--avm-ease), border-color 150ms var(--avm-ease), background-color 150ms var(--avm-ease);
+}
+
+.avm-form-input::placeholder {
+  color: var(--avm-muted);
+  opacity: 1;
+}
+
+.avm-form-input:focus-visible {
+  outline: 2px solid var(--avm-accent);
+  outline-offset: 2px;
+  border-color: var(--avm-accent);
+}
+
+textarea.avm-form-input {
+  min-height: 0;
+  resize: vertical;
+}
+
+select.avm-form-input {
+  cursor: pointer;
+}
+
+/* Careers CV picker: visually hidden file input + styled label */
+.avm-form-file {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.avm-form-file-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(var(--avm-space) * 3);
+  cursor: pointer;
+}
+
+.avm-form-file-label:hover {
+  border-color: var(--avm-blue-300);
+}
+
+.avm-form-file:focus-visible + .avm-form-file-label {
+  border-color: var(--avm-blue-600);
+  outline: 2px solid var(--avm-blue-600);
+  outline-offset: 2px;
+}
+
+.avm-form-file-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--avm-slate);
+}
+
+.avm-form-file-browse {
+  flex-shrink: 0;
+  font-size: var(--avm-text-xs);
+  line-height: var(--avm-text-xs-lh);
+  font-weight: var(--avm-weight-semibold);
+  letter-spacing: var(--avm-tracking-label);
+  text-transform: uppercase;
+  color: var(--avm-blue-600);
+}
+
+.avm-form-help {
+  margin: calc(var(--avm-space) * 2) 0 0;
+  font-size: var(--avm-text-xs);
+  line-height: var(--avm-text-xs-lh);
+  font-style: italic;
+  color: var(--avm-slate);
+}
+
+.avm-form-help a,
+.avm-form-link {
+  color: var(--avm-blue-600);
+  text-decoration: none;
+}
+
+.avm-form-help a:hover,
+.avm-form-link:hover {
+  color: var(--avm-blue-700);
+}
+
+/* Honeypot (useSpamGuard): off-screen, hidden from assistive tech */
+.avm-form-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.avm-form-alert {
+  margin: 0;
+  padding: calc(var(--avm-space) * 3) calc(var(--avm-space) * 4);
+  border: 1px solid;
+  border-radius: var(--avm-radius-lg);
+  font-size: var(--avm-text-sm);
+  line-height: var(--avm-text-sm-lh);
+  letter-spacing: normal;
+}
+
+.avm-form-alert[hidden] {
+  display: none;
+}
+
+.avm-form-alert--success {
+  border-color: var(--avm-green-200);
+  background-color: var(--avm-green-50);
+  color: var(--avm-green-800);
+}
+
+.avm-form-alert--error {
+  border-color: var(--avm-red-200);
+  background-color: var(--avm-red-50);
+  color: var(--avm-red-800);
+}
+
+/* Shown only in the theme editor when no action URL is set */
+.avm-form-notice {
+  margin: 0;
+  padding: calc(var(--avm-space) * 3) calc(var(--avm-space) * 4);
+  border: 1px dashed var(--avm-accent);
+  border-radius: var(--avm-radius-lg);
+  background-color: var(--avm-sky-50);
+  color: var(--avm-navy);
+  font-size: var(--avm-text-xs);
+  line-height: var(--avm-text-xs-lh);
+}
+
+.avm-form-submit {
+  appearance: none;
+  display: block;
+  width: 100%;
+  margin-top: calc(var(--avm-space) * 2);
+  padding: calc(var(--avm-space) * 4);
+  border: 0;
+  border-radius: var(--avm-radius-lg);
+  background-color: var(--avm-navy);
+  color: var(--avm-white);
+  font-size: var(--avm-text-sm);
+  line-height: var(--avm-text-sm-lh);
+  font-weight: var(--avm-weight-semibold);
+  letter-spacing: normal;
+  cursor: pointer;
+  transition: background-color 150ms var(--avm-ease);
+}
+
+.avm-form-submit:hover {
+  background-color: var(--avm-navy-hover);
+}
+
+.avm-form-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* SuccessState (careers / innovation / catalogue) */
+.avm-form-success {
+  padding: calc(var(--avm-space) * 12) 0;
+  text-align: center;
+}
+
+.avm-form-success[hidden] {
+  display: none;
+}
+
+.avm-form-success svg {
+  display: block;
+  margin: 0 auto;
+}
+
+.avm-form-success__title {
+  margin: calc(var(--avm-space) * 6) 0 0;
+  font-size: var(--avm-text-xl);
+  line-height: var(--avm-text-xl-lh);
+  font-weight: var(--avm-weight-semibold);
+  letter-spacing: normal;
+  color: var(--avm-navy);
+}
+
+.avm-form-success__text {
+  max-width: 384px;
+  margin: calc(var(--avm-space) * 2) auto 0;
+  font-size: var(--avm-text-base);
+  line-height: var(--avm-leading-relaxed);
+  color: var(--avm-slate);
+}
+
+/* ─── Form page sections (Careers #apply, Innovation #proposal) ─── */
+.avm-form-section {
+  background-color: var(--avm-white);
+  padding: var(--avm-section-y) var(--avm-gutter);
+}
+
+.avm-form-section--careers {
+  padding-bottom: 128px;
+}
+
+.avm-form-section__anchor {
+  /* scroll-mt-20: clear the sticky header when jumping to #apply / #proposal */
+  scroll-margin-top: 80px;
+}
+
+.avm-form-section__inner {
+  max-width: var(--avm-container-2xl);
+  margin: 0 auto;
+}
+
+.avm-form-section__header {
+  margin-bottom: calc(var(--avm-space) * 12);
+  text-align: center;
+}
+
+.avm-form-section__heading {
+  margin: 0;
+  font-size: var(--avm-text-4xl);
+  line-height: var(--avm-leading-display);
+  font-weight: var(--avm-weight-bold);
+  letter-spacing: var(--avm-tracking-display);
+  color: var(--avm-navy);
+}
+
+.avm-form-section__text {
+  max-width: var(--avm-container-xl);
+  margin: calc(var(--avm-space) * 4) auto 0;
+  font-size: var(--avm-text-base);
+  line-height: var(--avm-leading-relaxed);
+  letter-spacing: normal;
+  color: var(--avm-slate);
+}
+
+@media (min-width: 768px) {
+  .avm-form-section {
+    padding-left: var(--avm-gutter-md);
+    padding-right: var(--avm-gutter-md);
+  }
+
+  .avm-form-section__heading {
+    font-size: var(--avm-text-5xl);
+  }
+}

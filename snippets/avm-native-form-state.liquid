@@ -1,0 +1,36 @@
+{%- comment -%}
+  For AVM forms that use Shopify's native {% form 'contact' %} (contact, innovation,
+  request catalogue). Rendered right after the form.
+
+  1. Shopify's /contact endpoint reports form.posted_successfully? / form.errors to
+     EVERY contact form on the page — including the quote system's hidden form.
+     After submitting, the URL ends in #<id of the form that was sent> (from the form's
+     action), so if that id belongs to a different form, this form's success/error
+     state is reset to the normal form. Runs inline, before the deferred quote-system.js
+     cleans up the URL. With no hash (or no JS) the server-rendered state is kept.
+  2. On submit: native submission, button shows "Sending…" and is disabled (live site).
+
+  Accepts: form_id
+{%- endcomment -%}
+<script>
+  (function () {
+    var form = document.getElementById({{ form_id | json }});
+    if (!form) return;
+
+    var hash = window.location.hash;
+    if (hash && hash !== '#' + form.id) {
+      form.querySelectorAll('[data-avm-form-state]').forEach(function (el) { el.hidden = true; });
+      form.querySelectorAll('[data-avm-form-fields]').forEach(function (el) { el.hidden = false; });
+      form.querySelectorAll('[data-avm-prefill]').forEach(function (el) { el.value = ''; });
+    }
+
+    form.addEventListener('submit', function () {
+      var button = form.querySelector('[type="submit"]');
+      if (!button) return;
+      form.setAttribute('aria-busy', 'true');
+      button.textContent = 'Sending…';
+      // Disable after the browser has captured the submission.
+      setTimeout(function () { button.disabled = true; }, 0);
+    });
+  })();
+</script>
