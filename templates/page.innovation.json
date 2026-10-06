@@ -35,7 +35,6 @@
       "settings": {
         "anchor": "proposal",
         "heading": "Submit A Proposal",
-        "form_action": "",
         "error_message": "Something went wrong. Please try again or email us directly at sales@avmhealthcare.com."
       }
     }

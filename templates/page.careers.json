@@ -35,7 +35,7 @@
       "settings": {
         "anchor": "apply",
         "heading": "Express Your Interest",
-        "form_action": "",
+        "form_action": "https://avm-healthcare-website.vercel.app/api/careers",
         "error_message": "Something went wrong. Please try again or email us directly at sales@avmhealthcare.com."
       }
     }

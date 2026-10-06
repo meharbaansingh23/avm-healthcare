@@ -1,14 +1,14 @@
 {%- comment -%}
   AVM innovation form — mirrors the #proposal section of innovation/page.tsx + InnovationForm.tsx.
 
-  What the Next.js /api/innovation route expects (JSON body):
-    name*, organisation, email*, phone, proposalType*, description*,
-    company_website (honeypot, empty), form_started_at (ms timestamp)
-  Responds { success: true } on success, { success: false, error } on failure.
+  Shopify's native contact form ({% form 'contact' %}, id AvmInnovationForm), submitted
+  natively. Fields: contact[Form] = "Innovation proposal", contact[Name],
+  contact[Organisation], contact[email], contact[Phone], contact[Nature of proposal],
+  contact[body] (Describe your idea).
+  After sending, the success state replaces the fields (live InnovationForm.tsx).
 {%- endcomment -%}
 
 {{ 'avm-forms.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'avm-forms.js' | asset_url }}" defer="defer"></script>
 
 {%- assign s = section.settings -%}
 
@@ -24,28 +24,20 @@
     </div>
 
     <div data-avm-reveal style="--avm-reveal-delay: 0.1s;">
-      <avm-form-handler
-        data-action="{{ s.form_action | escape }}"
-        data-encoding="json"
-        data-ok-key="success"
-        data-success="replace"
-        data-error-message="{{ s.error_message | escape }}"
-      >
-        <form class="avm-form" method="post" aria-busy="false">
-          {%- render 'avm-form-spam-guard', prefix: 'i' -%}
-          {%- render 'avm-form-notice', action: s.form_action -%}
-
+      {%- form 'contact', id: 'AvmInnovationForm', class: 'avm-native-form' -%}
+        <input type="hidden" name="contact[Form]" value="Innovation proposal">
+        <div class="avm-form" data-avm-form-fields {% if form.posted_successfully? %}hidden{% endif %}>
           <div class="avm-form__row">
-            {%- render 'avm-form-field', id: 'i-name', name: 'name', label: 'Name', is_required: true -%}
-            {%- render 'avm-form-field', id: 'i-org', name: 'organisation', label: 'Organisation' -%}
+            {%- render 'avm-form-field', id: 'i-name', name: 'contact[Name]', label: 'Name', is_required: true -%}
+            {%- render 'avm-form-field', id: 'i-org', name: 'contact[Organisation]', label: 'Organisation' -%}
           </div>
           <div class="avm-form__row">
-            {%- render 'avm-form-field', id: 'i-email', name: 'email', label: 'Email', type: 'email', is_required: true -%}
-            {%- render 'avm-form-field', id: 'i-phone', name: 'phone', label: 'Phone', type: 'tel' -%}
+            {%- render 'avm-form-field', id: 'i-email', name: 'contact[email]', label: 'Email', type: 'email', is_required: true, value: form.email -%}
+            {%- render 'avm-form-field', id: 'i-phone', name: 'contact[Phone]', label: 'Phone', type: 'tel' -%}
           </div>
           {%- render 'avm-form-field',
             id: 'i-type',
-            name: 'proposalType',
+            name: 'contact[Nature of proposal]',
             label: 'Nature of proposal',
             type: 'select',
             is_required: true,
@@ -54,20 +46,28 @@
           -%}
           {%- render 'avm-form-field',
             id: 'i-desc',
-            name: 'description',
+            name: 'contact[body]',
             label: 'Describe your idea',
             type: 'textarea',
             rows: 6,
             is_required: true,
+            value: form.body,
             placeholder: "Give us an overview of what you have in mind — the problem you're solving, the product concept, and how you see AVM being involved."
           -%}
 
-          <div class="avm-form-alert avm-form-alert--error" role="alert" data-avm-form-error hidden></div>
+          {%- if form.errors -%}
+            <div class="avm-form-alert avm-form-alert--error" role="alert" data-avm-form-state>
+              {{- s.error_message | escape -}}
+            </div>
+          {%- endif -%}
 
           <button type="submit" class="avm-form-submit">Submit proposal</button>
-        </form>
-        {%- render 'avm-form-success', message: s.success_message -%}
-      </avm-form-handler>
+        </div>
+        {%- if form.posted_successfully? -%}
+          {%- render 'avm-form-success', message: s.success_message, server_state: true -%}
+        {%- endif -%}
+      {%- endform -%}
+      {%- render 'avm-native-form-state', form_id: 'AvmInnovationForm' -%}
     </div>
   </div>
 </div>
@@ -98,10 +98,8 @@
       "content": "Submission"
     },
     {
-      "type": "text",
-      "id": "form_action",
-      "label": "Form action URL",
-      "info": "Endpoint for the innovation form (JSON, replies { success: true }). Field list: see the section file."
+      "type": "paragraph",
+      "content": "Sent through Shopify's contact form to the store's sender email, labelled \"Innovation proposal\"."
     },
     {
       "type": "text",

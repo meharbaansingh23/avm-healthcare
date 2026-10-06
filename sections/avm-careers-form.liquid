@@ -29,9 +29,6 @@
     <div data-avm-reveal style="--avm-reveal-delay: 0.1s;">
       <avm-form-handler
         data-action="{{ s.form_action | escape }}"
-        data-encoding="multipart"
-        data-ok-key="success"
-        data-success="replace"
         data-error-message="{{ s.error_message | escape }}"
       >
         <form class="avm-form" method="post" enctype="multipart/form-data" aria-busy="false">
@@ -130,7 +127,8 @@
       "type": "text",
       "id": "form_action",
       "label": "Form action URL",
-      "info": "Endpoint for the careers form (multipart with CV, replies { success: true }). Field list: see the section file."
+      "info": "Endpoint for the careers form (multipart with CV, replies { success: true }). Must allow requests from this store.",
+      "default": "https://avm-healthcare-website.vercel.app/api/careers"
     },
     {
       "type": "text",

@@ -2,19 +2,18 @@
   AVM contact — mirrors the Next.js /contact page (contact/page.tsx + ContactForm.tsx):
   intro, office cards, contact details row, divider, "Send Us A Message" form.
 
-  The form POSTs to the "Form action URL" setting — NOT Shopify's /contact
-  endpoint, which stays reserved for the quote system's hidden form.
-
-  What the Next.js /api/contact route expects (JSON body):
-    name, email, phone, organisation, message,
-    company_website (honeypot, empty), form_started_at (ms timestamp)
-  Responds { ok: true } on success, { ok: false, error } on failure.
+  The form is Shopify's native contact form ({% form 'contact' %}, id AvmContactForm),
+  submitted natively. Fields: contact[Form] = "Contact enquiry", contact[Name],
+  contact[email], contact[Phone], contact[Organisation], contact[body] (message).
+  Success: inline banner above the fields (live ContactForm.tsx); errors: the live
+  message, plus Shopify's email error text when the email was rejected.
+  The quote system's hidden contact form is separate and untouched; see
+  snippets/avm-native-form-state.liquid for how their states are kept apart.
   Phone / email / WhatsApp / social links come from Theme settings → AVM site.
 {%- endcomment -%}
 
 {{ 'avm-contact.css' | asset_url | stylesheet_tag }}
 {{ 'avm-forms.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'avm-forms.js' | asset_url }}" defer="defer"></script>
 
 {%- liquid
   assign s = section.settings
@@ -109,37 +108,37 @@
     <span class="avm-contact__divider" aria-hidden="true"></span>
 
     <div class="avm-contact__form" data-avm-reveal style="--avm-reveal-delay: 0.1s;">
-      <avm-form-handler
-        data-action="{{ s.form_action | escape }}"
-        data-encoding="json"
-        data-ok-key="ok"
-        data-success="inline"
-        data-server-errors
-        data-error-message="Something went wrong. Please try again."
-      >
-        <form class="avm-form" method="post" aria-busy="false">
-          {%- render 'avm-form-spam-guard', prefix: 'ct' -%}
-          {%- if s.form_heading != blank -%}
-            <h2 class="avm-form__title">{{ s.form_heading | escape }}</h2>
-          {%- endif -%}
-          {%- render 'avm-form-notice', action: s.form_action -%}
+      {%- form 'contact', id: 'AvmContactForm', class: 'avm-form' -%}
+        <input type="hidden" name="contact[Form]" value="Contact enquiry">
+        {%- if s.form_heading != blank -%}
+          <h2 class="avm-form__title">{{ s.form_heading | escape }}</h2>
+        {%- endif -%}
 
-          <div class="avm-form-alert avm-form-alert--success" role="status" aria-live="polite" data-avm-form-success hidden>
+        {%- if form.posted_successfully? -%}
+          <div class="avm-form-alert avm-form-alert--success" role="status" aria-live="polite" data-avm-form-state>
             {{- s.success_message | escape -}}
           </div>
-          <div class="avm-form-alert avm-form-alert--error" role="alert" data-avm-form-error hidden></div>
-
-          <div class="avm-form__row">
-            {%- render 'avm-form-field', id: 'ct-name', name: 'name', label: 'Name', is_required: true -%}
-            {%- render 'avm-form-field', id: 'ct-email', name: 'email', label: 'Email', type: 'email', is_required: true -%}
+        {%- endif -%}
+        {%- if form.errors -%}
+          <div class="avm-form-alert avm-form-alert--error" role="alert" data-avm-form-state>
+            Something went wrong. Please try again.
+            {%- if form.errors contains 'email' %}
+              {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}.
+            {%- endif -%}
           </div>
-          {%- render 'avm-form-field', id: 'ct-phone', name: 'phone', label: 'Phone', type: 'tel' -%}
-          {%- render 'avm-form-field', id: 'ct-organisation', name: 'organisation', label: 'Organisation' -%}
-          {%- render 'avm-form-field', id: 'ct-message', name: 'message', label: 'Message', type: 'textarea', rows: 5, is_required: true -%}
+        {%- endif -%}
 
-          <button type="submit" class="avm-form-submit">Send message</button>
-        </form>
-      </avm-form-handler>
+        <div class="avm-form__row">
+          {%- render 'avm-form-field', id: 'ct-name', name: 'contact[Name]', label: 'Name', is_required: true -%}
+          {%- render 'avm-form-field', id: 'ct-email', name: 'contact[email]', label: 'Email', type: 'email', is_required: true, value: form.email -%}
+        </div>
+        {%- render 'avm-form-field', id: 'ct-phone', name: 'contact[Phone]', label: 'Phone', type: 'tel' -%}
+        {%- render 'avm-form-field', id: 'ct-organisation', name: 'contact[Organisation]', label: 'Organisation' -%}
+        {%- render 'avm-form-field', id: 'ct-message', name: 'contact[body]', label: 'Message', type: 'textarea', rows: 5, is_required: true, value: form.body -%}
+
+        <button type="submit" class="avm-form-submit">Send message</button>
+      {%- endform -%}
+      {%- render 'avm-native-form-state', form_id: 'AvmContactForm' -%}
     </div>
   </div>
 </div>
@@ -173,10 +172,8 @@
       "content": "Form"
     },
     {
-      "type": "text",
-      "id": "form_action",
-      "label": "Form action URL",
-      "info": "Endpoint for the contact form (JSON, replies { ok: true }). Never /contact. Field list: see the section file."
+      "type": "paragraph",
+      "content": "Sent through Shopify's contact form to the store's sender email, labelled \"Contact enquiry\"."
     },
     { "type": "text", "id": "form_heading", "label": "Form heading", "default": "Send Us A Message" },
     {

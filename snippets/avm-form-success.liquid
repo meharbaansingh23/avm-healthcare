@@ -1,8 +1,21 @@
 {%- comment -%}
   SuccessState from the Next.js forms (replaces the form after sending).
   Accepts: title, message
+  - server_state: true for native Shopify forms — rendered visible (the section only
+    renders it after form.posted_successfully?) and marked data-avm-form-state.
+    Otherwise it starts hidden and avm-forms.js reveals it (careers).
 {%- endcomment -%}
-<div class="avm-form-success" role="status" aria-live="polite" tabindex="-1" data-avm-form-success hidden>
+<div
+  class="avm-form-success"
+  role="status"
+  aria-live="polite"
+  tabindex="-1"
+  {% if server_state %}
+    data-avm-form-state
+  {% else %}
+    data-avm-form-success hidden
+  {% endif %}
+>
   <svg width="56" height="56" viewBox="0 0 56 56" fill="none" aria-hidden="true" focusable="false">
     <circle cx="28" cy="28" r="28" fill="#2563EB"/>
     <path d="M19 28l6 6 12-12" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>

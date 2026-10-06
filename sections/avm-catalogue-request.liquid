@@ -2,15 +2,15 @@
   AVM request catalogue — mirrors request-catalogue/page.tsx + CatalogueForm.tsx:
   form on the left, sticky catalogue cover on the right.
 
-  What the Next.js /api/request-catalogue route expects (JSON body):
-    name*, email*, phone*, country*, address, institution*, institutionType*, requirements,
-    company_website (honeypot, empty), form_started_at (ms timestamp)
-  Responds { success: true } on success, { success: false, error } on failure.
+  Shopify's native contact form ({% form 'contact' %}, id AvmCatalogueForm), submitted
+  natively. Fields: contact[Form] = "Catalogue request", contact[Name], contact[email],
+  contact[Phone], contact[Country], contact[Address], contact[Institution name],
+  contact[Institution type], contact[body] (Specific requirements).
+  After sending, the success state replaces the fields (live CatalogueForm.tsx).
 {%- endcomment -%}
 
 {{ 'avm-forms.css' | asset_url | stylesheet_tag }}
 {{ 'avm-catalogue-request.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'avm-forms.js' | asset_url }}" defer="defer"></script>
 
 {%- assign s = section.settings -%}
 
@@ -28,31 +28,23 @@
           <p class="avm-catalogue-request__text">{{ s.text | escape }}</p>
         {%- endif -%}
 
-        <avm-form-handler
-          data-action="{{ s.form_action | escape }}"
-          data-encoding="json"
-          data-ok-key="success"
-          data-success="replace"
-          data-error-message="{{ s.error_message | escape }}"
-        >
-          <form class="avm-form" method="post" aria-busy="false">
-            {%- render 'avm-form-spam-guard', prefix: 'rc' -%}
-            {%- render 'avm-form-notice', action: s.form_action -%}
-
+        {%- form 'contact', id: 'AvmCatalogueForm', class: 'avm-native-form' -%}
+          <input type="hidden" name="contact[Form]" value="Catalogue request">
+          <div class="avm-form" data-avm-form-fields {% if form.posted_successfully? %}hidden{% endif %}>
             <div class="avm-form__row">
-              {%- render 'avm-form-field', id: 'rc-name', name: 'name', label: 'Name', is_required: true -%}
-              {%- render 'avm-form-field', id: 'rc-email', name: 'email', label: 'Email', type: 'email', is_required: true -%}
+              {%- render 'avm-form-field', id: 'rc-name', name: 'contact[Name]', label: 'Name', is_required: true -%}
+              {%- render 'avm-form-field', id: 'rc-email', name: 'contact[email]', label: 'Email', type: 'email', is_required: true, value: form.email -%}
             </div>
             <div class="avm-form__row">
-              {%- render 'avm-form-field', id: 'rc-phone', name: 'phone', label: 'Phone', type: 'tel', is_required: true -%}
-              {%- render 'avm-form-field', id: 'rc-country', name: 'country', label: 'Country', is_required: true -%}
+              {%- render 'avm-form-field', id: 'rc-phone', name: 'contact[Phone]', label: 'Phone', type: 'tel', is_required: true -%}
+              {%- render 'avm-form-field', id: 'rc-country', name: 'contact[Country]', label: 'Country', is_required: true -%}
             </div>
-            {%- render 'avm-form-field', id: 'rc-address', name: 'address', label: 'Address', type: 'textarea', rows: 3 -%}
+            {%- render 'avm-form-field', id: 'rc-address', name: 'contact[Address]', label: 'Address', type: 'textarea', rows: 3 -%}
             <div class="avm-form__row">
-              {%- render 'avm-form-field', id: 'rc-institution', name: 'institution', label: 'Institution name', is_required: true -%}
+              {%- render 'avm-form-field', id: 'rc-institution', name: 'contact[Institution name]', label: 'Institution name', is_required: true -%}
               {%- render 'avm-form-field',
                 id: 'rc-itype',
-                name: 'institutionType',
+                name: 'contact[Institution type]',
                 label: 'Institution type',
                 type: 'select',
                 is_required: true,
@@ -62,19 +54,27 @@
             </div>
             {%- render 'avm-form-field',
               id: 'rc-req',
-              name: 'requirements',
+              name: 'contact[body]',
               label: 'Specific requirements',
               optional_note: '(optional)',
               type: 'textarea',
-              rows: 3
+              rows: 3,
+              value: form.body
             -%}
 
-            <div class="avm-form-alert avm-form-alert--error" role="alert" data-avm-form-error hidden></div>
+            {%- if form.errors -%}
+              <div class="avm-form-alert avm-form-alert--error" role="alert" data-avm-form-state>
+                {{- s.error_message | escape -}}
+              </div>
+            {%- endif -%}
 
             <button type="submit" class="avm-form-submit">Request full catalogue</button>
-          </form>
-          {%- render 'avm-form-success', message: s.success_message -%}
-        </avm-form-handler>
+          </div>
+          {%- if form.posted_successfully? -%}
+            {%- render 'avm-form-success', message: s.success_message, server_state: true -%}
+          {%- endif -%}
+        {%- endform -%}
+        {%- render 'avm-native-form-state', form_id: 'AvmCatalogueForm' -%}
       </div>
 
       <div class="avm-catalogue-request__aside" data-avm-reveal style="--avm-reveal-delay: 0.1s;">
@@ -136,10 +136,8 @@
       "content": "Submission"
     },
     {
-      "type": "text",
-      "id": "form_action",
-      "label": "Form action URL",
-      "info": "Endpoint for the catalogue form (JSON, replies { success: true }). Field list: see the section file."
+      "type": "paragraph",
+      "content": "Sent through Shopify's contact form to the store's sender email, labelled \"Catalogue request\"."
     },
     {
       "type": "text",
